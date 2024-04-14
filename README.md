@@ -6,9 +6,9 @@
 
 zeta-kotlin-flex在[zeta-kotlin](https://gitee.com/xia5800/zeta-kotlin)基础上是使用kotlin语言基于spring boot、mybatis-flex、sa-token等框架开发的项目脚手架。
 
-> 前端项目地址: [plus-ui](https://gitee.com/JavaLionLi/plus-ui)
+> 前端项目地址: [zeta-kotlin-vben](https://github.com/1783cwf/zeta-kotlin-vben)
 
-> 项目文档地址: [zeta-doc](https://plus-doc.dromara.org)
+> 项目文档地址: [zeta-doc](https://www.yuque.com/weifeng97/zv86gq?#%20%E3%80%8Azeta-kotlin-flex%E3%80%8B)
 
 > 接口文档地址: [api-doc](https://zeta-kotlin-flex.apifox.cn/)
 
