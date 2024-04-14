@@ -1,0 +1,27 @@
+# 开发环境配置
+zeta:
+  mybatis-flex:
+    is-print-sql: true
+    audit-enable: false
+  redis:
+    database: 5
+    ip: localdev
+    port: 6379
+    password: jhkdjhkjdhsIUTYURTU_J35x6r
+  # 数据源配置
+  database:
+    url: jdbc:mysql://localdev:3306/zeta_kotlin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: mysql_cMpYHe
+  file:
+    storage-type: minio
+    minio:
+      access-key: SDXTMGyVQVrWJ0STFF4o
+      secret-key: OWFMvB9EQJBUPiOxaaZHHHfo0AySsLutb3EacekF
+      bucket: dev
+      endpoint: http://localdev:9000
+# 日志配置
+logging:
+  file:
+    path: ./log
+  config: classpath:logback-spring.xml

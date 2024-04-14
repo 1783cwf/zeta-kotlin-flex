@@ -1,0 +1,67 @@
+# EditorConfig is awesome: http://EditorConfig.org
+# top-most EditorConfig file
+# 是否是最顶层的配置文件
+#
+# 当打开一个文件时, EditorConfig 插件会遍历文件的目录和其每一级父目录查找 .editorconfig 文件,
+# 直到有一个配置文件 root=true.
+#
+# EditorConfig 配置文件从上往下读取, 并且路径最近的文件最后被读取.
+# 匹配的配置属性按照属性应用在代码上, 所以最接近代码文件的属性优先级最高.
+#
+# 因此，如果是一个多项目或者嵌套目录形式的项目，如果想使用父目录的缺省配置，
+# 在子项目或子目录中仅需要单独覆盖父项目（父目录）的某几项.editorconfig配置时，
+# 子项目或子目录中的.editorconfig中的root 配置要为 false，以便让插件可以继续往上查找级联配置
+root = true
+# root = false    # 仅当本配置在子项目（子目录）中，且需要与上级级联时
+
+
+# 针对所有文件的缺省配置
+[*]
+
+# 文件编码
+charset = utf-8
+
+# Unix-style newlines with a newline ending every file
+# 行末应该采用什么符号来进行换行
+end_of_line = lf
+#使用Unix的换行符，在低版本windows自带编辑器中换行可能会不正常显示
+
+# 文件末尾会插入一个新的空白行
+insert_final_newline = true
+
+# 用空格方式缩进，去掉制表符（TAB）。
+indent_style = space
+# 每次缩进两列位置
+indent_size = 2
+# 每次TAB缩进列数
+tab_width = 2    # 当缩进风格为space时，可以不配
+
+# 去掉行尾空格
+trim_trailing_whitespace = true
+
+# 一行最大右边界(目前只有少数支持) 默认本来是不超过140，但是项目中对象的toString方法写在一行中更加直观便于阅读，这里就设置了一个比较大的值500
+max_line_length = 500
+
+[*.{groovy,gradle,java,kt}]
+# 类java语言的设置
+
+# 每次缩进设置为4
+indent_size = 4
+# 每次TAB缩进4
+tab_width = 4
+
+
+# 设置不能是UTF-8的文件编码
+[*.properties]
+# java properties配置文件
+charset = latin1
+# charset支持有限，latin1应该是ISO-8859-1的一个别名
+
+[*.md]
+# 出于忠于编写人排版原意，禁用在文件末尾插入新行
+insert_final_newline = false
+# 出于忠于编写人排版原意，禁用在删除行末空格
+trim_trailing_whitespace = false
+
+[jvm.options]
+insert_final_newline = false
