@@ -1,6 +1,6 @@
 ![img](https://img.shields.io/badge/Spring%20Boot-3.2-blue.svg)![img](https://img.shields.io/badge/JDK-17-green.svg)![img](https://img.shields.io/badge/JDK-21-green.svg)
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/1783cwf/zeta-kotlin-flex/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub](https://img.shields.io/github/stars/1783cwf/zeta-kotlin-flex.svg?style=social&label=Stars)](https://github.com/1783cwf/zeta-kotlin-flex.git)
 ## 简介
 
