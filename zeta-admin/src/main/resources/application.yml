@@ -1,0 +1,217 @@
+zeta:
+  # 项目版本
+  version: 1.0.0-SNAPSHOT
+  # 项目名
+  name: zeta-kotlin-flex
+  # 操作日志配置
+  log:
+    # 记录用户操作日志
+    enabled: true
+    # 是否保存操作日志,默认false 只打印操作日志,不保存到数据库
+    isSave: false
+
+  mybatis-flex:
+    # 是否开启数据审计功能
+    audit-enable: false
+    # 是否打印SQL
+    is-print-sql: false
+    # 是否启用逻辑删除
+    logic-delete: true
+
+  # token配置
+  token:
+    # 请求头中token参数的名字 Authorization: xxxxx
+    tokenName: Authorization
+    # token类型 DEFAULT、SIMPLE、MIXIN、STATELESS
+    type: SIMPLE
+    # jwt签名前缀 例如填写 Bearer 实际传参 token: Bearer xxxxxx
+    prefix:
+    # jwt签名加密key 仅当type不为DEFAULT时有效
+    signerKey: zeta-kotlin
+    # token过期时间 单位：秒, -1代表永不过期
+    expireTime: 7200
+    # token自动续期
+    renew: 'true'
+  # security配置
+  security:
+    ignore:
+      # 忽略鉴权的地址
+      ignoreUrl:
+        - /**/noToken/**
+  # XSS防护配置
+  xss:
+    # XSS防护开关 默认：false
+    enabled: true
+    # 忽略xss防护的地址
+    excludeUrl:
+      - /**/noxss/**
+      # 忽略指定接口的xss防护
+      - /api/test/test1
+      # 忽略新增、修改接口的xss防护
+      - POST:/api/demo
+      - PUT:/api/demo
+  # 加密解密配置
+  crypto:
+    aes:
+      # AES加密秘钥 长度规定：16、24、32
+      cryptoKey: 'kwYkDdgVXcqK03E3zioyr3ocMYmf4XYh'
+      # AES加密盐
+      cryptoIv: ''
+      # 加密模式 默认：ECB
+      mode: ECB
+      # 填充方式 默认：PKCS5Padding
+      padding: PKCS5Padding
+  # websocket配置
+  websocket:
+    enabled: true
+  # 文件存储配置
+  file:
+    # 文件存储策略 LOCAL、ALI_OSS、MINIO
+    storageType: minio
+    # 本地存储配置 仅当zeta.file.storageType=LOCAL时有效
+    local:
+      bucket: zeta
+      # web访问地址  需要配置nginx
+      endpoint: http://127.0.0.1/file/
+      # 文件存放路径
+      storagePath: ./fileUpload
+    # 阿里云存储配置 仅当zeta.file.storageType=ALI_OSS时有效
+    ali:
+      bucket: zeta
+      endpoint: oss-cn-guangzhou.aliyuncs.com
+      accessKeyId: 'alioss'
+      accessKeySecret: 'alioss123'
+    # Minio存储配置 仅当zeta.file.storageType=MINIO时有效
+    minio:
+      bucket: zeta
+      # minio地址+端口号
+      endpoint: http://127.0.0.1:9001/
+      accessKey: 'minio'
+      secretKey: 'minio123'
+
+# 端口
+server:
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  undertow:
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 16
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 400
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+
+# spring配置
+spring:
+  application:
+    name: ${zeta.name}
+  # 多环境配置
+  profiles:
+    active: dev
+  # mvc
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    # hikari配置
+    hikari:
+      # 最大连接池数量
+      maximum-pool-size: 20
+      # 最小空闲线程数量
+      minimum-idle: 10
+      # 配置获取连接等待超时的时间
+      connectionTimeout: 30000
+      # 校验超时时间
+      validationTimeout: 5000
+      # 空闲连接存活最大时间，默认10分钟
+      idleTimeout: 600000
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
+      maxLifetime: 1800000
+      # 多久检查一次连接的活性
+      keepaliveTime: 30000
+
+  # 设置上传文件大小
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  data:
+    # redis
+    redis:
+      # Redis数据库索引（默认为0）
+      database: ${zeta.redis.database}
+      # Redis服务器地址
+      host: ${zeta.redis.ip}
+      # Redis服务器连接端口
+      port: ${zeta.redis.port}
+      # Redis服务器连接密码（默认为空）
+      password: ${zeta.redis.password}
+      # 连接超时时间
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
+
+# mybatis-flex配置 https://mybatis-flex.com/zh/base/configuration.html
+mybatis-flex:
+  datasource:
+    ds1:
+      url: ${zeta.database.url}
+      username: ${zeta.database.username}
+      password: ${zeta.database.password}
+  mapper-locations: ["classpath*:/mapper/**/*.xml"]
+  type-aliases-package: com.zetaframework.**.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    # 逻辑删除数据存在标记值
+    normal-value-of-logic-delete: 0
+    # 逻辑删除数据删除标记值
+    deleted-value-of-logic-delete: 1
+    # 默认逻辑删除字段
+    logic-delete-column: "deleted"
+    # 默认乐观锁字段
+    version-column: "version"
+
+
+# Sa-Token配置 https://sa-token.dev33.cn/doc/index.html#/use/config
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: ${zeta.token.tokenName}
+  # token有效期 1天，单位s 默认30天, -1代表永不过期
+  timeout: ${zeta.token.expireTime}
+  # jwt秘钥 仅当zeta.token.type不为DEFAULT时有效
+  jwt-secret-key: ${zeta.token.signerKey}
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  active-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: true
+  # 是否尝试从 cookie 里读取 Token
+  is-read-cookie: false
+  # 是否输出操作日志
+  is-log: false
+  # 是否在初始化配置时打印版本字符画
+  is-print: false
+  # 自定义token样式
+  token-style: tik
+  max-login-count: 5
