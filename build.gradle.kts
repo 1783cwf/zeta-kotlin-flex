@@ -10,8 +10,9 @@ plugins {
   kotlin("kapt")
 }
 
-group = "com.zeta"
+val zetaGroup: String by project
 val zetaVersion: String by project
+group = zetaGroup
 version = zetaVersion
 
 val jvmVersion = JavaVersion.VERSION_21
