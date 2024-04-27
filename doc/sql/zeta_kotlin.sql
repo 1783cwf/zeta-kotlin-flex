@@ -64,9 +64,7 @@ CREATE TABLE `sys_dict_item` (
   `sort_value` int DEFAULT NULL COMMENT '排序',
   `deleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '逻辑删除字段',
   `version` int DEFAULT NULL COMMENT '乐观锁字段',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_dict_item_dictId` (`dict_id`) USING BTREE,
-  CONSTRAINT `fk_dict_item_dictId` FOREIGN KEY (`dict_id`) REFERENCES `sys_dict` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='字典项表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -255,11 +253,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint NOT NULL COMMENT '角色id',
   `menu_id` bigint NOT NULL COMMENT '菜单id',
   `version` int DEFAULT NULL COMMENT '乐观锁字段',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_role_menu_roleId` (`role_id`) USING BTREE,
-  KEY `idx_role_menu_menuId` (`menu_id`) USING BTREE,
-  CONSTRAINT `fk_role_menu_menuId` FOREIGN KEY (`menu_id`) REFERENCES `sys_menu` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_role_menu_roleId` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='角色菜单关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -318,11 +312,7 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint NOT NULL COMMENT '用户id',
   `role_id` bigint NOT NULL COMMENT '角色id',
   `version` int DEFAULT NULL COMMENT '乐观锁字段',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_user_role_roleId` (`role_id`) USING BTREE,
-  KEY `idx_user_role_userId` (`user_id`) USING BTREE,
-  CONSTRAINT `fk_user_role_roleId` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_role_userId` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='用户角色表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

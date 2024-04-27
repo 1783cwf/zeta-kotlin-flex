@@ -1,5 +1,7 @@
 package com.zetaframework.mybatisflex.entity
 
+import com.zetaframework.mybatisflex.annotation.ColumnDefine
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import java.io.Serializable
 
 /**
@@ -12,7 +14,8 @@ import java.io.Serializable
  * @date 2021/10/18 下午2:22
  * @since 1.0.0
  */
-abstract class StateEntity<T : Serializable, U : Serializable>(
+abstract class StateEntity<T : Serializable>(
     /** 状态 */
-    open var state: U? = null,
+    @ColumnDefine(type = INT, length = 10, notNull = true, defaultValue = "0", comment = "状态")
+    open var state: Int? = null,
 ) : BaseEntity<T>()

@@ -13,6 +13,7 @@ dependencies {
   api(project(":zeta-common:zeta-common-satoken"))
 
   api("com.mybatis-flex:mybatis-flex-spring-boot3-starter")
+  api("com.tangzc:auto-table-spring-boot-starter")
   api("com.mybatis-flex:mybatis-flex-kotlin-extensions")
   annotationProcessor("com.mybatis-flex:mybatis-flex-processor")
 }
