@@ -22,6 +22,7 @@ val saTokenBomVersion: String by project
 val hutoolBomVersion: String by project
 val mybatisFlexVersion: String by project
 val mybatisFlexKotlinVersion: String by project
+val autoTableVersion: String by project
 val aliyunSdkOssVersion: String by project
 val minioVersion: String by project
 val poiVersion: String by project
@@ -93,6 +94,7 @@ subprojects {
       // orm
       dependency("com.mybatis-flex:mybatis-flex-spring-boot3-starter:$mybatisFlexVersion")
       dependency("com.mybatis-flex:mybatis-flex-kotlin-extensions:$mybatisFlexKotlinVersion")
+      dependency("com.tangzc:auto-table-spring-boot-starter:${autoTableVersion}")
 
       // oss
       dependency("com.aliyun.oss:aliyun-sdk-oss:$aliyunSdkOssVersion")

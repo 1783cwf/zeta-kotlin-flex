@@ -1,5 +1,6 @@
 package com.zetaframework
 
+import com.tangzc.autotable.springboot.EnableAutoTable
 import org.mybatis.spring.annotation.MapperScan
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository
 
 @MapperScan(value = ["com.zetaframework.**.dao"], annotationClass = Repository::class)
 @SpringBootApplication
+@EnableAutoTable
 class ZetaKotlinFlexApplication
 
 private val log: Logger = LoggerFactory.getLogger(ZetaKotlinFlexApplication::class.java)
