@@ -9,6 +9,9 @@ import com.mybatisflex.core.logicdelete.LogicDeleteProcessor
 import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor
 import com.mybatisflex.core.query.QueryColumnBehavior
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer
+import com.mybatisflex.spring.boot.MybatisFlexProperties
+import com.tangzc.autotable.core.AutoTableOrmFrameAdapter
+import com.zetaframework.mybatisflex.adapter.MybatisFlexAutoTableAdapter
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import com.zetaframework.mybatisflex.listener.EntityInsertListener
 import com.zetaframework.mybatisflex.listener.EntityUpdateListener
@@ -77,5 +80,10 @@ class MybatisFlexConfig(
     fun logicDeleteProcessor(): LogicDeleteProcessor {
         logger.info("逻辑删除已启用")
         return BooleanLogicDeleteProcessor()
+    }
+
+    @Bean
+    fun mybatisFlexAdapter(mybatisFlexProperties: MybatisFlexProperties): AutoTableOrmFrameAdapter {
+        return MybatisFlexAutoTableAdapter(mybatisFlexProperties)
     }
 }

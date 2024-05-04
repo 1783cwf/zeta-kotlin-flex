@@ -27,3 +27,7 @@ logging:
   file:
     path: /home/product/log/zeta-kotlin
   config: classpath:logback-spring.xml
+
+# 生产环境,关闭自动建表
+auto-table:
+  enable: false

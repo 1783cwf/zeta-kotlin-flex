@@ -3,10 +3,10 @@ package com.zetaframework.system.model.entity
 import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Table
 import com.tangzc.autotable.annotation.AutoTable
+import com.tangzc.autotable.annotation.mysql.MysqlTypeConstant.LONGTEXT
 import com.zetaframework.log.model.LogDTO
 import com.zetaframework.mybatisflex.annotation.ColumnDefine
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
-import com.zetaframework.mybatisflex.constant.DBTypeConstant.LONGTEXT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.VARCHAR
 import com.zetaframework.mybatisflex.entity.LogBaseEntity
 import io.github.linpeilie.annotations.AutoMapper
