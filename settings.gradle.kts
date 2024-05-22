@@ -21,6 +21,7 @@ pluginManagement {
   repositories {
     maven("https://maven.aliyun.com/repository/gradle-plugin")
     maven("https://plugins.gradle.org/m2/")
+    google()
     gradlePluginPortal()
   }
 }
@@ -36,6 +37,7 @@ include("zeta-common:zeta-common-base")
 include("zeta-common:zeta-common-log")
 include("zeta-common:zeta-common-json")
 include("zeta-common:zeta-common-mybatisflex")
+include("zeta-common:zeta-common-autotable")
 include("zeta-common:zeta-common-redis")
 include("zeta-common:zeta-common-satoken")
 include("zeta-common:zeta-common-xss")

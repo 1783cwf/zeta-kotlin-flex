@@ -26,7 +26,7 @@ abstract class BaseEntity<T>(
     /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
     @Id(keyType = KeyType.Generator)
-    @PrimaryKey(true)
+    @PrimaryKey(false)
     open var id: Long? = null,
     /** 创建时间 */
     @Column(value = "create_time")

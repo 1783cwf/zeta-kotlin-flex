@@ -4,11 +4,11 @@ import cn.dev33.satoken.exception.NotLoginException
 import cn.dev33.satoken.exception.NotPermissionException
 import cn.dev33.satoken.exception.NotRoleException
 import cn.hutool.core.util.StrUtil
-import com.zetaframework.enums.ErrorCodeEnum
 import com.zetaframework.exception.ArgumentException
 import com.zetaframework.exception.BusinessException
 import com.zetaframework.model.result.ApiResult
 import com.zetaframework.redis.exception.LimitException
+import java.util.Objects
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
-import java.util.Objects
 
 /**
  * 全局异常处理器
@@ -34,9 +33,9 @@ class GlobalExceptionHandler {
      * @param ex [BusinessException]
      * @return ApiResult<*>
      */
-    @ExceptionHandler(com.zetaframework.exception.BusinessException::class)
+    @ExceptionHandler(BusinessException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun businessExceptionHandler(ex: com.zetaframework.exception.BusinessException): ApiResult<*> {
+    fun businessExceptionHandler(ex: BusinessException): ApiResult<*> {
         logger.warn("抛出业务异常：$ex")
         return ApiResult.result(ex.code, ex.message, null)
     }
@@ -47,9 +46,9 @@ class GlobalExceptionHandler {
      * @param ex [ArgumentException]
      * @return ApiResult<*>
      */
-    @ExceptionHandler(com.zetaframework.exception.ArgumentException::class)
+    @ExceptionHandler(ArgumentException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun argumentExceptionHandler(ex: com.zetaframework.exception.ArgumentException): ApiResult<*> {
+    fun argumentExceptionHandler(ex: ArgumentException): ApiResult<*> {
         logger.warn("抛出参数异常：", ex)
         return ApiResult.result(ex.code, ex.message, null)
     }

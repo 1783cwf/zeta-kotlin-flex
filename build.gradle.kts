@@ -35,7 +35,7 @@ val mapstructPlusVersion: String by project
 
 allprojects {
   repositories {
-    maven("https://maven.aliyun.com/repository/public")
+    maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
     mavenCentral()
   }
 }
@@ -94,7 +94,7 @@ subprojects {
       // orm
       dependency("com.mybatis-flex:mybatis-flex-spring-boot3-starter:$mybatisFlexVersion")
       dependency("com.mybatis-flex:mybatis-flex-kotlin-extensions:$mybatisFlexKotlinVersion")
-      dependency("com.tangzc:auto-table-spring-boot-starter:${autoTableVersion}")
+      dependency("com.tangzc:auto-table-spring-boot-starter:$autoTableVersion")
 
       // oss
       dependency("com.aliyun.oss:aliyun-sdk-oss:$aliyunSdkOssVersion")
@@ -131,7 +131,7 @@ subprojects {
       }
     }
 
-    compileJava{
+    compileJava {
       /*
        * https://www.mapstruct.plus/guide/configuration.html mapstruct-plus编译器配置项
        *

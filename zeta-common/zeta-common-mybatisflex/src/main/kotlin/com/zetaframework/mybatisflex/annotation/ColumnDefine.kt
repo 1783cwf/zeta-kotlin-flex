@@ -9,9 +9,8 @@ import org.springframework.core.annotation.AliasFor
 
 /**
  * 列聚合注解
- * @author caoweifeng
+ * @author <a href="mailto:weistuday@gmail.com">caoweifeng</a>
  * @date 2024年04月27日 20:17
- * @email weistuday@gmail.com
  */
 @Target(AnnotationTarget.FIELD, AnnotationTarget.ANNOTATION_CLASS)
 @Retention(AnnotationRetention.RUNTIME)

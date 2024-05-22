@@ -11,12 +11,12 @@ import com.zetaframework.system.model.entity.SysFile
 import com.zetaframework.system.service.ISysFileService
 import com.zetaframework.utils.MapstructUtils
 import jakarta.servlet.http.HttpServletResponse
+import java.io.InputStream
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
-import java.io.InputStream
 
 /**
  * 系统文件 服务实现类
@@ -46,7 +46,7 @@ class SysFileServiceImpl(
 
         val model = MapstructUtils.convert(fileInfo, SysFile::class.java)
         if (!this.save(model)) {
-            throw com.zetaframework.exception.BusinessException("文件保存失败")
+            throw BusinessException("文件保存失败")
         }
         return model!!
     }
@@ -60,7 +60,7 @@ class SysFileServiceImpl(
         id: Long,
         response: HttpServletResponse,
     ) {
-        val sysFile = this.getById(id) ?: throw com.zetaframework.exception.BusinessException("文件不存在或已被删除")
+        val sysFile = this.getById(id) ?: throw BusinessException("文件不存在或已被删除")
 
         // 获取文件输入流
         val inputStream: InputStream? = fileContext.getFileInputStream(sysFile.path!!)

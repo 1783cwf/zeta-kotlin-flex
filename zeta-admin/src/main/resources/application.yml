@@ -215,3 +215,18 @@ sa-token:
   # 自定义token样式
   token-style: tik
   max-login-count: 5
+
+# https://autotable.tangzc.com/%E6%8C%87%E5%8D%97/%E9%AB%98%E7%BA%A7/%E5%BC%80%E5%8F%91%7C%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83.html
+auto-table:
+  # 开启自动建表
+  enable: true
+  record-sql:
+    # 开启SQL记录
+    enable: true
+    # 当前版本（此处可保持与计划上线的版本号一致，方便管理SQL文件）
+    version: 1.0.0
+    # 记录到数据库（如果是多数据源，则会根据不同数据源，记录到不同的库）
+    record-type: db
+
+
+
