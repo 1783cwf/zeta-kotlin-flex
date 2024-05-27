@@ -57,7 +57,7 @@ class SysMenuQueryParam(
     var authority: String? = null,
     /** 菜单类型 */
 
-    var type: MenuTypeEnum? = null,
+    var menuType: MenuTypeEnum? = null,
     /** 是否隐藏 0否 1是 */
 
     var hide: Boolean? = null,

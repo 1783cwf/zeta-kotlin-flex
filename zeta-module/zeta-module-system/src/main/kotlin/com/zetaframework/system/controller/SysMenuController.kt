@@ -55,7 +55,7 @@ class SysMenuController : SuperController<ISysMenuService, SysMenu, SysMenuQuery
      */
     override fun handlerSave(saveDTO: SysMenuSaveDTO): ApiResult<Boolean> {
         // 如果新增的是菜单
-        if (MenuTypeEnum.MENU == saveDTO.type) {
+        if (MenuTypeEnum.MENU == saveDTO.menuType) {
             Assert.notBlank(saveDTO.name, "路由名称不能为空")
             Assert.notBlank(saveDTO.path, "路由地址不能为空")
         }
@@ -70,7 +70,7 @@ class SysMenuController : SuperController<ISysMenuService, SysMenu, SysMenuQuery
      */
     override fun handlerUpdate(updateDTO: SysMenuUpdateDTO): ApiResult<Boolean> {
         // 如果修改的是菜单
-        if (MenuTypeEnum.MENU == updateDTO.type) {
+        if (MenuTypeEnum.MENU == updateDTO.menuType) {
             Assert.notBlank(updateDTO.name, "路由名称不能为空")
             Assert.notBlank(updateDTO.path, "路由地址不能为空")
         }

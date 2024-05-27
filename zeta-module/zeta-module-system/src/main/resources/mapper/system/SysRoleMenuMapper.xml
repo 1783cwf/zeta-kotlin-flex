@@ -47,7 +47,7 @@
                 )
             )
             <if test="menuType != null">
-                AND type = #{menuType}
+                AND menuType = #{menuType}
             </if>
         </where>
         ORDER BY id, sort_value

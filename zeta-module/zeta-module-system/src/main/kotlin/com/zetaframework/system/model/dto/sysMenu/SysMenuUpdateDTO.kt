@@ -50,7 +50,7 @@ data class SysMenuUpdateDTO(
     /** 菜单类型 */
 
     @get:NotNull(message = "菜单类型不能为空")
-    var type: MenuTypeEnum? = null,
+    var menuType: MenuTypeEnum? = null,
     /** 是否隐藏 0否 1是 */
 
     var hide: Boolean? = null,

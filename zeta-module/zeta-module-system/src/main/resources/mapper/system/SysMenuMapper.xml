@@ -34,7 +34,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_time, created_by, update_time, updated_by, label, parent_id, sort_value,
-        name, path, component, redirect, icon, authority, type, deleted, hide, keep_alive, href, frame_src
+        name, path, component, redirect, icon, authority, menu_type, deleted, hide, keep_alive, href, frame_src
     </sql>
 
     <!-- 用法：<include refid="SYS_MENU_JOIN_COLUMN_LIST"><property name="tableName" value="t1"/></include>, -->

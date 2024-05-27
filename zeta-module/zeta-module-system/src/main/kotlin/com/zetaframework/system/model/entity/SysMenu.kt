@@ -52,9 +52,9 @@ class SysMenu : TreeEntity<SysMenu, Long>() {
 
     /** 菜单类型 */
     @get:NotNull(message = "菜单类型不能为空")
-    @Column(value = "type")
+    @Column(value = "menu_type")
     @ColumnDefine(type = VARCHAR, length = 32, comment = "菜单类型")
-    var type: MenuTypeEnum? = null
+    var menuType: MenuTypeEnum? = null
 
     /** 是否隐藏 0否 1是 */
     @Column(value = "hide")
@@ -82,6 +82,6 @@ class SysMenu : TreeEntity<SysMenu, Long>() {
     var checked: Boolean? = null
 
     override fun toString(): String {
-        return "SysMenu(name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, type=$type, hide=$hide, keepAlive=$keepAlive, href=$href, frameSrc=$frameSrc, checked=$checked)"
+        return "SysMenu(name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, menuType=$menuType, hide=$hide, keepAlive=$keepAlive, href=$href, frameSrc=$frameSrc, checked=$checked)"
     }
 }
