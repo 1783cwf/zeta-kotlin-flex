@@ -1,11 +1,20 @@
 package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.db.query
+import com.mybatisflex.kotlin.extensions.kproperty.`in`
+import com.mybatisflex.kotlin.extensions.sql.unaryPlus
+import com.mybatisflex.kotlin.extensions.wrapper.and
+import com.mybatisflex.kotlin.vec.QueryFunctions.select
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.system.dao.SysRoleMenuMapper
 import com.zetaframework.system.model.entity.SysMenu
 import com.zetaframework.system.model.entity.SysRoleMenu
 import com.zetaframework.system.model.entity.SysUserRole
+import com.zetaframework.system.model.entity.table.SysMenuTableDef.SYS_MENU
+import com.zetaframework.system.model.entity.table.SysRoleMenuTableDef.SYS_ROLE_MENU
+import com.zetaframework.system.model.entity.table.SysRoleTableDef.SYS_ROLE
+import com.zetaframework.system.model.entity.table.SysUserRoleTableDef.SYS_USER_ROLE
 import com.zetaframework.system.service.ISysRoleMenuService
 import com.zetaframework.system.service.ISysUserRoleService
 import org.springframework.stereotype.Service
@@ -22,6 +31,29 @@ class SysRoleMenuServiceImpl(
     private val saRoleStringCacheKey: com.zetaframework.system.common.cacheKey.SaRoleStringCacheKey,
     private val saPermissionStringCacheKey: com.zetaframework.system.common.cacheKey.SaPermissionStringCacheKey,
 ) : ISysRoleMenuService, ServiceImpl<SysRoleMenuMapper, SysRoleMenu>() {
+    val baseColumnList =
+        listOf(
+            SysMenu::id,
+            SysMenu::createTime,
+            SysMenu::createdBy,
+            SysMenu::updateTime,
+            SysMenu::updatedBy,
+            SysMenu::label,
+            SysMenu::name,
+            SysMenu::path,
+            SysMenu::component,
+            SysMenu::redirect,
+            SysMenu::icon,
+            SysMenu::authority,
+            SysMenu::menuType,
+            SysMenu::hide,
+            SysMenu::keepAlive,
+            SysMenu::href,
+            SysMenu::frameSrc,
+            SysMenu::parentId,
+            SysMenu::sortValue,
+        )
+
     /**
      * 查询用户对应的菜单
      *
@@ -32,8 +64,32 @@ class SysRoleMenuServiceImpl(
     override fun listMenuByUserId(
         userId: Long,
         menuType: String?,
-    ): MutableList<SysMenu> {
-        return mapper.listMenuByUserId(userId, menuType)
+    ): List<SysMenu> {
+        // 根据用户ID查询当前用户所具有的角色
+        val roleIds =
+            select(SYS_USER_ROLE.ROLE_ID)
+                .from(SYS_USER_ROLE)
+                .leftJoin<QueryWrapper>(SYS_ROLE)
+                .on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE.ID))
+                .where(SYS_USER_ROLE.USER_ID.eq(userId))
+
+        // 根据角色ID查询所有的菜单ID
+        val menuIds =
+            select(SYS_ROLE_MENU.MENU_ID)
+                .from(SYS_ROLE_MENU)
+                .where(SYS_ROLE_MENU.ROLE_ID.`in`(roleIds))
+
+        return query<SysMenu> {
+            select(*baseColumnList.toTypedArray())
+            from(SYS_MENU)
+            where {
+                this.and(SysMenu::id.`in`(menuIds))
+                and(!menuType.isNullOrBlank()) {
+                    SYS_MENU.MENU_TYPE.eq(menuType)
+                }
+            }
+            orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
+        }
     }
 
     /**
@@ -46,8 +102,24 @@ class SysRoleMenuServiceImpl(
     override fun listMenuByRoleIds(
         roleIds: List<Long>,
         menuType: String?,
-    ): MutableList<SysMenu> {
-        return mapper.listMenuByRoleIds(roleIds, menuType)
+    ): List<SysMenu> {
+        // 根据角色ID集合获取所有符合的菜单ID集合
+        val menuIds =
+            select(SYS_ROLE_MENU.MENU_ID)
+                .from(SYS_ROLE_MENU)
+                .where(SYS_ROLE_MENU.ROLE_ID.`in`(roleIds))
+
+        return query<SysMenu> {
+            select(*baseColumnList.toTypedArray())
+            from(SYS_MENU)
+            where {
+                this.and(SYS_MENU.ID.`in`(menuIds))
+                and(!menuType.isNullOrBlank()) {
+                    SYS_MENU.MENU_TYPE.eq(menuType)
+                }
+            }
+            orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
+        }
     }
 
     /**
