@@ -1,6 +1,8 @@
 package com.zetaframework.system.model.dto.sysMenu
 
+import com.zetaframework.system.model.entity.SysMenu
 import com.zetaframework.system.model.enums.MenuTypeEnum
+import io.github.linpeilie.annotations.AutoMapper
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -11,7 +13,7 @@ import jakarta.validation.constraints.Size
  * @author AutoGenerator
  * @date 2022-04-24 17:45:03
  */
-
+@AutoMapper(target = SysMenu::class)
 data class SysMenuSaveDTO(
     /** 父级id */
 
