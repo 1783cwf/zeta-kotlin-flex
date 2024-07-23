@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
  *
  * @author gcc
  */
-@ConfigurationProperties(prefix = com.zetaframework.async.properties.AsyncProperties.Companion.PREFIX)
+@ConfigurationProperties(prefix = AsyncProperties.PREFIX)
 class AsyncProperties {
     companion object {
         const val PREFIX = "zeta.async"

@@ -68,7 +68,7 @@ class SysUser : StateEntity<Long>() {
     @ColumnDefine(type = VARCHAR, length = 20, comment = "手机号")
     var mobile: String? = null
 
-    /** 性别 */
+    /** 性别 0 男 1 女 2 保密*/
     @get:NotNull(message = "性别不能为空")
     @Column(value = "sex")
     @ColumnDefine(type = TINYINT, length = 1, defaultValue = "0")
