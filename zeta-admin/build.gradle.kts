@@ -52,16 +52,6 @@ tasks {
     inputDir.set(file("./"))
     buildArgs.set(mapOf("JAR_FILE" to "build/libs/${project.name}-${project.version}.jar"))
     dockerFile.set(file("Dockerfile"))
-
-    doLast {
-      // 构建镜像之后清除分层文件
-      delete(
-        file("application"),
-        file("spring-boot-loader"),
-        file("snapshot-dependencies"),
-        file("dependencies"),
-      )
-    }
   }
 
   register("pushDockerImage", DockerPushImage::class) {

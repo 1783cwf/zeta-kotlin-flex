@@ -1,15 +1,15 @@
-FROM bitnami/java:21 as builder
+FROM --platform=linux/amd64 bellsoft/liberica-openjdk-debian:21-cds as builder
 WORKDIR application
 
 ARG JAR_FILE
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM bitnami/java:21
+FROM --platform=linux/amd64 bellsoft/liberica-openjdk-debian:21-cds
 
 WORKDIR appliction
-COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/snapshot-dependencies/ ./
 COPY --from=builder application/application/ ./
 
