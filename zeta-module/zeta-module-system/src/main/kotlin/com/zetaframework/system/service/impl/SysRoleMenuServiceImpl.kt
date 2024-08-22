@@ -1,10 +1,11 @@
 package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.condition.allAnd
 import com.mybatisflex.kotlin.extensions.db.query
+import com.mybatisflex.kotlin.extensions.kproperty.eq
 import com.mybatisflex.kotlin.extensions.kproperty.`in`
 import com.mybatisflex.kotlin.extensions.sql.unaryPlus
-import com.mybatisflex.kotlin.extensions.wrapper.and
 import com.mybatisflex.kotlin.vec.QueryFunctions.select
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.system.dao.SysRoleMenuMapper
@@ -82,12 +83,10 @@ class SysRoleMenuServiceImpl(
         return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SYS_MENU)
-            where {
-                this.and(SysMenu::id.`in`(menuIds))
-                and(!menuType.isNullOrBlank()) {
-                    SYS_MENU.MENU_TYPE.eq(menuType)
-                }
-            }
+            allAnd(
+                SysMenu::id `in` menuIds,
+                SysMenu::menuType eq menuType,
+            )
             orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
         }
     }
@@ -112,12 +111,10 @@ class SysRoleMenuServiceImpl(
         return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SYS_MENU)
-            where {
-                this.and(SYS_MENU.ID.`in`(menuIds))
-                and(!menuType.isNullOrBlank()) {
-                    SYS_MENU.MENU_TYPE.eq(menuType)
-                }
-            }
+            allAnd(
+                SysMenu::id `in` menuIds,
+                SysMenu::menuType eq menuType,
+            )
             orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
         }
     }

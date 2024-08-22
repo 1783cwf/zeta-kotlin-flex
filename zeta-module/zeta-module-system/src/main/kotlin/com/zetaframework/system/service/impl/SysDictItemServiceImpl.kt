@@ -1,6 +1,7 @@
 package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.condition.allAnd
 import com.mybatisflex.kotlin.extensions.db.query
 import com.mybatisflex.kotlin.extensions.kproperty.eq
 import com.mybatisflex.kotlin.extensions.kproperty.`in`
@@ -51,9 +52,9 @@ class SysDictItemServiceImpl : ISysDictItemService, ServiceImpl<SysDictItemMappe
             )
             from(SysDictItem::class.java)
             leftJoin(SysDict::class.java).on(SysDictItem::id.eq(SysDict::id))
-            where {
-                SysDict::code.`in`(codes)
-            }
+            allAnd(
+                SysDict::code.`in`(codes),
+            )
         }.groupBy { it.dictCode!! } // 按照字典编码分组
     }
 

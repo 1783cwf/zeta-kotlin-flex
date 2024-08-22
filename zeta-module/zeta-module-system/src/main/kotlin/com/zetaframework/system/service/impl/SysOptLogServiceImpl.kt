@@ -1,14 +1,14 @@
 package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.paginate.Page
+import com.mybatisflex.kotlin.extensions.condition.allAnd
 import com.mybatisflex.kotlin.extensions.db.paginate
 import com.mybatisflex.kotlin.extensions.kproperty.eq
-import com.mybatisflex.kotlin.extensions.kproperty.like
 import com.mybatisflex.kotlin.extensions.kproperty.unaryMinus
-import com.mybatisflex.kotlin.extensions.wrapper.and
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.base.param.PageParam
 import com.zetaframework.log.model.LogDTO
+import com.zetaframework.mybatisflex.extensions.like
 import com.zetaframework.system.dao.SysOptLogMapper
 import com.zetaframework.system.model.dto.sysOptLog.SysOptLogTableDTO
 import com.zetaframework.system.model.entity.SysOptLog
@@ -87,20 +87,21 @@ class SysOptLogServiceImpl : ISysOptLogService, ServiceImpl<SysOptLogMapper, Sys
             )
             from(SysOptLog::class.java)
             leftJoin(SysUser::class.java).on(SysOptLog::createdBy.eq(SysUser::id))
-            where {
-                and(queryParam?.id != null) { SysOptLog::id.eq(queryParam?.id) }
-                and(!queryParam?.type.isNullOrBlank()) { SysOptLog::type.eq(queryParam?.type) }
-                and(!queryParam?.userName.isNullOrBlank()) { SysOptLog::userName.eq(queryParam?.userName) }
-                and(!queryParam?.description.isNullOrBlank()) { SysOptLog::description.like(queryParam?.description!!) }
-                and(!queryParam?.url.isNullOrBlank()) { SysOptLog::url.eq(queryParam?.url) }
-                and(!queryParam?.httpMethod.isNullOrBlank()) { SysOptLog::httpMethod.eq(queryParam?.httpMethod) }
-                and(!queryParam?.classPath.isNullOrBlank()) { SysOptLog::classPath.eq(queryParam?.classPath) }
-                and(!queryParam?.os.isNullOrBlank()) { SysOptLog::os.like(queryParam?.os!!) }
-                and(!queryParam?.device.isNullOrBlank()) { SysOptLog::device.like(queryParam?.device!!) }
-                and(!queryParam?.browser.isNullOrBlank()) { SysOptLog::browser.like(queryParam?.browser!!) }
-                and(!queryParam?.ip.isNullOrBlank()) { SysOptLog::ip.like(queryParam?.ip!!) }
-                and(!queryParam?.ipRegion.isNullOrBlank()) { SysOptLog::ipRegion.like(queryParam?.ipRegion!!) }
-            }
+            allAnd(
+                SysOptLog::id eq queryParam?.id,
+                SysOptLog::type eq queryParam?.type,
+                SysOptLog::userName eq queryParam?.userName,
+                SysOptLog::url eq queryParam?.url,
+                SysOptLog::description like queryParam?.description,
+                SysOptLog::httpMethod eq queryParam?.httpMethod,
+                SysOptLog::classPath eq queryParam?.classPath,
+                SysOptLog::os like queryParam?.os,
+                SysOptLog::device like queryParam?.device,
+                SysOptLog::browser like queryParam?.browser,
+                SysOptLog::ip like queryParam?.ip,
+                SysOptLog::ipRegion like queryParam?.ipRegion,
+            )
+
             orderBy(-SysOptLog::createTime)
         }
     }
