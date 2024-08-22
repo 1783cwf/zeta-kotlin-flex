@@ -8,7 +8,6 @@ import com.zetaframework.exception.ArgumentException
 import com.zetaframework.exception.BusinessException
 import com.zetaframework.model.result.ApiResult
 import com.zetaframework.redis.exception.LimitException
-import java.util.Objects
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import java.util.Objects
 
 /**
  * 全局异常处理器

@@ -46,9 +46,9 @@ object KtObjectMapper {
         instance.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         // 禁止:FAIL_ON_EMPTY_BEANS
         instance.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-        // 禁止:忽略未知字段
-        instance.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
 
+        // 允许:忽略未知字段
+        instance.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
         // 允许:对单引号处理
         instance.enable(JsonParser.Feature.ALLOW_SINGLE_QUOTES)
         // 允许:忽略不能转义的字符
