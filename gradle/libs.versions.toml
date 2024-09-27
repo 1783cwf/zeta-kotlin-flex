@@ -1,12 +1,12 @@
 [versions]
 # bom
-springBoot = "3.3.3"
+springBoot = "3.3.4"
 dependencyManagement = "1.1.4"
-saTokenBom = "1.38.0"
-hutoolBom = "5.8.29"
+saTokenBom = "1.39.0"
+hutoolBom = "5.8.32"
 
 # orm
-mybatisFlex = "1.9.6"
+mybatisFlex = "1.9.7"
 mybatisFlexKotlin = "1.1.2"
 autoTable = "1.9.1"
 
