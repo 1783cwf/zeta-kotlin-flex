@@ -117,7 +117,7 @@ subprojects{
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib-jdk8"))
     kapt("com.mybatis-flex:mybatis-flex-processor")
-    annotationProcessor(rootProject.projectLibs.mapstructPlusProcessor)
+    kapt(rootProject.projectLibs.mapstructPlusProcessor)
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   }
 
