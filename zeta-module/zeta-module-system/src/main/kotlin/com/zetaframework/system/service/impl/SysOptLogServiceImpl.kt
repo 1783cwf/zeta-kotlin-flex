@@ -4,11 +4,11 @@ import com.mybatisflex.core.paginate.Page
 import com.mybatisflex.kotlin.extensions.condition.allAnd
 import com.mybatisflex.kotlin.extensions.db.paginate
 import com.mybatisflex.kotlin.extensions.kproperty.eq
+import com.mybatisflex.kotlin.extensions.kproperty.like
 import com.mybatisflex.kotlin.extensions.kproperty.unaryMinus
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.base.param.PageParam
 import com.zetaframework.log.model.LogDTO
-import com.zetaframework.mybatisflex.extensions.like
 import com.zetaframework.system.dao.SysOptLogMapper
 import com.zetaframework.system.model.dto.sysOptLog.SysOptLogTableDTO
 import com.zetaframework.system.model.entity.SysOptLog

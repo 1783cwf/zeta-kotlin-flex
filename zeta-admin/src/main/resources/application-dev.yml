@@ -5,12 +5,12 @@ zeta:
     audit-enable: false
   redis:
     database: 5
-    ip: localdev
+    ip: localhost
     port: 6379
     password: jhkdjhkjdhsIUTYURTU_J35x6r
   # 数据源配置
   database:
-    url: jdbc:mysql://localdev:3306/zeta_kotlin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/zeta_kotlin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: mysql_cMpYHe
   file:
@@ -19,7 +19,7 @@ zeta:
       access-key: SDXTMGyVQVrWJ0STFF4o
       secret-key: OWFMvB9EQJBUPiOxaaZHHHfo0AySsLutb3EacekF
       bucket: dev
-      endpoint: http://localdev:9000
+      endpoint: http://localhost:9000
 # 日志配置
 logging:
   file:
