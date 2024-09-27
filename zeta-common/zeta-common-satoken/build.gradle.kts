@@ -1,11 +1,3 @@
-plugins {
-  kotlin("jvm")
-}
-
-val zetaVersion: String by project
-val zetaGroup: String by project
-group = zetaGroup
-version = zetaVersion
 
 dependencies {
 
@@ -16,8 +8,4 @@ dependencies {
   api("cn.dev33:sa-token-redis-jackson")
   api("cn.dev33:sa-token-spring-aop")
   api("cn.dev33:sa-token-jwt")
-}
-
-tasks.test {
-  useJUnitPlatform()
 }

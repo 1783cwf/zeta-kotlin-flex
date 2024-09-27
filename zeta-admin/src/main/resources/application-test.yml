@@ -19,5 +19,5 @@ zeta:
 # 日志配置
 logging:
   file:
-    path: D:/server/log/zeta-kotlin
+    path: ./log
   config: classpath:logback-spring.xml

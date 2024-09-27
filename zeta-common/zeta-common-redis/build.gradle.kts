@@ -1,11 +1,3 @@
-plugins {
-  kotlin("jvm")
-}
-
-val zetaVersion: String by project
-val zetaGroup: String by project
-group = zetaGroup
-version = zetaVersion
 
 dependencies {
 
@@ -14,8 +6,4 @@ dependencies {
 
   api("org.springframework.boot:spring-boot-starter-data-redis")
   api("org.springframework.boot:spring-boot-starter-cache")
-}
-
-tasks.test {
-  useJUnitPlatform()
 }

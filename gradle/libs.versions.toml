@@ -1,0 +1,60 @@
+[versions]
+# bom
+springBoot = "3.3.3"
+dependencyManagement = "1.1.4"
+saTokenBom = "1.38.0"
+hutoolBom = "5.8.29"
+
+# orm
+mybatisFlex = "1.9.6"
+mybatisFlexKotlin = "1.1.2"
+autoTable = "1.9.1"
+
+# utils
+aliyunSdkOss = "3.17.1"
+minio = "8.5.9"
+poiVersion = "5.2.3"
+easyExcelVersion = "3.3.3"
+easyCaptcha = "1.6.2"
+transmittableThreadLocal = "2.14.5"
+ip2region = "2.6.6"
+aizudaMonitor = "1.0.0"
+mapstructPlus = "1.4.5"
+
+
+# plugins
+kotlin = "2.0.20"
+ktLint = "12.1.0"
+bmuschkoDocker = "9.4.0"
+ksp = "2.0.10-1.0.24"
+foojayResolverConvention = "0.8.0"
+
+[libraries]
+springBootDependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
+saTokenBom = { module = "cn.dev33:sa-token-bom", version.ref = "saTokenBom" }
+hutoolBom = { module = "cn.hutool:hutool-bom", version.ref = "hutoolBom" }
+mybatisFlexStarter = { module = "com.mybatis-flex:mybatis-flex-spring-boot3-starter", version.ref = "mybatisFlex" }
+mybatisFlexBom = { module = "com.mybatis-flex:mybatis-flex-dependencies", version.ref = "mybatisFlex" }
+mybatisFlexProcessor = { module = "com.mybatis-flex:mybatis-flex-processor", version.ref = "mybatisFlex" }
+mybatisFlexKotlin = { module = "com.mybatis-flex:mybatis-flex-kotlin-extensions", version.ref = "mybatisFlexKotlin" }
+autoTableStarter = { module = "com.tangzc:auto-table-spring-boot-starter", version.ref = "autoTable" }
+transmittableThreadLocal = { module = "com.alibaba:transmittable-thread-local", version.ref = "transmittableThreadLocal" }
+ip2region = { module = "org.lionsoul:ip2region", version.ref = "ip2region" }
+mapstructPlusSpringBootStarter = { module = "io.github.linpeilie:mapstruct-plus-spring-boot-starter", version.ref = "mapstructPlus"}
+mapstructPlusProcessor = { module = "io.github.linpeilie:mapstruct-plus-processor", version.ref = "mapstructPlus"}
+aliyunSdkOss = { module = "com.aliyun.oss:aliyun-sdk-oss", version.ref = "aliyunSdkOss" }
+minio = { module = "io.minio:minio", version.ref = "minio" }
+aizudaMonitor = { module = "com.aizuda:aizuda-monitor", version.ref = "aizudaMonitor" }
+easyCaptcha = { module = "com.github.whvcse:easy-captcha", version.ref = "easyCaptcha" }
+
+
+[plugins]
+springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
+dependencyManagement = { id = "io.spring.dependency-management", version.ref = "dependencyManagement" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
+kotlinSpring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlinkapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+bmuschkoDocker = { id = "com.bmuschko.docker-remote-api", version.ref = "bmuschkoDocker" }
+foojayResolverConvention = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojayResolverConvention" }
+

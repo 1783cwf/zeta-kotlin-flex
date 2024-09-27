@@ -1,177 +1,132 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
 
   idea
-  id("org.springframework.boot")
-  id("org.jlleitschuh.gradle.ktlint")
-  id("io.spring.dependency-management")
-  id("com.bmuschko.docker-remote-api")
-  kotlin("jvm")
-  kotlin("plugin.spring")
-  kotlin("kapt")
+  `java-library`
+  alias(projectLibs.plugins.springBoot)
+  alias(projectLibs.plugins.ktlint)
+  alias(projectLibs.plugins.dependencyManagement)
+  alias(projectLibs.plugins.bmuschkoDocker)
+  alias(projectLibs.plugins.kotlin)
+  alias(projectLibs.plugins.kotlinSpring)
+  alias(projectLibs.plugins.kotlinkapt)
 }
 
-val zetaGroup: String by project
-val zetaVersion: String by project
-group = zetaGroup
-version = zetaVersion
+tasks {
+  bootJar { enabled = false }
+  jar { enabled = false }
+}
 
-val jvmVersion = JavaVersion.VERSION_21
-
-val springBootVersion: String by project
-val saTokenBomVersion: String by project
-val hutoolBomVersion: String by project
-val mybatisFlexVersion: String by project
-val mybatisFlexKotlinVersion: String by project
-val autoTableVersion: String by project
-val aliyunSdkOssVersion: String by project
-val minioVersion: String by project
-val poiVersion: String by project
-val easyExcelVersion: String by project
-val easyCaptchaVersion: String by project
-val transmittableThreadLocalVersion: String by project
-val ip2regionVersion: String by project
-val aizudaMonitorVersion: String by project
-val mapstructPlusVersion: String by project
-
-allprojects {
-  repositories {
-    maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
-    mavenCentral()
+java {
+  /**
+   * 源码JDK版本
+   */
+  sourceCompatibility = JavaVersion.VERSION_21
+  /**
+   * 编译后字节码可运行环境的版本
+   */
+  targetCompatibility = JavaVersion.VERSION_21
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(21))
   }
+
+  withSourcesJar()
+  withJavadocJar()
+}
+
+kotlin {
+  compilerOptions {
+    apiVersion.set(KotlinVersion.KOTLIN_2_0)
+    jvmTarget.set(JvmTarget.JVM_21)
+    freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=all-compatibility")
+  }
+
 }
 
 /**
- * 子模块配置，不包括最外层build
+ * 总体项目配置(包括最外层build配置)
  */
-subprojects {
+allprojects {
 
-  apply(plugin = "org.springframework.boot")
-  apply(plugin = "io.spring.dependency-management")
-  apply(plugin = "kotlin")
-  apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-  apply(plugin = "org.jetbrains.kotlin.jvm")
-  apply(plugin = "org.jetbrains.kotlin.kapt")
-  apply(plugin = "org.jlleitschuh.gradle.ktlint")
-  apply(plugin = "com.bmuschko.docker-remote-api")
+  if (childProjects.isNotEmpty()) return@allprojects
 
-  java {
-    withSourcesJar()
-    withJavadocJar()
-    /**
-     * 源码JDK版本
-     */
-    java.sourceCompatibility = jvmVersion
-    /**
-     * 编译后字节码可运行环境的版本
-     */
-    java.targetCompatibility = jvmVersion
+  apply(plugin = "idea")
+
+  repositories {
+    maven("https://repo.huaweicloud.com/repository/maven")
+    mavenCentral()
   }
 
-  /**
-   * 子模块标准依赖
-   * 所有子模块都会拥有此处配置的依赖
-   */
-  dependencies {
-    kapt("io.github.linpeilie:mapstruct-plus-processor:$mapstructPlusVersion")
-    implementation(kotlin("reflect"))
-    implementation(kotlin("stdlib-jdk8"))
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-      exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-    }
+  if (project.name.contains("dependencies")) {
+    apply(plugin = "java-platform")
+  } else {
+    apply(plugin = "java-library")
   }
 
-  dependencyManagement {
-    imports {
-      mavenBom("cn.dev33:sa-token-bom:$saTokenBomVersion")
-      mavenBom("cn.hutool:hutool-bom:$hutoolBomVersion")
-    }
+}
 
-    dependencies {
-      dependency("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
-        exclude("org.springframework.boot:spring-boot-starter-tomcat")
-      }
+/**
+ * 子模块配置(不包括最外层build配置)
+ */
+subprojects{
 
-      // orm
-      dependency("com.mybatis-flex:mybatis-flex-spring-boot3-starter:$mybatisFlexVersion")
-      dependency("com.mybatis-flex:mybatis-flex-kotlin-extensions:$mybatisFlexKotlinVersion")
-      dependency("com.tangzc:auto-table-spring-boot-starter:$autoTableVersion")
+  // dependencies 单独配置
+  if (project.name.contains("dependencies") || childProjects.isNotEmpty()) return@subprojects
 
-      // oss
-      dependency("com.aliyun.oss:aliyun-sdk-oss:$aliyunSdkOssVersion")
-      dependency("io.minio:minio:$minioVersion")
-
-      // 监控
-      dependency("com.aizuda:aizuda-monitor:$aizudaMonitorVersion")
-
-      // utils
-      dependency("org.lionsoul:ip2region:$ip2regionVersion")
-      dependency("com.alibaba:transmittable-thread-local:$transmittableThreadLocalVersion")
-      dependency("com.github.whvcse:easy-captcha:$easyCaptchaVersion")
-      dependency("io.github.linpeilie:mapstruct-plus-spring-boot-starter:$mapstructPlusVersion")
-      dependency("io.github.linpeilie:mapstruct-plus-processor:$mapstructPlusVersion")
-
-      // excel相关
-      dependency("org.apache.poi:poi:$poiVersion")
-      dependency("org.apache.poi:poi-ooxml:$poiVersion")
-      dependency("com.alibaba:easyexcel:$easyExcelVersion") {
-        exclude("org.apache.poi:poi-ooxml-schemas")
-      }
-    }
-  }
+  apply(plugin = rootProject.projectLibs.plugins.springBoot.get().pluginId)
+  apply(plugin = rootProject.projectLibs.plugins.dependencyManagement.get().pluginId)
+  apply(plugin = rootProject.projectLibs.plugins.ktlint.get().pluginId)
+  apply(plugin = rootProject.projectLibs.plugins.kotlin.get().pluginId)
+  apply(plugin = rootProject.projectLibs.plugins.kotlinkapt.get().pluginId)
+  apply(plugin = rootProject.projectLibs.plugins.kotlinSpring.get().pluginId)
 
   tasks {
-
-    /**
-     * kotlin编译
-     */
-    compileKotlin {
-      kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = jvmVersion.majorVersion
-      }
+    bootJar {
+      enabled = false
+      archiveClassifier = ""
     }
 
-    compileJava {
-      /*
-       * https://www.mapstruct.plus/guide/configuration.html mapstruct-plus编译器配置项
-       *
-       * 1. unmappedSourcePolicy: 当来源类中没有对应属性时的策略，默认忽略
-       * 2. unmappedTargetPolicy: 当目标类中没有对应属性时的策略，默认忽略
-       */
-      options.compilerArgs.add("-Amapstruct.plus.unmappedSourcePolicy=IGNORE")
-      options.compilerArgs.add("-Amapstruct.plus.unmappedTargetPolicy=IGNORE")
+    jar {
+      enabled = true
+      archiveClassifier = ""
+      manifest {
+        attributes["Implementation-Title"] = project.name
+        attributes["Implementation-Version"] = project.version
+        attributes["Implementation-Vendor-Id"] = project.group
+        attributes["Implementation-Vendor"] = "zeta kotlin flex"
+      }
+      doFirst {
+        println("当前制品: [${project.group}:${project.name}:${project.version}]")
+      }
     }
 
     test {
       useJUnitPlatform()
     }
 
-    /**
-     * 通用服务包只打包成Jar不通过SpringBootJar特殊处理
-     */
-    if (
-      project.name.startsWith("zeta-common") ||
-      project.name.startsWith("zeta-module") ||
-      Regex("(api|service|web|sdk)\$").containsMatchIn(project.name)
-    ) {
-      bootJar {
-        enabled = false
-        archiveBaseName.set(project.name)
-      }
-      jar {
-        enabled = true
-        archiveBaseName.set(project.name)
-      }
+    withType<JavaCompile> {
+      options.compilerArgs.add("-Xlint:deprecation")
+      options.compilerArgs.add("-Xlint:unchecked")
     }
 
-    if (project.name == "zeta-admin") {
-      bootJar {
-        enabled = true
-        archiveBaseName.set(project.name)
-        layered {
-          enabled = true
-        }
-      }
+  }
+
+  dependencies{
+    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib-jdk8"))
+    kapt("com.mybatis-flex:mybatis-flex-processor")
+    annotationProcessor(rootProject.projectLibs.mapstructPlusProcessor)
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+  }
+
+  dependencyManagement{
+    imports {
+      mavenBom(rootProject.projectLibs.springBootDependencies.get().toString())
+      mavenBom(rootProject.projectLibs.saTokenBom.get().toString())
+      mavenBom(rootProject.projectLibs.hutoolBom.get().toString())
+      mavenBom(rootProject.projectLibs.mybatisFlexBom.get().toString())
     }
   }
 }

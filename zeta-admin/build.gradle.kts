@@ -2,13 +2,8 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 
 plugins {
-  kotlin("jvm")
+  alias(libs.plugins.bmuschkoDocker)
 }
-
-val zetaVersion: String by project
-val zetaGroup: String by project
-group = zetaGroup
-version = zetaVersion
 
 // 镜像仓库地址
 val dockerRegistry: String by project
@@ -33,6 +28,13 @@ tasks {
     useJUnitPlatform()
   }
 
+  bootJar {
+    enabled = true
+    layered {
+      enabled = true
+    }
+  }
+
   docker {
 
     // 配置docker认证信息
@@ -46,7 +48,7 @@ tasks {
 
   register("buildDockerImage", DockerBuildImage::class) {
     group = "docker"
-    dependsOn("build")
+    dependsOn("bootJar")
 
     images.set(listOf(imageName))
     inputDir.set(file("./"))
