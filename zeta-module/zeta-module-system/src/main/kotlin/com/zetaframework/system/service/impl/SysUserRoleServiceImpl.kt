@@ -1,6 +1,10 @@
 package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.condition.allAnd
+import com.mybatisflex.kotlin.extensions.db.query
+import com.mybatisflex.kotlin.extensions.kproperty.eq
+import com.mybatisflex.kotlin.extensions.kproperty.`in`
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.model.dto.SysRoleDTO
 import com.zetaframework.system.dao.SysUserRoleMapper
@@ -29,7 +33,27 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
      * @return List<[SysRole]> 角色列表
      */
     override fun listByUserId(userId: Long): List<SysRole> {
-        return mapper.selectByUserId(userId)
+        // 查询当前用户ID关联的所有角色ID
+        val roleIds =
+            QueryWrapper.create()
+                .select(SysUserRole::roleId)
+                .from(SysUserRole::class.java)
+                .where(SysUserRole::userId.eq(userId))
+
+        return query<SysRole> {
+            select(
+                SysRole::id,
+                SysRole::name,
+                SysRole::code,
+                SysRole::createdBy,
+                SysRole::createTime,
+                SysRole::updatedBy,
+                SysRole::updateTime,
+                SysRole::describe,
+                SysRole::deleted,
+            )
+            SysRole::id `in` roleIds
+        }
     }
 
     /**
@@ -39,7 +63,26 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
      * @return List<[SysRoleDTO]> 角色详情列表
      */
     override fun listByUserIds(userIds: List<Long>): List<SysRoleDTO> {
-        return mapper.selectByUserIds(userIds)
+        return query<SysRoleDTO> {
+            select(
+                SysRole::id,
+                SysRole::name,
+                SysRole::code,
+                SysRole::createdBy,
+                SysRole::createTime,
+                SysRole::updatedBy,
+                SysRole::updateTime,
+                SysRole::describe,
+                SysRole::deleted,
+                SysUserRole::userId,
+            )
+            from(SysUserRole::class.java)
+                .leftJoin(SysRole::class.java).on(SysUserRole::roleId.eq(SysRole::id))
+            allAnd(
+                SysUserRole::userId `in` userIds,
+                SysRole::deleted eq false,
+            )
+        }
     }
 
     /**

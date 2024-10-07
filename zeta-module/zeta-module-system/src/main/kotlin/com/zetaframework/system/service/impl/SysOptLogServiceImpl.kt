@@ -101,7 +101,6 @@ class SysOptLogServiceImpl : ISysOptLogService, ServiceImpl<SysOptLogMapper, Sys
                 SysOptLog::ip like queryParam?.ip,
                 SysOptLog::ipRegion like queryParam?.ipRegion,
             )
-
             orderBy(-SysOptLog::createTime)
         }
     }

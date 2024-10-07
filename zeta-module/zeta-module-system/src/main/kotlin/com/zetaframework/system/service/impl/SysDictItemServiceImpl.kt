@@ -53,7 +53,7 @@ class SysDictItemServiceImpl : ISysDictItemService, ServiceImpl<SysDictItemMappe
             from(SysDictItem::class.java)
             leftJoin(SysDict::class.java).on(SysDictItem::id.eq(SysDict::id))
             allAnd(
-                SysDict::code.`in`(codes),
+                SysDict::code `in` (codes),
             )
         }.groupBy { it.dictCode!! } // 按照字典编码分组
     }

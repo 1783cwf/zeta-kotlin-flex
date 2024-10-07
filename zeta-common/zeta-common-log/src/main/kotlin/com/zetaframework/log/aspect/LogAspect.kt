@@ -4,7 +4,7 @@ import cn.hutool.core.date.SystemClock
 import cn.hutool.core.exceptions.ExceptionUtil
 import cn.hutool.core.util.StrUtil
 import cn.hutool.http.useragent.UserAgentUtil
-import com.zetaframework.jackson.util.JSONUtil
+import com.zetaframework.jackson.util.toJsonString
 import com.zetaframework.log.annotation.SysLog
 import com.zetaframework.log.enums.LogTypeEnum
 import com.zetaframework.log.event.LogEvent
@@ -14,6 +14,7 @@ import com.zetaframework.utils.IpAddressUtil
 import com.zetaframework.utils.ServletUtil
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import java.time.LocalDateTime
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.AfterReturning
 import org.aspectj.lang.annotation.AfterThrowing
@@ -27,7 +28,6 @@ import org.springframework.context.ApplicationContext
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import org.springframework.web.multipart.MultipartFile
-import java.time.LocalDateTime
 
 /**
  * 系统日志 切面
@@ -195,7 +195,7 @@ class LogAspect(private val context: ApplicationContext) {
 
         val paramMap = ServletUtil.getParamMap(request)
         if (paramMap.isNotEmpty()) {
-            params = JSONUtil.toJsonStr(paramMap)
+            params = paramMap.toJsonString()
         } else {
             if (joinPoint.args.isNotEmpty()) {
                 val paramList = mutableListOf<Any>()
@@ -208,7 +208,7 @@ class LogAspect(private val context: ApplicationContext) {
                     }
                 }
                 if (paramList.isNotEmpty()) {
-                    params = JSONUtil.toJsonStr(paramList)
+                    params = paramList.toJsonString()
                 }
             }
         }
@@ -254,7 +254,7 @@ class LogAspect(private val context: ApplicationContext) {
         sysLog: SysLog,
     ): String? =
         if (sysLog.response) {
-            JSONUtil.toJsonStr(result)
+            result.toJsonString()
         } else {
             ""
         }

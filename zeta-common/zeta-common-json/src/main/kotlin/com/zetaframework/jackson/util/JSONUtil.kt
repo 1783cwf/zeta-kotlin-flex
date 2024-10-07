@@ -3,10 +3,12 @@ package com.zetaframework.jackson.util
 import cn.hutool.core.date.DatePattern
 import cn.hutool.core.util.StrUtil
 import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ObjectWriter
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer
+import com.fasterxml.jackson.databind.type.TypeFactory
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
@@ -16,12 +18,12 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import org.slf4j.LoggerFactory
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import org.slf4j.LoggerFactory
 
 /**
  * 封装Jackson得到的JSON工具类
@@ -113,13 +115,24 @@ object JSONUtil {
         if (StrUtil.isBlank(json)) {
             return null
         }
+        return objectMapper.readValue(json, clazz)
+    }
 
-        try {
-            return objectMapper.readValue(json, clazz)
-        } catch (e: Exception) {
-            logger.error("json字符串转对象失败", e)
+    /**
+     * json字符串转对象
+     *
+     * @param json String?    json字符串
+     * @param objectType JavaType
+     * @return T?
+     */
+    fun <T> parseObject(
+        json: String?,
+        objectType: JavaType,
+    ): T? {
+        if (StrUtil.isBlank(json)) {
+            return null
         }
-        return null
+        return objectMapper.readValue(json, objectType)
     }
 
     /**
@@ -149,10 +162,36 @@ object JSONUtil {
         }
 
         try {
+
             return objectMapper.readValue(json, valueTypeRef)
         } catch (e: Exception) {
             logger.error("json字符串转对象失败", e)
         }
         return null
     }
+}
+
+/**
+ * 是否格式化输出，默认不格式化
+ * @param pretty Boolean?   是否格式化输出
+ * @return String?
+ */
+fun Any?.toJsonString(pretty: Boolean? = false): String? {
+    return JSONUtil.toJsonStr(this, pretty)
+}
+
+fun <T> String?.toListObject(clazz: Class<T>): T? {
+    return JSONUtil.parseObject(this, TypeFactory.defaultInstance().constructCollectionType(List::class.java, clazz))
+}
+
+fun <T> String?.toObject(clazz: Class<T>): T? {
+    return JSONUtil.parseObject(this, clazz)
+}
+
+inline fun <reified T> String.toObject(): T? {
+    return toObject(T::class.java)
+}
+
+fun <T : Any> T.deepCody(clazz: Class<T> = this.javaClass): T? {
+    return this.toJsonString()?.toObject(clazz)
 }

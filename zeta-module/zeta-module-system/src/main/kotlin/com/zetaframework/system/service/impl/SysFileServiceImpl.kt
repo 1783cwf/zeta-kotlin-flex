@@ -94,7 +94,7 @@ class SysFileServiceImpl(
      *
      * @param ids 文件id列表
      */
-    @Transactional(rollbackFor = [Exception::class])
+    @Transactional
     override fun batchDelete(ids: MutableList<Long>): Boolean {
         // 批量查询文件
         val listFile = this.listByIds(ids)

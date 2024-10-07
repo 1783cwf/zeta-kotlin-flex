@@ -91,7 +91,7 @@ class SysUserServiceImpl(
         user?.readonly = false
         user?.state = UserStateEnum.NORMAL.code
         if (!this.save(user)) {
-            throw com.zetaframework.exception.BusinessException("新增用户失败")
+            throw BusinessException("新增用户失败")
         }
 
         // 删除并重新关联角色
@@ -109,7 +109,7 @@ class SysUserServiceImpl(
     override fun updateUser(updateDTO: SysUserUpdateDTO): Boolean {
         val user = MapstructUtils.convert(updateDTO, SysUser::class.java)
         if (!this.updateById(user)) {
-            throw com.zetaframework.exception.BusinessException("修改用户失败")
+            throw BusinessException("修改用户失败")
         }
 
         // 删除并重新关联角色
@@ -157,7 +157,7 @@ class SysUserServiceImpl(
             return mapper.selectByAccount(account)
         } catch (e: Exception) {
             // 可能查询到多个用户
-            throw com.zetaframework.exception.BusinessException("查询到多个用户")
+            throw BusinessException("查询到多个用户")
         }
     }
 
@@ -191,7 +191,7 @@ class SysUserServiceImpl(
     override fun batchImportUser(userList: List<SysUser>): Boolean {
         // 保存用户
         if (!this.saveBatch(userList)) {
-            throw com.zetaframework.exception.BusinessException("新增用户失败")
+            throw BusinessException("新增用户失败")
         }
 
         try {
@@ -202,7 +202,7 @@ class SysUserServiceImpl(
                 userRoleService.saveUserRole(user.id!!, roleIds)
             }
         } catch (e: Exception) {
-            throw com.zetaframework.exception.BusinessException("关联用户角色失败")
+            throw BusinessException("关联用户角色失败")
         }
 
         return true

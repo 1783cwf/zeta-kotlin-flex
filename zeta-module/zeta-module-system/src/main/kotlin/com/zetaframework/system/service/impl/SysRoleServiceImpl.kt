@@ -1,6 +1,10 @@
 package com.zetaframework.system.service.impl
 
-import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.db.query
+import com.mybatisflex.kotlin.extensions.db.queryOne
+import com.mybatisflex.kotlin.extensions.kproperty.eq
+import com.mybatisflex.kotlin.extensions.kproperty.`in`
+import com.mybatisflex.kotlin.extensions.kproperty.unaryMinus
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.system.dao.SysRoleMapper
 import com.zetaframework.system.model.entity.SysRole
@@ -22,11 +26,10 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
      * @return [SysRole] 角色名对应的角色
      */
     override fun getRoleByName(name: String): SysRole? {
-        return this.getOne(
-            QueryWrapper.create(SysRole())
-                .eq(SysRole::name, name)
-                .orderBy(SysRole::id, false),
-        )
+        return queryOne<SysRole> {
+            SysRole::name eq name
+            orderBy(-SysRole::id)
+        }
     }
 
     /**
@@ -38,7 +41,9 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
     override fun getRolesByNames(names: List<String>): List<SysRole> {
         if (names.isEmpty()) return emptyList()
 
-        return this.list(QueryWrapper.create(SysRole()).`in`(SysRole::name, names))
+        return query<SysRole> {
+            SysRole::name `in` names
+        }
     }
 
     /**
@@ -48,11 +53,10 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
      * @return [SysRole] 角色编码对应的角色
      */
     override fun getRoleByCode(code: String): SysRole? {
-        return this.getOne(
-            QueryWrapper.create(SysRole())
-                .eq(SysRole::code, code)
-                .orderBy(SysRole::id, false),
-        )
+        return queryOne<SysRole> {
+            SysRole::code eq code
+            orderBy(-SysRole::id)
+        }
     }
 
     /**
@@ -62,6 +66,8 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
      * @return List<[SysRole]> 角色编码对应的角色
      */
     override fun getRolesByCodes(codes: List<String>): List<SysRole> {
-        return this.list(QueryWrapper.create(SysRole()).`in`(SysRole::code, codes))
+        return query<SysRole> {
+            SysRole::code `in` codes
+        }
     }
 }
