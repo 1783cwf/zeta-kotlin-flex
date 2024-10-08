@@ -35,7 +35,7 @@ class SysDict : BaseEntity<Long>() {
     var describe: String? = null
 
     /** 排序 */
-    @AutoColumn(value = "sort_value", type = INT, length = 10, comment = "排序")
+    @AutoColumn(value = "sort_value", type = INT, comment = "排序")
     var sortValue: Int? = null
 
     override fun toString(): String {

@@ -6,14 +6,11 @@ import com.mybatisflex.kotlin.extensions.condition.allAnd
 import com.mybatisflex.kotlin.extensions.db.query
 import com.mybatisflex.kotlin.extensions.kproperty.eq
 import com.mybatisflex.kotlin.extensions.kproperty.`in`
-import com.mybatisflex.kotlin.extensions.sql.unaryPlus
-import com.mybatisflex.kotlin.vec.QueryFunctions.select
+import com.mybatisflex.kotlin.extensions.kproperty.unaryPlus
 import com.zetaframework.system.model.entity.SysMenu
+import com.zetaframework.system.model.entity.SysRole
 import com.zetaframework.system.model.entity.SysRoleMenu
-import com.zetaframework.system.model.entity.table.SysMenuTableDef.SYS_MENU
-import com.zetaframework.system.model.entity.table.SysRoleMenuTableDef.SYS_ROLE_MENU
-import com.zetaframework.system.model.entity.table.SysRoleTableDef.SYS_ROLE
-import com.zetaframework.system.model.entity.table.SysUserRoleTableDef.SYS_USER_ROLE
+import com.zetaframework.system.model.entity.SysUserRole
 import org.springframework.stereotype.Repository
 
 /**
@@ -37,26 +34,28 @@ interface SysRoleMenuMapper : BaseMapper<SysRoleMenu> {
     ): MutableList<SysMenu> {
         // 根据用户ID查询当前用户所具有的角色
         val roleIds =
-            select(SYS_USER_ROLE.ROLE_ID)
-                .from(SYS_USER_ROLE)
-                .leftJoin<QueryWrapper>(SYS_ROLE)
-                .on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE.ID))
-                .where(SYS_USER_ROLE.USER_ID.eq(userId))
+            QueryWrapper.create()
+                .select(SysUserRole::roleId)
+                .from(SysUserRole::class.java)
+                .leftJoin<QueryWrapper>(SysRole::class.java)
+                .on(SysUserRole::roleId.eq(SysRole::id))
+                .where(SysUserRole::userId.eq(userId))
 
         // 根据角色ID查询所有的菜单ID
         val menuIds =
-            select(SYS_ROLE_MENU.MENU_ID)
-                .from(SYS_ROLE_MENU)
-                .where(SYS_ROLE_MENU.ROLE_ID.`in`(roleIds))
+            QueryWrapper.create()
+                .select(SysRoleMenu::menuId)
+                .from(SysRoleMenu::class.java)
+                .where(SysRoleMenu::roleId.`in`(roleIds))
 
         return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
-            from(SYS_MENU)
+            from(SysMenu::class.java)
             allAnd(
                 SysMenu::id `in` menuIds,
                 SysMenu::menuType eq menuType,
             )
-            orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
+            orderBy(+SysMenu::sortValue, +SysMenu::id)
         }.toMutableList()
     }
 
@@ -73,18 +72,19 @@ interface SysRoleMenuMapper : BaseMapper<SysRoleMenu> {
     ): MutableList<SysMenu> {
         // 根据角色ID集合获取所有符合的菜单ID集合
         val menuIds =
-            select(SYS_ROLE_MENU.MENU_ID)
-                .from(SYS_ROLE_MENU)
-                .where(SYS_ROLE_MENU.ROLE_ID.`in`(roleIds))
+            QueryWrapper.create()
+                .select(SysRoleMenu::menuId)
+                .from(SysRoleMenu::class.java)
+                .where(SysRoleMenu::roleId.`in`(roleIds))
 
         return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
-            from(SYS_MENU)
+            from(SysMenu::class.java)
             allAnd(
                 SysMenu::id `in` menuIds,
                 SysMenu::menuType eq menuType,
             )
-            orderBy(+SYS_MENU.SORT_VALUE, +SYS_MENU.ID)
+            orderBy(+SysMenu::sortValue, +SysMenu::id)
         }.toMutableList()
     }
 

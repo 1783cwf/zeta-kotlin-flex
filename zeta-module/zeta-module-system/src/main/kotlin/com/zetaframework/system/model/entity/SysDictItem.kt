@@ -24,7 +24,7 @@ class SysDictItem : BaseEntity<Long>() {
     /** 字典id */
     @get:NotNull(message = "字典id不能为空")
     @Column(value = "dict_id")
-    @ColumnDefine(type = BIGINT, length = 20, comment = "字典id")
+    @ColumnDefine(type = BIGINT, comment = "字典id")
     var dictId: Long? = null
 
     /** 字典项 */
@@ -48,7 +48,7 @@ class SysDictItem : BaseEntity<Long>() {
 
     /** 排序 */
     @Column(value = "sort_value")
-    @ColumnDefine(type = INT, length = 10, comment = "排序")
+    @ColumnDefine(type = INT, comment = "排序")
     var sortValue: Int? = null
 
     override fun toString(): String {
