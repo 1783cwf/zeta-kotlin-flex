@@ -8,7 +8,7 @@ hutoolBom = "5.8.32"
 # orm
 mybatisFlex = "1.9.7"
 mybatisFlexKotlin = "1.1.2"
-autoTable = "1.9.1"
+autoTable = "1.9.2"
 
 # utils
 aliyunSdkOss = "3.17.1"

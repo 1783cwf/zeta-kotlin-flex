@@ -6,9 +6,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.stereotype.Repository
 
-@MapperScan(value = ["com.zetaframework.**.dao"], annotationClass = Repository::class)
+@MapperScan(value = ["com.zetaframework.**.dao"])
 @SpringBootApplication
 @EnableAutoTable
 class ZetaKotlinFlexApplication

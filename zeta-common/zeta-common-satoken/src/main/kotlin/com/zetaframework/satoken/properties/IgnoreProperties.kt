@@ -18,15 +18,9 @@ class IgnoreProperties {
             "/**/*.jpg",
             "/**/*.png",
             "/**/*.gif",
-            "/**/api-docs/**",
-            "/**/api-docs-ext/**",
-            "/**/swagger-resources/**",
-            "/**/webjars/**",
-            "/druid/**",
             "/error",
-            "/ws/**",
-            "/api/login",
-            "/api/captcha",
+            "/api/system/login",
+            "/api/system/captcha",
         )
 
     /** 忽略鉴权的地址 */

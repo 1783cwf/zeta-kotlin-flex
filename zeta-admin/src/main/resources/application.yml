@@ -47,9 +47,6 @@ zeta:
       - /**/noxss/**
       # 忽略指定接口的xss防护
       - /api/test/test1
-      # 忽略新增、修改接口的xss防护
-      - POST:/api/demo
-      - PUT:/api/demo
   # 加密解密配置
   crypto:
     aes:

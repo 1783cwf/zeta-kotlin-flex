@@ -17,7 +17,7 @@ class ApiResult<T> {
     /** 是否成功 */
     val success: Boolean
 
-        get() = code == com.zetaframework.enums.ErrorCodeEnum.SUCCESS.code
+        get() = code == ErrorCodeEnum.SUCCESS.code
 
     /** 状态信息 */
 
@@ -45,7 +45,7 @@ class ApiResult<T> {
         this.defExec = defExec
     }
 
-    constructor(code: Int? = com.zetaframework.enums.ErrorCodeEnum.SUCCESS.code, message: String? = null, data: T? = null, error: String? = null) {
+    constructor(code: Int? = ErrorCodeEnum.SUCCESS.code, message: String? = null, data: T? = null, error: String? = null) {
         this.code = code
         this.message = message
         this.data = data
@@ -93,8 +93,8 @@ class ApiResult<T> {
          * @return ApiResult<E>
          */
         fun <E> success(
-            code: Int? = com.zetaframework.enums.ErrorCodeEnum.SUCCESS.code,
-            message: String? = com.zetaframework.enums.ErrorCodeEnum.SUCCESS.msg,
+            code: Int? = ErrorCodeEnum.SUCCESS.code,
+            message: String? = ErrorCodeEnum.SUCCESS.msg,
             data: E? = null,
         ): ApiResult<E> {
             return ApiResult(code, message, data)
@@ -106,7 +106,7 @@ class ApiResult<T> {
          * @return ApiResult<BaseEntity>
          */
         fun <E> successDef(): ApiResult<E> {
-            return ApiResult(com.zetaframework.enums.ErrorCodeEnum.SUCCESS.code, com.zetaframework.enums.ErrorCodeEnum.SUCCESS.msg, null, true)
+            return ApiResult(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
         }
 
         /**
@@ -118,8 +118,8 @@ class ApiResult<T> {
          * @return ApiResult<E>
          */
         fun <E> fail(
-            code: Int? = com.zetaframework.enums.ErrorCodeEnum.FAIL.code,
-            message: String? = com.zetaframework.enums.ErrorCodeEnum.FAIL.msg,
+            code: Int? = ErrorCodeEnum.FAIL.code,
+            message: String? = ErrorCodeEnum.FAIL.msg,
             data: E? = null,
         ): ApiResult<E> {
             return ApiResult(code, message, data)

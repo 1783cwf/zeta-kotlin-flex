@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController
  * @author gcc
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/system")
 class MainController(
     private val captchaCacheKey: com.zetaframework.system.common.cacheKey.CaptchaStringCacheKey,
 ) : SuperSimpleController<ISysUserService, SysUser>() {
@@ -87,11 +87,9 @@ class MainController(
         val specCaptcha = SpecCaptcha(120, 40, 5)
         captchaCacheKey.set(key, specCaptcha.text())
 
-        return if ("prod" === env) {
-            // 如果生产环境，不返回验证码的值
-            success(CaptchaResult(key, specCaptcha.toBase64()))
-        } else {
-            success(CaptchaResult(key, specCaptcha.toBase64(), specCaptcha.text()))
-        }
+        // 如果生产环境，不返回验证码的值
+        val text = if ("prod" === env) "" else specCaptcha.text()
+
+        return success(CaptchaResult(key, specCaptcha.toBase64(), text))
     }
 }

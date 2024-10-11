@@ -170,7 +170,7 @@ class SaTokenConfigure(
     private fun returnFail(e: Throwable): String? {
         // 初始化错误码和错误信息
         var statusCode: Int = HttpStatus.BAD_REQUEST.value()
-        var code: Int = com.zetaframework.enums.ErrorCodeEnum.FAIL.code
+        var code: Int = ErrorCodeEnum.FAIL.code
         val message: String?
 
         when (e) {
@@ -185,13 +185,13 @@ class SaTokenConfigure(
                         NotLoginException.KICK_OUT -> NotLoginException.KICK_OUT_MESSAGE
                         else -> NotLoginException.DEFAULT_MESSAGE
                     }
-                code = com.zetaframework.enums.ErrorCodeEnum.UNAUTHORIZED.code
+                code = ErrorCodeEnum.UNAUTHORIZED.code
                 statusCode = HttpStatus.UNAUTHORIZED.value()
             }
             // 处理NotRoleException和NotPermissionException异常的错误信息
             is NotRoleException, is NotPermissionException -> {
-                message = com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg
-                code = com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code
+                message = ErrorCodeEnum.FORBIDDEN.msg
+                code = ErrorCodeEnum.FORBIDDEN.code
                 statusCode = HttpStatus.FORBIDDEN.value()
             }
             // 处理其它异常的错误信息

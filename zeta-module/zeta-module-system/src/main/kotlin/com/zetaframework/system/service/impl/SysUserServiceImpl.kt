@@ -5,6 +5,9 @@ import cn.dev33.satoken.stp.StpInterface
 import cn.hutool.core.collection.CollUtil
 import com.mybatisflex.core.paginate.Page
 import com.mybatisflex.core.query.QueryWrapper
+import com.mybatisflex.kotlin.extensions.condition.allAnd
+import com.mybatisflex.kotlin.extensions.db.queryOne
+import com.mybatisflex.kotlin.extensions.kproperty.eq
 import com.mybatisflex.spring.service.impl.ServiceImpl
 import com.zetaframework.base.param.PageParam
 import com.zetaframework.constants.RedisKeyConstants.USER_PERMISSION_KEY
@@ -153,11 +156,29 @@ class SysUserServiceImpl(
      * @return [SysUser] 用户
      */
     override fun getByAccount(account: String): SysUser? {
-        try {
-            return mapper.selectByAccount(account)
-        } catch (e: Exception) {
-            // 可能查询到多个用户
-            throw BusinessException("查询到多个用户")
+        return queryOne<SysUser> {
+            select(
+                SysUser::id,
+                SysUser::account,
+                SysUser::username,
+                SysUser::mobile,
+                SysUser::sex,
+                SysUser::avatar,
+                SysUser::birthday,
+                SysUser::password,
+                SysUser::readonly,
+                SysUser::state,
+                SysUser::email,
+                SysUser::createTime,
+                SysUser::createdBy,
+                SysUser::updateTime,
+                SysUser::updatedBy,
+            )
+            from(SysUser::class.java)
+            allAnd(
+                SysUser::account eq account,
+                SysUser::deleted eq false,
+            )
         }
     }
 

@@ -32,16 +32,16 @@ class PasswordAuthStrategyImpl(
         // 查询用户, 因为账号已经判空过了所以这里直接param.account!!
         val user = userService.getByAccount(param.account!!) ?: throw BusinessException("用户不存在")
 
-        // 密码解密
-        val password =
-            try {
-                aseHelper.decryptStr(param.password!!)
-            } catch (e: Exception) {
-                ""
-            }
+        // 密码解密 后续改为全局加解密
+//        val password =
+//            try {
+//                aseHelper.decryptStr(param.password!!)
+//            } catch (e: Exception) {
+//                ""
+//            }
         val userId = user.id
         // 比较密码
-        if (!userService.comparePassword(password, user.password!!)) {
+        if (!userService.comparePassword(param.password!!, user.password!!)) {
             SpringUtil.publishEvent(
                 LoginEvent(
                     LoginLogDTO.loginFail(
