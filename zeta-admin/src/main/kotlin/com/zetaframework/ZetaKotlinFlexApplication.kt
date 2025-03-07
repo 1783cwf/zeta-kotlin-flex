@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     val context = runApplication<ZetaKotlinFlexApplication>(*args)
     val env = context.environment
     log.info(
-        """
+    """
 ----------------------------------------------------------
 	项目 '${env.getProperty("spring.application.name")}' 启动成功!
 ----------------------------------------------------------

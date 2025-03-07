@@ -9,10 +9,10 @@ import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.TINYINT
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
-import org.dromara.autotable.annotation.AutoColumn
-import org.dromara.autotable.annotation.PrimaryKey
 import java.io.Serializable
 import java.time.LocalDateTime
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.PrimaryKey
 
 /**
  * 包括id、create_time、create_by、update_by、update_time、version、deleted字段的表继承的基础实体
@@ -25,7 +25,7 @@ import java.time.LocalDateTime
 abstract class BaseEntity<T>(
     /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
-    @Id(keyType = KeyType.Generator)
+    @Id(keyType = KeyType.Generator, value = "flexId")
     @PrimaryKey(autoIncrement = false)
     open var id: Long? = null,
     /** 创建时间 */
