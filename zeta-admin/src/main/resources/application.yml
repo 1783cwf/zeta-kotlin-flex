@@ -102,6 +102,11 @@ server:
     buffer-size: 1024
     # 是否分配的直接内存
     direct-buffers: true
+  compression:
+    # 开启响应压缩
+    enabled: true
+    # 最小压缩值为10kb
+    min-response-size: 10240
 
 # spring配置
 spring:

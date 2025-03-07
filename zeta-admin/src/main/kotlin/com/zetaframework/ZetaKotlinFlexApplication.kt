@@ -1,6 +1,6 @@
 package com.zetaframework
 
-import com.tangzc.autotable.springboot.EnableAutoTable
+import org.dromara.autotable.springboot.EnableAutoTable
 import org.mybatis.spring.annotation.MapperScan
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

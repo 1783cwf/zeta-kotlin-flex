@@ -1,9 +1,6 @@
 package com.zetaframework.system.model.entity
 
-import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Table
-import com.tangzc.autotable.annotation.AutoTable
-import com.zetaframework.mybatisflex.annotation.ColumnDefine
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.VARCHAR
@@ -11,6 +8,8 @@ import com.zetaframework.mybatisflex.entity.BaseEntity
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoTable
 
 /**
  * 字典项
@@ -23,32 +22,27 @@ import jakarta.validation.constraints.Size
 class SysDictItem : BaseEntity<Long>() {
     /** 字典id */
     @get:NotNull(message = "字典id不能为空")
-    @Column(value = "dict_id")
-    @ColumnDefine(type = BIGINT, comment = "字典id")
+    @AutoColumn(value = "dict_id", type = BIGINT, comment = "字典id")
     var dictId: Long? = null
 
     /** 字典项 */
     @get:NotBlank(message = "字典项不能为空")
     @get:Size(max = 32, message = "字典项长度不能超过32")
-    @Column(value = "name")
-    @ColumnDefine(type = VARCHAR, length = 32, comment = "字典项")
+    @AutoColumn(value = "name", type = VARCHAR, length = 32, comment = "字典项")
     var name: String? = null
 
     /** 值 */
     @get:NotBlank(message = "值不能为空")
     @get:Size(max = 32, message = "值长度不能超过32")
-    @Column(value = "value")
-    @ColumnDefine(type = VARCHAR, length = 32, comment = "值")
+    @AutoColumn(value = "value", type = VARCHAR, length = 32, comment = "值")
     var value: String? = null
 
     /** 描述 */
-    @Column(value = "describe_")
-    @ColumnDefine(type = VARCHAR, length = 255, comment = "描述")
+    @AutoColumn(value = "describe_", type = VARCHAR, length = 255, comment = "描述")
     var describe: String? = null
 
     /** 排序 */
-    @Column(value = "sort_value")
-    @ColumnDefine(type = INT, comment = "排序")
+    @AutoColumn(value = "sort_value", type = INT, comment = "排序")
     var sortValue: Int? = null
 
     override fun toString(): String {

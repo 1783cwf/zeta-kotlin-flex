@@ -1,30 +1,29 @@
 [versions]
 # bom
-springBoot = "3.3.4"
+springBoot = "3.4.3"
 dependencyManagement = "1.1.4"
-saTokenBom = "1.39.0"
-hutoolBom = "5.8.32"
+saTokenBom = "1.40.0"
+hutoolBom = "5.8.36"
 
 # orm
-mybatisFlex = "1.9.7"
+mybatisFlex = "1.10.8"
 mybatisFlexKotlin = "1.1.2"
-autoTable = "1.9.2"
+autoTable = "2.1.4"
 
 # utils
 aliyunSdkOss = "3.17.1"
-minio = "8.5.9"
-poiVersion = "5.2.3"
-easyExcelVersion = "3.3.3"
+minio = "8.5.12"
 easyCaptcha = "1.6.2"
 transmittableThreadLocal = "2.14.5"
-ip2region = "2.6.6"
+ip2region = "2.7.0"
 aizudaMonitor = "1.0.0"
-mapstructPlus = "1.4.5"
+mapstructPlus = "1.4.6"
 
 
 # plugins
 kotlin = "2.0.20"
-ktLint = "12.1.0"
+ktLintPlugins = "12.1.2"
+ktlint = "1.5.0"
 bmuschkoDocker = "9.4.0"
 ksp = "2.0.10-1.0.24"
 foojayResolverConvention = "0.8.0"
@@ -37,7 +36,7 @@ mybatisFlexStarter = { module = "com.mybatis-flex:mybatis-flex-spring-boot3-star
 mybatisFlexBom = { module = "com.mybatis-flex:mybatis-flex-dependencies", version.ref = "mybatisFlex" }
 mybatisFlexProcessor = { module = "com.mybatis-flex:mybatis-flex-processor", version.ref = "mybatisFlex" }
 mybatisFlexKotlin = { module = "com.mybatis-flex:mybatis-flex-kotlin-extensions", version.ref = "mybatisFlexKotlin" }
-autoTableStarter = { module = "com.tangzc:auto-table-spring-boot-starter", version.ref = "autoTable" }
+autoTableStarter = { module = "org.dromara.autotable:auto-table-spring-boot-starter", version.ref = "autoTable" }
 transmittableThreadLocal = { module = "com.alibaba:transmittable-thread-local", version.ref = "transmittableThreadLocal" }
 ip2region = { module = "org.lionsoul:ip2region", version.ref = "ip2region" }
 mapstructPlusSpringBootStarter = { module = "io.github.linpeilie:mapstruct-plus-spring-boot-starter", version.ref = "mapstructPlus"}
@@ -46,13 +45,14 @@ aliyunSdkOss = { module = "com.aliyun.oss:aliyun-sdk-oss", version.ref = "aliyun
 minio = { module = "io.minio:minio", version.ref = "minio" }
 aizudaMonitor = { module = "com.aizuda:aizuda-monitor", version.ref = "aizudaMonitor" }
 easyCaptcha = { module = "com.github.whvcse:easy-captcha", version.ref = "easyCaptcha" }
+ktlint = { module = "com.pinterest.ktlint:ktlint", version.ref = "ktlint" }
 
 
 [plugins]
 springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
 dependencyManagement = { id = "io.spring.dependency-management", version.ref = "dependencyManagement" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLintPlugins" }
 kotlinSpring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlinkapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 bmuschkoDocker = { id = "com.bmuschko.docker-remote-api", version.ref = "bmuschkoDocker" }

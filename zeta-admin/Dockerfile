@@ -3,7 +3,7 @@ WORKDIR application
 
 ARG JAR_FILE
 COPY ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
+RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM --platform=linux/amd64 bellsoft/liberica-openjdk-debian:21-cds
 

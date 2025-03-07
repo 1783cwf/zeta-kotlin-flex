@@ -19,8 +19,8 @@ import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy
  */
 @Configuration
 @EnableAsync
-@EnableConfigurationProperties(com.zetaframework.async.properties.AsyncProperties::class)
-class AsyncConfiguration(private val asyncProperties: com.zetaframework.async.properties.AsyncProperties) : AsyncConfigurer {
+@EnableConfigurationProperties(AsyncProperties::class)
+class AsyncConfiguration(private val asyncProperties: AsyncProperties) : AsyncConfigurer {
     /**
      * 配置自定义线程池
      *

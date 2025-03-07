@@ -1,13 +1,13 @@
 package com.zetaframework.system.model.entity
 
 import com.mybatisflex.annotation.Table
-import com.tangzc.autotable.annotation.AutoColumn
-import com.tangzc.autotable.annotation.AutoTable
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.VARCHAR
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoTable
 
 /**
  * 字典
@@ -21,7 +21,7 @@ class SysDict : BaseEntity<Long>() {
     /** 名称 */
     @get:NotBlank(message = "名称不能为空")
     @get:Size(max = 32, message = "名称长度不能超过32")
-    @AutoColumn(type = VARCHAR, length = 32, comment = "名称", value = "name")
+    @AutoColumn(value = "name", type = VARCHAR, length = 32, comment = "名称")
     var name: String? = null
 
     /** 编码 */

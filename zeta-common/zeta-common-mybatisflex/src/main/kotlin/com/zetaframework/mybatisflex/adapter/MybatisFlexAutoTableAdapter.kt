@@ -13,10 +13,10 @@ import com.mybatisflex.annotation.Table
 import com.mybatisflex.core.FlexGlobalConfig
 import com.mybatisflex.core.util.ClassUtil
 import com.mybatisflex.spring.boot.MybatisFlexProperties
-import com.tangzc.autotable.annotation.AutoTable
-import com.tangzc.autotable.core.AutoTableOrmFrameAdapter
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import org.apache.ibatis.type.UnknownTypeHandler
+import org.dromara.autotable.annotation.AutoTable
+import org.dromara.autotable.core.AutoTableOrmFrameAdapter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.AnnotatedElementUtils

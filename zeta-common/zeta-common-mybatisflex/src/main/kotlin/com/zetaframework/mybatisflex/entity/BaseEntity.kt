@@ -3,14 +3,14 @@ package com.zetaframework.mybatisflex.entity
 import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Id
 import com.mybatisflex.annotation.KeyType
-import com.tangzc.autotable.annotation.PrimaryKey
-import com.zetaframework.mybatisflex.annotation.ColumnDefine
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATETIME
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.TINYINT
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.PrimaryKey
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -26,31 +26,31 @@ abstract class BaseEntity<T>(
     /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
     @Id(keyType = KeyType.Generator)
-    @PrimaryKey(false)
+    @PrimaryKey(autoIncrement = false)
     open var id: Long? = null,
     /** 创建时间 */
     @Column(value = "create_time")
-    @ColumnDefine(type = DATETIME, comment = "创建时间")
+    @AutoColumn(type = DATETIME, comment = "创建时间")
     open var createTime: LocalDateTime? = null,
     /** 创建人ID */
     @Column(value = "created_by")
-    @ColumnDefine(type = BIGINT, comment = "创建人ID")
+    @AutoColumn(type = BIGINT, comment = "创建人ID")
     open var createdBy: Long? = null,
     /** 最后修改时间 */
     @Column(value = "update_time")
-    @ColumnDefine(type = DATETIME, comment = "最后修改时间")
+    @AutoColumn(type = DATETIME, comment = "最后修改时间")
     open var updateTime: LocalDateTime? = null,
     /** 最后修改人ID */
     @Column(value = "updated_by")
-    @ColumnDefine(type = BIGINT, comment = "最后修改人ID")
+    @AutoColumn(type = BIGINT, comment = "最后修改人ID")
     open var updatedBy: Long? = null,
     /** 乐观锁 */
     @Column(value = "version", version = true)
-    @ColumnDefine(type = INT, comment = "乐观锁", defaultValue = "0")
+    @AutoColumn(type = INT, comment = "乐观锁", defaultValue = "0")
     open var version: Int? = null,
     /** 逻辑删除字段 false 未删除 true已删除*/
     @Column(value = "deleted", isLogicDelete = true)
-    @ColumnDefine(type = TINYINT, comment = "逻辑删除字段", defaultValue = "0")
+    @AutoColumn(type = TINYINT, comment = "逻辑删除字段", defaultValue = "0")
     open var deleted: Boolean? = null,
 ) : Serializable {
     companion object {

@@ -55,7 +55,7 @@ allprojects {
   apply(plugin = "idea")
 
   repositories {
-    maven("https://repo.huaweicloud.com/repository/maven")
+    maven("https://mirrors.huaweicloud.com/repository/maven/")
     mavenCentral()
   }
 

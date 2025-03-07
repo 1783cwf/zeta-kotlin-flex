@@ -10,12 +10,12 @@ import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor
 import com.mybatisflex.core.query.QueryColumnBehavior
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer
 import com.mybatisflex.spring.boot.MybatisFlexProperties
-import com.tangzc.autotable.core.AutoTableOrmFrameAdapter
 import com.zetaframework.mybatisflex.adapter.MybatisFlexAutoTableAdapter
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import com.zetaframework.mybatisflex.listener.EntityInsertListener
 import com.zetaframework.mybatisflex.listener.EntityUpdateListener
 import com.zetaframework.mybatisflex.properties.DatabaseProperties
+import org.dromara.autotable.core.AutoTableOrmFrameAdapter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression

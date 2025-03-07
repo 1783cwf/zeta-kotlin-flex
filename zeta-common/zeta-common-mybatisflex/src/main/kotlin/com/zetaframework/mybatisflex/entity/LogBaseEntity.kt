@@ -3,9 +3,9 @@ package com.zetaframework.mybatisflex.entity
 import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Id
 import com.mybatisflex.annotation.KeyType
-import com.tangzc.autotable.annotation.PrimaryKey
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
+import org.dromara.autotable.annotation.PrimaryKey
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -21,7 +21,7 @@ abstract class LogBaseEntity<T>(
     /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
     @Id(keyType = KeyType.Generator)
-    @PrimaryKey(false)
+    @PrimaryKey(autoIncrement = false)
     open var id: Long? = null,
     /** 创建时间 */
     @Column(value = "create_time")

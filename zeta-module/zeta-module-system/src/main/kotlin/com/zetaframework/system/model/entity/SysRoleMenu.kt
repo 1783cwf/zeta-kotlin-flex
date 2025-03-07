@@ -1,13 +1,12 @@
 package com.zetaframework.system.model.entity
 
-import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Table
-import com.tangzc.autotable.annotation.AutoTable
-import com.tangzc.autotable.annotation.Index
-import com.zetaframework.mybatisflex.annotation.ColumnDefine
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import jakarta.validation.constraints.NotNull
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoTable
+import org.dromara.autotable.annotation.Index
 
 /**
  * 角色菜单
@@ -20,15 +19,13 @@ import jakarta.validation.constraints.NotNull
 class SysRoleMenu() : BaseEntity<Long>() {
     /** 角色id */
     @get:NotNull(message = "角色id不能为空")
-    @Column(value = "role_id")
-    @ColumnDefine(type = BIGINT, comment = "角色id")
+    @AutoColumn(value = "role_id", type = BIGINT, comment = "角色id")
     @Index
     var roleId: Long? = null
 
     /** 菜单id */
     @get:NotNull(message = "菜单id不能为空")
-    @Column(value = "menu_id")
-    @ColumnDefine(type = BIGINT, comment = "菜单id")
+    @AutoColumn(value = "menu_id", type = BIGINT, comment = "菜单id")
     @Index
     var menuId: Long? = null
 

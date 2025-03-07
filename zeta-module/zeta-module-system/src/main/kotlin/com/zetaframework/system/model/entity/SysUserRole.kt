@@ -1,13 +1,12 @@
 package com.zetaframework.system.model.entity
 
-import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Table
-import com.tangzc.autotable.annotation.AutoTable
-import com.tangzc.autotable.annotation.Index
-import com.zetaframework.mybatisflex.annotation.ColumnDefine
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import jakarta.validation.constraints.NotNull
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoTable
+import org.dromara.autotable.annotation.Index
 
 /**
  * 用户角色
@@ -20,15 +19,13 @@ import jakarta.validation.constraints.NotNull
 class SysUserRole() : BaseEntity<Long>() {
     /** 用户id */
     @get:NotNull(message = "用户id不能为空")
-    @Column(value = "user_id")
-    @ColumnDefine(type = BIGINT, comment = "用户id")
+    @AutoColumn(value = "user_id", type = BIGINT, comment = "用户id")
     @Index
     var userId: Long? = null
 
     /** 角色id */
     @get:NotNull(message = "角色id不能为空")
-    @Column(value = "role_id")
-    @ColumnDefine(type = BIGINT, comment = "角色id")
+    @AutoColumn(value = "role_id", type = BIGINT, comment = "角色id")
     @Index
     var roleId: Long? = null
 

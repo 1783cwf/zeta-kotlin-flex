@@ -3,7 +3,6 @@ package com.zetaframework.mybatisflex.listener
 import cn.hutool.core.date.LocalDateTimeUtil
 import cn.hutool.core.util.ObjectUtil
 import com.mybatisflex.annotation.InsertListener
-import com.zetaframework.exception.BusinessException
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import com.zetaframework.satoken.utils.LoginHelper
 
