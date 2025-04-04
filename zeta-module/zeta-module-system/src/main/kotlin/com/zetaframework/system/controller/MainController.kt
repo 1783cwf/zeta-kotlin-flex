@@ -6,12 +6,13 @@ import com.wf.captcha.SpecCaptcha
 import com.zetaframework.base.controller.SuperSimpleController
 import com.zetaframework.model.result.ApiResult
 import com.zetaframework.redis.annotation.Limit
+import com.zetaframework.system.common.cacheKey.CaptchaStringCacheKey
 import com.zetaframework.system.model.entity.SysUser
 import com.zetaframework.system.model.param.LoginParam
 import com.zetaframework.system.model.result.CaptchaResult
 import com.zetaframework.system.model.result.LoginResult
+import com.zetaframework.system.service.IAuthStrategy
 import com.zetaframework.system.service.ISysUserService
-import com.zetaframework.system.service.getGranter
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.validation.annotation.Validated
@@ -29,10 +30,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/system")
 class MainController(
-    private val captchaCacheKey: com.zetaframework.system.common.cacheKey.CaptchaStringCacheKey,
+    private val captchaCacheKey: CaptchaStringCacheKey,
+    private val authStrategy: Map<String, IAuthStrategy>
 ) : SuperSimpleController<ISysUserService, SysUser>() {
     @Value("\${spring.profiles.active:prod}")
     private val env: String? = null
+
+
 
     /**
      * 用户登录
@@ -56,7 +60,7 @@ class MainController(
         }
         captchaCacheKey.delete(param.key)
 
-        return success(getGranter(param.grantType).login(param))
+        return success(authStrategy[param.grantType.serviceImpl]!!.login(param))
     }
 
     /**

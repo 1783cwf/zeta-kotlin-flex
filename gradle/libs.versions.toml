@@ -2,7 +2,7 @@
 # bom
 springBoot = "3.4.3"
 dependencyManagement = "1.1.4"
-saTokenBom = "1.40.0"
+saTokenBom = "1.41.0"
 hutoolBom = "5.8.36"
 
 # orm

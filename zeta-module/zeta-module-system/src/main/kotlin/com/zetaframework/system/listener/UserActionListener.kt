@@ -1,7 +1,7 @@
 package com.zetaframework.system.listener
 
 import cn.dev33.satoken.listener.SaTokenListener
-import cn.dev33.satoken.stp.SaLoginModel
+import cn.dev33.satoken.stp.parameter.SaLoginParameter
 import cn.hutool.core.convert.Convert
 import cn.hutool.extra.spring.SpringUtil
 import com.zetaframework.log.enums.LoginStateEnum
@@ -24,19 +24,19 @@ class UserActionListener : SaTokenListener {
      * @param loginType 账号类别
      * @param loginId 账号id
      * @param tokenValue 本次登录产生的 token 值
-     * @param loginModel 登录参数
+     * @param loginParameter 登录参数
      */
     override fun doLogin(
         loginType: String?,
         loginId: Any?,
         tokenValue: String?,
-        loginModel: SaLoginModel?,
+        loginParameter: SaLoginParameter?,
     ) {
         SpringUtil.publishEvent(
             LoginEvent(
                 LoginLogDTO.loginSuccess(
-                    Convert.toStr(loginModel?.getExtra(LoginHelper.ACCOUNT)),
-                    Convert.toLong(loginModel?.getExtra(LoginHelper.USER_KEY)),
+                    Convert.toStr(loginParameter?.getExtra(LoginHelper.ACCOUNT)),
+                    Convert.toLong(loginParameter?.getExtra(LoginHelper.USER_KEY)),
                     request = ServletUtil.getRequest()!!,
                 ),
             ),

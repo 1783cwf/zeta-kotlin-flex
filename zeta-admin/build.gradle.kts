@@ -21,6 +21,7 @@ dependencies {
   implementation("org.apache.commons:commons-pool2")
   implementation("com.mysql:mysql-connector-j")
   implementation("com.zaxxer:HikariCP")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks {
