@@ -15,9 +15,3 @@ zeta:
       WebConsoleEnabled: true
       login-username: admin
       login-password: admin
-
-# 日志配置
-logging:
-  file:
-    path: ./log
-  config: classpath:logback-spring.xml

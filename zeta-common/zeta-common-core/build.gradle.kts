@@ -11,10 +11,8 @@ dependencies {
   api("org.springframework.boot:spring-boot-starter")
   api("org.springframework.boot:spring-boot-starter-undertow")
   api("org.springframework.boot:spring-boot-starter-validation")
-  api("org.springframework.boot:spring-boot-starter-web") {
-    exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
-  }
-
+  api("org.springframework.boot:spring-boot-starter-web")
+  api("org.springframework.boot:spring-boot-starter-log4j2")
   api("cn.hutool:hutool-core")
   api("cn.hutool:hutool-http")
   api("cn.hutool:hutool-extra")

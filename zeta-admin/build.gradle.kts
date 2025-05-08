@@ -24,10 +24,6 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
-configurations.all {
-  exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
-}
-
 tasks {
   test {
     useJUnitPlatform()
@@ -57,7 +53,10 @@ tasks {
 
     images.set(listOf(imageName))
     inputDir.set(file("./"))
-    buildArgs.set(mapOf("JAR_FILE" to "build/libs/${project.name}-${project.version}.jar"))
+    buildArgs.set(mapOf(
+      "JAR_FILE" to "build/libs/${project.name}-${project.version}.jar",
+      "PROJECT_NAME" to project.name
+    ))
     dockerFile.set(file("Dockerfile"))
   }
 

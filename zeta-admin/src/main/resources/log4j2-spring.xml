@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="true" monitorInterval="30">
+
+  <!-- 安全加固配置 -->
+  <Properties>
+    <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%X{traceId}] %-5level %logger{36} - %msg%n</Property>
+    <Property name="LOG_PATH">./logs</Property>
+    <Property name="LOG_NAME">${spring:spring.application.name}</Property>
+    <Property name="LOG_RETAIN">30</Property>
+    <Property name="LOG_SIZE">100MB</Property>
+
+    <!-- 强制安全参数 -->
+    <Property name="log4j2.formatMsgNoLookups">true</Property>
+    <Property name="log4j2.enableJndi">false</Property>
+  </Properties>
+
+  <Appenders>
+    <!-- 控制台输出：仅输出 INFO 级别 -->
+    <Console name="CONSOLE_INFO" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+    </Console>
+
+    <!-- 控制台输出：仅输出 ERROR 级别 -->
+    <Console name="CONSOLE_ERROR" target="SYSTEM_ERR">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+    </Console>
+
+    <!-- INFO 日志文件 -->
+    <RollingFile name="INFO_FILE" fileName="${LOG_PATH}/${LOG_NAME}.info.log"
+                 filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/${LOG_NAME}.info.%i.log">
+      <Filters>
+        <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
+      </Filters>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <SizeBasedTriggeringPolicy size="${LOG_SIZE}"/>
+      </Policies>
+      <DefaultRolloverStrategy max="${LOG_RETAIN}"/>
+    </RollingFile>
+
+    <!-- ERROR 日志文件 -->
+    <RollingFile name="ERROR_FILE" fileName="${LOG_PATH}/${LOG_NAME}.error.log"
+                 filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/${LOG_NAME}.error.%i.log">
+      <Filters>
+        <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <SizeBasedTriggeringPolicy size="${LOG_SIZE}"/>
+      </Policies>
+      <DefaultRolloverStrategy max="${LOG_RETAIN}"/>
+    </RollingFile>
+
+  </Appenders>
+
+  <Loggers>
+
+    <SpringProfile name="dev">
+      <Root level="INFO">
+        <AppenderRef ref="CONSOLE_INFO"/>
+        <AppenderRef ref="CONSOLE_ERROR"/>
+        <AppenderRef ref="INFO_FILE"/>
+        <AppenderRef ref="ERROR_FILE"/>
+      </Root>
+    </SpringProfile>
+
+    <SpringProfile name="uat,prod">
+      <Root level="INFO">
+        <AppenderRef ref="INFO_FILE"/>
+        <AppenderRef ref="ERROR_FILE"/>
+      </Root>
+    </SpringProfile>
+
+  </Loggers>
+</Configuration>

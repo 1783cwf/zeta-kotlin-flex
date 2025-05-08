@@ -20,8 +20,4 @@ zeta:
       secret-key: OWFMvB9EQJBUPiOxaaZHHHfo0AySsLutb3EacekF
       bucket: dev
       endpoint: http://localhost:9000
-# 日志配置
-logging:
-  file:
-    path: ./log
-  config: classpath:logback-spring.xml
+

@@ -230,5 +230,8 @@ auto-table:
     # 记录到数据库（如果是多数据源，则会根据不同数据源，记录到不同的库）
     record-type: db
 
-
-
+# 日志配置
+logging:
+  file:
+    path: ./log
+  config: classpath:log4j2-spring.xml
