@@ -16,6 +16,8 @@ import com.zetaframework.mybatisflex.listener.EntityInsertListener
 import com.zetaframework.mybatisflex.listener.EntityUpdateListener
 import com.zetaframework.mybatisflex.properties.DatabaseProperties
 import org.dromara.autotable.core.AutoTableOrmFrameAdapter
+import org.dromara.autotable.springboot.EnableAutoTable
+import org.mybatis.spring.annotation.MapperScan
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression
@@ -30,9 +32,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
  * @email weistuday@gmail.com
  * @description:
  */
+@EnableAutoTable
 @Configuration
 @EnableTransactionManagement
 @EnableConfigurationProperties(DatabaseProperties::class)
+@MapperScan(value = ["com.zetaframework.**.dao"])
 class MybatisFlexConfig(
     private val databaseProperties: DatabaseProperties,
 ) : MyBatisFlexCustomizer {

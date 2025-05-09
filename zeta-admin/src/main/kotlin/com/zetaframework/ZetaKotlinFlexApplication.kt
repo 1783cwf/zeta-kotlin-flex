@@ -1,15 +1,11 @@
 package com.zetaframework
 
-import org.dromara.autotable.springboot.EnableAutoTable
-import org.mybatis.spring.annotation.MapperScan
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@MapperScan(value = ["com.zetaframework.**.dao"])
 @SpringBootApplication
-@EnableAutoTable
 class ZetaKotlinFlexApplication
 
 private val log: Logger = LoggerFactory.getLogger(ZetaKotlinFlexApplication::class.java)
