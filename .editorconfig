@@ -39,8 +39,8 @@ tab_width = 2    # 当缩进风格为space时，可以不配
 # 去掉行尾空格
 trim_trailing_whitespace = true
 
-# 一行最大右边界(目前只有少数支持) 默认本来是不超过140，但是项目中对象的toString方法写在一行中更加直观便于阅读，这里就设置了一个比较大的值500
-max_line_length = 500
+# 一行最大右边界(目前只有少数支持)
+max_line_length = 140
 
 [*.{groovy,gradle,java,kt}]
 # 类java语言的设置

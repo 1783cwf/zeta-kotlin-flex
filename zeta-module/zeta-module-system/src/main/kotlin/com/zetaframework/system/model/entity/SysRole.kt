@@ -38,5 +38,6 @@ class SysRole : BaseEntity<Long>() {
     @AutoColumn(value = "readonly_", type = TINYINT, length = 1, comment = "是否内置 0否 1是")
     var readonly: Boolean? = null
 
-    override fun toString(): String = "SysRole(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, readonly=$readonly, deleted=$deleted)"
+    override fun toString(): String =
+        "SysRole(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, readonly=$readonly, deleted=$deleted)"
 }

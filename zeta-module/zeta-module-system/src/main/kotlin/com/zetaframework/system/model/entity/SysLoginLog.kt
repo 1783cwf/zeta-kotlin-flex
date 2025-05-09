@@ -56,5 +56,6 @@ class SysLoginLog : LogBaseEntity<Long>() {
     @AutoColumn(value = "ip_region", type = VARCHAR, length = 255, comment = "ip所在地区")
     var ipRegion: String? = null
 
-    override fun toString(): String = "SysLoginLog(id=$id, createTime=$createTime, createdBy=$createdBy, state=$state, account=$account, comments=$comments, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
+    override fun toString(): String =
+        "SysLoginLog(id=$id, createTime=$createTime, createdBy=$createdBy, state=$state, account=$account, comments=$comments, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
 }

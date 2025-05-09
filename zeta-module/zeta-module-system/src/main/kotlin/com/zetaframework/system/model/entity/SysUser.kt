@@ -83,7 +83,8 @@ class SysUser : StateEntity<Long>() {
     @Ignore
     var roles: List<SysRoleDTO>? = null
 
-    override fun toString(): String = "SysUser(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, username=$username, account=$account, password=$password, email=$email, mobile=$mobile, sex=$sex, avatar=$avatar, birthday=$birthday, readonly=$readonly, deleted=$deleted)"
+    override fun toString(): String =
+        "SysUser(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, username=$username, account=$account, password=$password, email=$email, mobile=$mobile, sex=$sex, avatar=$avatar, birthday=$birthday, readonly=$readonly, deleted=$deleted)"
 }
 
 fun SysUser.toLoginUser(): LoginUser {

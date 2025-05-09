@@ -70,5 +70,6 @@ class SysMenu : TreeEntity<SysMenu, Long>() {
     @Ignore
     var checked: Boolean? = null
 
-    override fun toString(): String = "SysMenu(name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, menuType=$menuType, hide=$hide, keepAlive=$keepAlive, href=$href, frameSrc=$frameSrc, checked=$checked)"
+    override fun toString(): String =
+        "SysMenu(name=$name, path=$path, component=$component, redirect=$redirect, icon=$icon, authority=$authority, menuType=$menuType, hide=$hide, keepAlive=$keepAlive, href=$href, frameSrc=$frameSrc, checked=$checked)"
 }

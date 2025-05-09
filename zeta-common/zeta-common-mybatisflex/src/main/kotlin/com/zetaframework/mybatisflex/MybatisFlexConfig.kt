@@ -87,5 +87,6 @@ class MybatisFlexConfig(
     }
 
     @Bean
-    fun mybatisFlexAdapter(mybatisFlexProperties: MybatisFlexProperties): AutoTableOrmFrameAdapter = MybatisFlexAutoTableAdapter(mybatisFlexProperties)
+    fun mybatisFlexAdapter(mybatisFlexProperties: MybatisFlexProperties): AutoTableOrmFrameAdapter =
+        MybatisFlexAutoTableAdapter(mybatisFlexProperties)
 }

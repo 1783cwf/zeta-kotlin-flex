@@ -183,7 +183,11 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun notRoleExceptionHandler(ex: NotRoleException): ApiResult<*> {
         logger.warn("抛出角色认证异常：", ex)
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code, com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg, null)
+        return ApiResult.result(
+            com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code,
+            com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg,
+            null,
+        )
     }
 
     /**
@@ -196,7 +200,11 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun notPermissionExceptionHandler(ex: NotPermissionException): ApiResult<*> {
         logger.warn("抛出权限认证异常：", ex)
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code, com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg, null)
+        return ApiResult.result(
+            com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code,
+            com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg,
+            null,
+        )
     }
 
     /**

@@ -177,7 +177,8 @@ object JSONUtil {
  */
 fun Any?.toJsonString(pretty: Boolean? = false): String? = JSONUtil.toJsonStr(this, pretty)
 
-fun <T> String?.toListObject(clazz: Class<T>): T? = JSONUtil.parseObject(this, TypeFactory.defaultInstance().constructCollectionType(List::class.java, clazz))
+fun <T> String?.toListObject(clazz: Class<T>): T? =
+    JSONUtil.parseObject(this, TypeFactory.defaultInstance().constructCollectionType(List::class.java, clazz))
 
 fun <T> String?.toObject(clazz: Class<T>): T? = JSONUtil.parseObject(this, clazz)
 
