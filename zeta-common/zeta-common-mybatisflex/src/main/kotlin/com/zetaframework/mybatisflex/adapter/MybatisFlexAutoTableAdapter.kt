@@ -120,7 +120,8 @@ class MybatisFlexAutoTableAdapter(
         // 设置私有字段可访问
         valField.isAccessible = true
 
-        return enumType.getEnumConstants()
+        return enumType
+            .getEnumConstants()
             .map { enumConstant ->
                 try {
                     return@map valField[enumConstant]
@@ -128,14 +129,11 @@ class MybatisFlexAutoTableAdapter(
                     logger.error("获取枚举值失败: $enumType", e)
                     throw RuntimeException(e)
                 }
-            }
-            .map(Objects::toString)
+            }.map(Objects::toString)
             .toList()
     }
 
-    override fun scannerAnnotations(): List<Class<out Annotation>> {
-        return listOf(Table::class.java)
-    }
+    override fun scannerAnnotations(): List<Class<out Annotation>> = listOf(Table::class.java)
 
     override fun getTableName(clazz: Class<*>): String {
         val table = AnnotatedElementUtils.findMergedAnnotation(clazz, Table::class.java)

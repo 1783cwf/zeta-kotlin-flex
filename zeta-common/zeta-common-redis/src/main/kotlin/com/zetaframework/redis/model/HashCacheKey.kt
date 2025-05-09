@@ -24,9 +24,7 @@ import java.time.Duration
  * @author gcc
  */
 interface HashCacheKey : CacheKey {
-    fun getHashOps(): HashOperations<String, Any, Any?> {
-        return getRedisTemplate().opsForHash<Any, Any?>()
-    }
+    fun getHashOps(): HashOperations<String, Any, Any?> = getRedisTemplate().opsForHash<Any, Any?>()
 
     /**
      * 将哈希表key中的字段hashKey的值设为value
@@ -75,9 +73,7 @@ interface HashCacheKey : CacheKey {
      *
      * @param suffix   key后缀 可空
      */
-    fun get(suffix: Any? = ""): MutableMap<Any, Any?> {
-        return getHashOps().entries(buildKey(getPrefix(), suffix))
-    }
+    fun get(suffix: Any? = ""): MutableMap<Any, Any?> = getHashOps().entries(buildKey(getPrefix(), suffix))
 
     /**
      * 获取存储在哈希表中指定hashKey对应的值
@@ -114,9 +110,7 @@ interface HashCacheKey : CacheKey {
      * @param suffix   key后缀 可空
      * @return hashKeySet
      */
-    fun getKeys(suffix: Any? = ""): MutableSet<Any> {
-        return getHashOps().keys(buildKey(getPrefix(), suffix))
-    }
+    fun getKeys(suffix: Any? = ""): MutableSet<Any> = getHashOps().keys(buildKey(getPrefix(), suffix))
 
     /**
      * 获取哈希表中的所有value
@@ -124,9 +118,7 @@ interface HashCacheKey : CacheKey {
      * @param suffix   key后缀 可空
      * @return valueList
      */
-    fun getValues(suffix: Any? = ""): MutableList<Any?> {
-        return getHashOps().values(buildKey(getPrefix(), suffix))
-    }
+    fun getValues(suffix: Any? = ""): MutableList<Any?> = getHashOps().values(buildKey(getPrefix(), suffix))
 
     /**
      * 获取存储在哈希表中指定hashKey对应的值

@@ -5,7 +5,9 @@ package com.zetaframework.system.model.enums
  * @author <a href="mailto:weistuday@gmail.com">caoweifeng</a>
  * @date 2024年03月31日 15:20
  */
-enum class GrantTypeEnum(var serviceImpl: String) {
+enum class GrantTypeEnum(
+    var serviceImpl: String,
+) {
     /** 密码 */
     PASSWORD("passwordAuthStrategyImpl"),
 
@@ -16,6 +18,5 @@ enum class GrantTypeEnum(var serviceImpl: String) {
     EMAIL("emailAuthStrategyImpl"),
 
     /** 三方授权 */
-    SOCIAL("socialAuthStrategyImpl");
-
+    SOCIAL("socialAuthStrategyImpl"),
 }

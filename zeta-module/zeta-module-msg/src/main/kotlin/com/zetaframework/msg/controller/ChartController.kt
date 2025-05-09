@@ -47,9 +47,7 @@ class ChartController(
      */
     @MessageMapping("/group")
     @SendTo("/topic/group")
-    fun group(message: String): String {
-        return message
-    }
+    fun group(message: String): String = message
 
     /**
      * ### 私聊
@@ -102,9 +100,7 @@ class ChartController(
      */
     @MessageMapping("/info")
     @SendToUser("/queue/info")
-    fun getInfo(user: WsUser): String {
-        return user.toString()
-    }
+    fun getInfo(user: WsUser): String = user.toString()
 
     /**
      * ### 订阅topic获得当前在线人数
@@ -122,7 +118,5 @@ class ChartController(
      * websocket连接后，一订阅该topic马上就会收到回复
      */
     @SubscribeMapping("/onlineUserCount")
-    fun getOnlineUserCount(): Int? {
-        return userRegistry.userCount
-    }
+    fun getOnlineUserCount(): Int? = userRegistry.userCount
 }

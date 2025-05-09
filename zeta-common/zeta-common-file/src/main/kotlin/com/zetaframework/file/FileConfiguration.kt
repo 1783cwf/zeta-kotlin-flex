@@ -80,7 +80,8 @@ class FileConfiguration(
         Assert.notBlank(minio.accessKey, "请配置Minio用户名")
         Assert.notBlank(minio.secretKey, "请配置Minio密码")
 
-        return MinioClient.Builder()
+        return MinioClient
+            .Builder()
             .endpoint(minio.endpoint)
             .credentials(minio.accessKey, minio.secretKey)
             .build()

@@ -56,9 +56,7 @@ class PageParam<T> private constructor() {
      * @return
      * @param <T>
      </T> */
-    fun <T> build(): Page<T> {
-        return Page<T>(this.pageNumber, this.pageSize)
-    }
+    fun <T> build(): Page<T> = Page<T>(this.pageNumber, this.pageSize)
 
     companion object {
         /**

@@ -12,7 +12,9 @@ import org.springframework.scheduling.annotation.Async
  * 2. 保存登录日志的方式交给具体的业务去实现
  * @author gcc
  */
-open class LoginLogListener(private val consumer: (loginLogDTO: LoginLogDTO) -> Unit) {
+open class LoginLogListener(
+    private val consumer: (loginLogDTO: LoginLogDTO) -> Unit,
+) {
     /**
      * 保存登录日志
      *

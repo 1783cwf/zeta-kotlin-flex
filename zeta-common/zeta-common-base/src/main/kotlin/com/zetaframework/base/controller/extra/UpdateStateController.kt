@@ -45,7 +45,5 @@ interface UpdateStateController<Entity, State : Serializable> : BaseController<E
      * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
-    fun handlerUpdateState(param: UpdateStateParam<Long, State>): ApiResult<Boolean> {
-        return ApiResult.successDef()
-    }
+    fun handlerUpdateState(param: UpdateStateParam<Long, State>): ApiResult<Boolean> = ApiResult.successDef()
 }

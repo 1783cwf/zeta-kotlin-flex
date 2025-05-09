@@ -23,11 +23,10 @@ enum class UserStateEnum(
          *
          * @return MutableList<Int>
          */
-        fun getAllCode(): MutableList<Int> {
-            return mutableListOf(
+        fun getAllCode(): MutableList<Int> =
+            mutableListOf(
                 NORMAL.code,
                 FORBIDDEN.code,
             )
-        }
     }
 }

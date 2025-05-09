@@ -24,7 +24,9 @@ import org.springframework.data.redis.serializer.SerializationException
  *
  * @author gcc
  */
-class CustomJackson2JsonRedisSerializer<T>(clazz: Class<T>) : RedisSerializer<T> {
+class CustomJackson2JsonRedisSerializer<T>(
+    clazz: Class<T>,
+) : RedisSerializer<T> {
     /** java类型 */
     private val javaType: JavaType
 
@@ -52,9 +54,7 @@ class CustomJackson2JsonRedisSerializer<T>(clazz: Class<T>) : RedisSerializer<T>
      *
      * @param clazz Class<T>
      */
-    private fun getJavaType(clazz: Class<T>): JavaType {
-        return TypeFactory.defaultInstance().constructType(clazz)
-    }
+    private fun getJavaType(clazz: Class<T>): JavaType = TypeFactory.defaultInstance().constructType(clazz)
 
     /**
      * 利用Jackson的ObjectMapper将对象序列化成二进制数据
@@ -101,7 +101,5 @@ class CustomJackson2JsonRedisSerializer<T>(clazz: Class<T>) : RedisSerializer<T>
      * @param value T
      * @return Boolean
      */
-    private fun <T> isNullVal(value: T?): Boolean {
-        return value == null || NullVal::class.java == value.javaClass
-    }
+    private fun <T> isNullVal(value: T?): Boolean = value == null || NullVal::class.java == value.javaClass
 }

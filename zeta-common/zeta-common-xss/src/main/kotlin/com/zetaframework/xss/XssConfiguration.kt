@@ -54,7 +54,10 @@ class XssConfiguration(
                 ?.filter(StrUtil::isNotBlank)
                 ?.forEach { urlPattern ->
                     // GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
-                    val name = mapping.methodsCondition.methods.first().name
+                    val name =
+                        mapping.methodsCondition.methods
+                            .first()
+                            .name
 
                     // 构造：“GET:/api/demo”、“POST:/api/sysUser”这样的地址
                     xssProperties.excludeUrl.add("$name:$urlPattern")
@@ -95,9 +98,8 @@ class XssConfiguration(
      * @return
      */
     @Bean
-    fun jackson2ObjectMapperBuilderCustomizer2(xssCleaner: XssCleaner): Jackson2ObjectMapperBuilderCustomizer {
-        return Jackson2ObjectMapperBuilderCustomizer { builder: Jackson2ObjectMapperBuilder ->
+    fun jackson2ObjectMapperBuilderCustomizer2(xssCleaner: XssCleaner): Jackson2ObjectMapperBuilderCustomizer =
+        Jackson2ObjectMapperBuilderCustomizer { builder: Jackson2ObjectMapperBuilder ->
             builder.deserializerByType(String::class.java, XssStringJsonDeserializer(xssCleaner, xssProperties))
         }
-    }
 }

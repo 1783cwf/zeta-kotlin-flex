@@ -68,9 +68,7 @@ class SysUserController(
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<SysUserQueryParam>,
-    ): ApiResult<Page<SysUserDTO>> {
-        return success(service.customPage(param))
-    }
+    ): ApiResult<Page<SysUserDTO>> = success(service.customPage(param))
 
     /**
      * 处理单体查询数据
@@ -116,9 +114,7 @@ class SysUserController(
      * @param updateDTO 修改对象
      * @return ApiResult<BaseEntity>
      */
-    override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ApiResult<Boolean> {
-        return success(service.updateUser(updateDTO))
-    }
+    override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ApiResult<Boolean> = success(service.updateUser(updateDTO))
 
     /**
      * 自定义修改状态
@@ -282,7 +278,5 @@ class SysUserController(
      * @return ApiResult<[List<String>]>
      */
     @GetMapping("/permissions")
-    fun permissions(): ApiResult<List<String>> {
-        return success(StpUtil.getPermissionList())
-    }
+    fun permissions(): ApiResult<List<String>> = success(StpUtil.getPermissionList())
 }

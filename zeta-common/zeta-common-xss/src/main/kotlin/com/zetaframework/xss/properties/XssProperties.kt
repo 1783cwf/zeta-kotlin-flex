@@ -36,12 +36,11 @@ class XssProperties {
     /**
      * 获取忽略xss防护的地址
      */
-    fun getNotMatchUrl(): MutableSet<String> {
-        return mutableSetOf<String>().apply {
+    fun getNotMatchUrl(): MutableSet<String> =
+        mutableSetOf<String>().apply {
             addAll(baseUrl)
             addAll(excludeUrl)
         }
-    }
 
     /**
      * 是否是忽略xss防护的地址
@@ -60,12 +59,11 @@ class XssProperties {
     fun isIgnoreUrl(
         requestMethod: String,
         path: String,
-    ): Boolean {
-        return this.getNotMatchUrl().any { url ->
+    ): Boolean =
+        this.getNotMatchUrl().any { url ->
             // 为什么要封装一个方法，因为any{}是inline函数，不能用return
             check(requestMethod, url, path)
         }
-    }
 
     /**
      * 匹配三种类型的路由地址

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service
  * @date 2022-04-15 10:12:09
  */
 @Service
-class SysDictServiceImpl : ISysDictService, ServiceImpl<SysDictMapper, SysDict>() {
+class SysDictServiceImpl :
+    ServiceImpl<SysDictMapper, SysDict>(),
+    ISysDictService {
     private val logger = LoggerFactory.getLogger(this::class.java)
 }

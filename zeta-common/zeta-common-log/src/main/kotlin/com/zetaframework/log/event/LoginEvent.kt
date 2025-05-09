@@ -8,4 +8,6 @@ import org.springframework.context.ApplicationEvent
  *
  * @author gcc
  */
-class LoginEvent(source: LoginLogDTO) : ApplicationEvent(source)
+class LoginEvent(
+    source: LoginLogDTO,
+) : ApplicationEvent(source)

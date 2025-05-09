@@ -11,4 +11,7 @@ import org.springframework.context.ApplicationEvent
  * 主要用来发送用户上线、下线事件通知
  * @author gcc
  */
-class WsUserEvent(val user: WsUser?, source: WsUserTypeEnum) : ApplicationEvent(source)
+class WsUserEvent(
+    val user: WsUser?,
+    source: WsUserTypeEnum,
+) : ApplicationEvent(source)

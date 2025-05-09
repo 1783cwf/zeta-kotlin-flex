@@ -45,7 +45,5 @@ interface SaveController<Entity, SaveDTO> : BaseController<Entity> {
      * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
-    fun handlerSave(saveDTO: SaveDTO): ApiResult<Boolean> {
-        return ApiResult.successDef()
-    }
+    fun handlerSave(saveDTO: SaveDTO): ApiResult<Boolean> = ApiResult.successDef()
 }

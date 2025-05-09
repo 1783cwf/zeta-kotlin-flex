@@ -38,13 +38,12 @@ interface CacheKey {
 fun CacheKey.buildKey(
     prefix: String,
     suffix: Any?,
-): String {
-    return if (ObjectUtil.isNotEmpty(suffix)) {
+): String =
+    if (ObjectUtil.isNotEmpty(suffix)) {
         StrUtil.join(StrPool.COLON, prefix, suffix)
     } else {
         prefix
     }
-}
 
 /**
  * 设置key过期

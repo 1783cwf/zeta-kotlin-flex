@@ -39,7 +39,8 @@ class WebsocketStompConfiguration(
      */
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
         // 添加端点。 前端 new SockJs("http://xxxx:8080/ws")
-        registry.addEndpoint("/ws") // 记得配置saToken放开接口拦截
+        registry
+            .addEndpoint("/ws") // 记得配置saToken放开接口拦截
             .setAllowedOriginPatterns("*")
             .withSockJS()
     }

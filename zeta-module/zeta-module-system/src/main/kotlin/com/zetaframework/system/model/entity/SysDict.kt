@@ -38,7 +38,5 @@ class SysDict : BaseEntity<Long>() {
     @AutoColumn(value = "sort_value", type = INT, comment = "排序")
     var sortValue: Int? = null
 
-    override fun toString(): String {
-        return "SysDict(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, sortValue=$sortValue, deleted=$deleted)"
-    }
+    override fun toString(): String = "SysDict(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, sortValue=$sortValue, deleted=$deleted)"
 }

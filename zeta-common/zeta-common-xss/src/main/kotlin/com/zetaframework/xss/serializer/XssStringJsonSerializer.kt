@@ -22,9 +22,7 @@ class XssStringJsonSerializer(
     /**
      * 处理类型
      */
-    override fun handledType(): Class<String> {
-        return String::class.java
-    }
+    override fun handledType(): Class<String> = String::class.java
 
     /**
      * 序列化

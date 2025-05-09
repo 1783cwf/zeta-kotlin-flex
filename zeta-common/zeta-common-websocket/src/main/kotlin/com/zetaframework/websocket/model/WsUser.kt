@@ -12,11 +12,7 @@ import java.security.Principal
 class WsUser : Principal {
     var userId: String? = null
 
-    override fun getName(): String? {
-        return this.userId
-    }
+    override fun getName(): String? = this.userId
 
-    override fun toString(): String {
-        return "WsUser(userId=$userId)"
-    }
+    override fun toString(): String = "WsUser(userId=$userId)"
 }

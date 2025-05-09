@@ -29,8 +29,8 @@ class JacksonConfiguration {
      * 全局Jackson序列化配置
      */
     @Bean("jackson2ObjectMapperBuilderCustomizer")
-    fun jackson2ObjectMapperBuilderCustomizer(): Jackson2ObjectMapperBuilderCustomizer {
-        return Jackson2ObjectMapperBuilderCustomizer { builder: Jackson2ObjectMapperBuilder ->
+    fun jackson2ObjectMapperBuilderCustomizer(): Jackson2ObjectMapperBuilderCustomizer =
+        Jackson2ObjectMapperBuilderCustomizer { builder: Jackson2ObjectMapperBuilder ->
             // 序列化
             builder.serializerByType(
                 LocalDateTime::class.java,
@@ -53,5 +53,4 @@ class JacksonConfiguration {
             // 配置枚举使用toString方式
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
         }
-    }
 }

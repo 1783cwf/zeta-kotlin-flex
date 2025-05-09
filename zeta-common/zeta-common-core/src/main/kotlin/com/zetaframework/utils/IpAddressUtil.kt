@@ -94,9 +94,7 @@ object IpAddressUtil {
      * @param info
      * @return String
      */
-    private fun filterZero(info: String?): String? {
-        return if (info.isNullOrBlank() || ZERO == info) null else info
-    }
+    private fun filterZero(info: String?): String? = if (info.isNullOrBlank() || ZERO == info) null else info
 
     /**
      * ip地址信息

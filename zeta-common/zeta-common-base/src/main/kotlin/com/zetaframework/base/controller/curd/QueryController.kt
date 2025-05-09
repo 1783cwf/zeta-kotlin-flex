@@ -32,9 +32,7 @@ interface QueryController<Entity, QueryParam> : PageController<Entity, QueryPara
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<QueryParam>,
-    ): ApiResult<Page<Entity>> {
-        return success(super.query(param))
-    }
+    ): ApiResult<Page<Entity>> = success(super.query(param))
 
     /**
      * 批量查询
@@ -47,9 +45,7 @@ interface QueryController<Entity, QueryParam> : PageController<Entity, QueryPara
     @PostMapping("/query")
     fun list(
         @RequestBody param: QueryParam,
-    ): ApiResult<List<Entity>> {
-        return success(handlerBatchQuery(param))
-    }
+    ): ApiResult<List<Entity>> = success(handlerBatchQuery(param))
 
     /**
      * 自定义批量查询

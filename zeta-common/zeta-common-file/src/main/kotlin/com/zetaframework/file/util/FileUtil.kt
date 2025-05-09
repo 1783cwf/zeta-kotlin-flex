@@ -42,9 +42,7 @@ object FileUtil {
      * 2.返回的后缀不带“.”
      * @param file MultipartFile
      */
-    fun getSuffix(file: MultipartFile): String {
-        return FileUtil.getSuffix(file.originalFilename) ?: ""
-    }
+    fun getSuffix(file: MultipartFile): String = FileUtil.getSuffix(file.originalFilename) ?: ""
 
     /**
      * 生成文件路径
@@ -72,13 +70,12 @@ object FileUtil {
      *
      * @param file MultipartFile
      */
-    fun getFileType(file: MultipartFile): String {
-        return try {
+    fun getFileType(file: MultipartFile): String =
+        try {
             FileTypeUtil.getType(file.inputStream, file.originalFilename)
         } catch (e: IORuntimeException) {
             ""
         }
-    }
 
     /**
      * 存储文件
@@ -101,16 +98,12 @@ object FileUtil {
      * 2.如果文件不存在或已被删除 返回true
      * @param absolutePath web服务器存放文件的绝对路径
      */
-    fun deleteFile(absolutePath: String): Boolean {
-        return FileUtil.del(absolutePath)
-    }
+    fun deleteFile(absolutePath: String): Boolean = FileUtil.del(absolutePath)
 
     /**
      * 获取本地文件
      *
      * @param absolutePath web服务器存放文件的绝对路径
      */
-    fun getFile(absolutePath: String): BufferedInputStream {
-        return FileUtil.getInputStream(absolutePath)
-    }
+    fun getFile(absolutePath: String): BufferedInputStream = FileUtil.getInputStream(absolutePath)
 }

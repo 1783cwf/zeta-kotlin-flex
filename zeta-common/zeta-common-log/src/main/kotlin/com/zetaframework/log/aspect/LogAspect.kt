@@ -35,7 +35,9 @@ import java.time.LocalDateTime
  * @author gcc
  */
 @Aspect
-class LogAspect(private val context: ApplicationContext) {
+class LogAspect(
+    private val context: ApplicationContext,
+) {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(this::class.java)
         private val START_TIME: ThreadLocal<Long> = ThreadLocal()

@@ -15,7 +15,9 @@ import java.io.InputStream
  * 实际业务中直接@Autowried FileStrategy也是Ok。原因见：[FileConfiguration]
  * @author gcc
  */
-class FileContext(private val fileStrategy: FileStrategy) {
+class FileContext(
+    private val fileStrategy: FileStrategy,
+) {
     companion object {
         /** OSS支持的最大文件上传大小:  5GB */
         private const val MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024L
@@ -24,9 +26,7 @@ class FileContext(private val fileStrategy: FileStrategy) {
     /**
      * 获取文件管理策略
      */
-    fun getFileStrategy(): FileStrategy {
-        return fileStrategy
-    }
+    fun getFileStrategy(): FileStrategy = fileStrategy
 
     /**
      * 文件上传
@@ -74,9 +74,7 @@ class FileContext(private val fileStrategy: FileStrategy) {
      *
      * @param path
      */
-    fun getFileInputStream(path: String): InputStream? {
-        return fileStrategy.getObject(path)
-    }
+    fun getFileInputStream(path: String): InputStream? = fileStrategy.getObject(path)
 
     /**
      * 删除文件

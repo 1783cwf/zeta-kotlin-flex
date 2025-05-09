@@ -37,7 +37,5 @@ abstract class SuperSimpleController<S : IService<Entity>, Entity> : BaseControl
     /**
      * 获取service
      */
-    override fun getBaseService(): IService<Entity> {
-        return service
-    }
+    override fun getBaseService(): IService<Entity> = service
 }

@@ -85,7 +85,5 @@ class SysOptLog : LogBaseEntity<Long>() {
     @AutoColumn(value = "user_name", type = VARCHAR, length = 50, comment = "操作人")
     var userName: String? = null
 
-    override fun toString(): String {
-        return "SysOptLog(id=$id, createTime=$createTime, createdBy=$createdBy, type=$type, description=$description, url=$url, httpMethod=$httpMethod, classPath=$classPath, params=$params, result=$result, exception=$exception, spendTime=$spendTime, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
-    }
+    override fun toString(): String = "SysOptLog(id=$id, createTime=$createTime, createdBy=$createdBy, type=$type, description=$description, url=$url, httpMethod=$httpMethod, classPath=$classPath, params=$params, result=$result, exception=$exception, spendTime=$spendTime, os=$os, device=$device, browser=$browser, ip=$ip, ipRegion=$ipRegion)"
 }

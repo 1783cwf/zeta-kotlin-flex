@@ -12,7 +12,9 @@ import org.springframework.scheduling.annotation.Async
  * 2. 保存系统日志的方式交给具体的业务去实现
  * @author gcc
  */
-open class LogListener(private val consumer: (logDTO: LogDTO) -> Unit) {
+open class LogListener(
+    private val consumer: (logDTO: LogDTO) -> Unit,
+) {
     /**
      * 保存系统日志
      *

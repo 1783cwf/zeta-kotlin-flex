@@ -42,9 +42,7 @@ interface DeleteController<Entity> : BaseController<Entity> {
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    fun handlerDelete(id: Long): ApiResult<Boolean> {
-        return ApiResult.successDef()
-    }
+    fun handlerDelete(id: Long): ApiResult<Boolean> = ApiResult.successDef()
 
     /**
      * 批量删除
@@ -71,7 +69,5 @@ interface DeleteController<Entity> : BaseController<Entity> {
      * @param ids List<Id>
      * @return ApiResult<Boolean>
      */
-    fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
-        return ApiResult.successDef()
-    }
+    fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> = ApiResult.successDef()
 }

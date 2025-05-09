@@ -50,7 +50,8 @@ class MinioFileStrategyImpl(
 
         // 文件上传
         minioClient.putObject(
-            PutObjectArgs.builder()
+            PutObjectArgs
+                .builder()
                 .bucket(minio.bucket)
                 .contentType(file.contentType)
                 .`object`(fileInfo.path)
@@ -74,7 +75,8 @@ class MinioFileStrategyImpl(
         return try {
             // 获取文件
             val getObjectArgs =
-                GetObjectArgs.builder()
+                GetObjectArgs
+                    .builder()
                     .bucket(minio.bucket)
                     .`object`(path)
                     .build()
@@ -95,7 +97,8 @@ class MinioFileStrategyImpl(
         return try {
             // 删除文件
             val removeObjectArgs =
-                RemoveObjectArgs.builder()
+                RemoveObjectArgs
+                    .builder()
                     .bucket(minio.bucket)
                     .`object`(param.path)
                     .build()

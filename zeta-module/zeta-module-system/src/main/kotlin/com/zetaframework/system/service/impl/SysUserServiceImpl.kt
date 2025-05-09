@@ -42,7 +42,9 @@ import org.springframework.transaction.annotation.Transactional
 class SysUserServiceImpl(
     private val userRoleService: ISysUserRoleService,
     private val roleMenuService: ISysRoleMenuService,
-) : ISysUserService, ServiceImpl<SysUserMapper, SysUser>(), StpInterface {
+) : ServiceImpl<SysUserMapper, SysUser>(),
+    ISysUserService,
+    StpInterface {
     /**
      * 自定义分页查询
      *
@@ -155,8 +157,8 @@ class SysUserServiceImpl(
      * @param account 账号
      * @return [SysUser] 用户
      */
-    override fun getByAccount(account: String): SysUser? {
-        return queryOne<SysUser> {
+    override fun getByAccount(account: String): SysUser? =
+        queryOne<SysUser> {
             select(
                 SysUser::id,
                 SysUser::account,
@@ -180,7 +182,6 @@ class SysUserServiceImpl(
                 SysUser::deleted eq false,
             )
         }
-    }
 
     /**
      * 加密用户密码

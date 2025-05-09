@@ -14,7 +14,5 @@ class HutoolXssCleaner : XssCleaner {
      * @param value 有风险的xss文本
      * @return 清理后的xss文本
      */
-    override fun clear(value: String): String {
-        return HtmlUtil.filter(value)
-    }
+    override fun clear(value: String): String = HtmlUtil.filter(value)
 }

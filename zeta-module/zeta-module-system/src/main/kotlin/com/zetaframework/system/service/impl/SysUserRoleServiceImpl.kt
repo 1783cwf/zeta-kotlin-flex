@@ -23,7 +23,9 @@ import org.springframework.transaction.annotation.Transactional
  * @date 2021-12-30 15:24:03
  */
 @Service
-class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMapper, SysUserRole>() {
+class SysUserRoleServiceImpl :
+    ServiceImpl<SysUserRoleMapper, SysUserRole>(),
+    ISysUserRoleService {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     /**
@@ -35,7 +37,8 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
     override fun listByUserId(userId: Long): List<SysRole> {
         // 查询当前用户ID关联的所有角色ID
         val roleIds =
-            QueryWrapper.create()
+            QueryWrapper
+                .create()
                 .select(SysUserRole::roleId)
                 .from(SysUserRole::class.java)
                 .where(SysUserRole::userId.eq(userId))
@@ -62,8 +65,8 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
      * @param userIds 用户id集合
      * @return List<[SysRoleDTO]> 角色详情列表
      */
-    override fun listByUserIds(userIds: List<Long>): List<SysRoleDTO> {
-        return query<SysRoleDTO> {
+    override fun listByUserIds(userIds: List<Long>): List<SysRoleDTO> =
+        query<SysRoleDTO> {
             select(
                 SysRole::id,
                 SysRole::name,
@@ -77,13 +80,13 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
                 SysUserRole::userId,
             )
             from(SysUserRole::class.java)
-                .leftJoin(SysRole::class.java).on(SysUserRole::roleId.eq(SysRole::id))
+                .leftJoin(SysRole::class.java)
+                .on(SysUserRole::roleId.eq(SysRole::id))
             allAnd(
                 SysUserRole::userId `in` userIds,
                 SysRole::deleted eq false,
             )
         }
-    }
 
     /**
      * 关联用户角色
@@ -120,7 +123,5 @@ class SysUserRoleServiceImpl : ISysUserRoleService, ServiceImpl<SysUserRoleMappe
     override fun saveUserRole(
         userId: Long,
         roleId: Long,
-    ): Boolean {
-        return this.save(SysUserRole(userId, roleId))
-    }
+    ): Boolean = this.save(SysUserRole(userId, roleId))
 }

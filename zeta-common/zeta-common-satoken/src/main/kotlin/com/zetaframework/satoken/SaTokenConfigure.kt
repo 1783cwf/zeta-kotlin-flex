@@ -51,7 +51,8 @@ class SaTokenConfigure(
      * @param registry CorsRegistry
      */
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
+        registry
+            .addMapping("/**")
             .allowedOriginPatterns("*")
             .allowedHeaders("*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
@@ -68,7 +69,8 @@ class SaTokenConfigure(
     private val beforeAuth: SaFilterAuthStrategy =
         SaFilterAuthStrategy {
             // saToken跨域配置
-            SaHolder.getResponse()
+            SaHolder
+                .getResponse()
                 .setHeader("Access-Control-Allow-Origin", "*")
                 .setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH")
                 .setHeader("Access-Control-Max-Age", "3600")
@@ -122,8 +124,8 @@ class SaTokenConfigure(
      * @return SaServletFilter
      */
     @Bean
-    fun saServletFilter(): SaServletFilter {
-        return SaServletFilter()
+    fun saServletFilter(): SaServletFilter =
+        SaServletFilter()
             // 指定拦截路由
             .addInclude("/**")
             // 指定放行路由
@@ -131,7 +133,6 @@ class SaTokenConfigure(
             .setBeforeAuth(beforeAuth)
             .setAuth(auth)
             .setError(this::returnFail)
-    }
 
     /**
      * Sa-Token token风格配置
@@ -139,8 +140,8 @@ class SaTokenConfigure(
      * @return StpLogic
      */
     @Bean
-    fun stpLogic(): StpLogic {
-        return when (tokenProperties.type) {
+    fun stpLogic(): StpLogic =
+        when (tokenProperties.type) {
             TokenTypeEnum.SIMPLE -> {
                 logger.info("检测到sa-token采用了[jwt-simple模式]")
                 StpLogicJwtForSimple()
@@ -158,7 +159,6 @@ class SaTokenConfigure(
                 StpLogic(StpUtil.TYPE)
             }
         }
-    }
 
     /**
      * return 错误消息

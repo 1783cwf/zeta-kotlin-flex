@@ -5,7 +5,10 @@ package com.zetaframework.enums
  *
  * @author gcc
  */
-enum class ErrorCodeEnum(val code: Int, val msg: String) {
+enum class ErrorCodeEnum(
+    val code: Int,
+    val msg: String,
+) {
     /** 通用操作成功 */
     OK(0, "操作成功"),
 

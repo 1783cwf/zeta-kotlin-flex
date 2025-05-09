@@ -46,7 +46,5 @@ interface UpdateController<Entity, UpdateDTO> : BaseController<Entity> {
      * @param updateDTO 修改对象
      * @return ApiResult<Boolean>
      */
-    fun handlerUpdate(updateDTO: UpdateDTO): ApiResult<Boolean> {
-        return ApiResult.successDef()
-    }
+    fun handlerUpdate(updateDTO: UpdateDTO): ApiResult<Boolean> = ApiResult.successDef()
 }

@@ -23,7 +23,9 @@ import java.util.Objects
  */
 @Aspect
 @Component
-class LimitAspect(private val redisHelper: RedisHelper) {
+class LimitAspect(
+    private val redisHelper: RedisHelper,
+) {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @Around("@annotation(com.zetaframework.redis.annotation.Limit)")

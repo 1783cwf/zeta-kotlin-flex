@@ -37,7 +37,8 @@ class RedisConfiguration {
         val stringRedisSerializer = StringRedisSerializer()
 
         val configuration =
-            RedisCacheConfiguration.defaultCacheConfig()
+            RedisCacheConfiguration
+                .defaultCacheConfig()
                 // 缓存双冒号变成单冒号  test::key::123  -> test:key:123
                 .computePrefixWith { prefix: String -> prefix + StrPool.COLON }
                 // 禁用空值
@@ -92,18 +93,15 @@ class RedisConfiguration {
      * @return RedisHelper
      */
     @Bean
-    fun redisHelper(redisTemplate: RedisTemplate<String, Any>): RedisHelper {
-        return RedisHelper(redisTemplate)
-    }
+    fun redisHelper(redisTemplate: RedisTemplate<String, Any>): RedisHelper = RedisHelper(redisTemplate)
 
     /**
      * 获取配置好的 Jackson2JsonRedisSerializer对象
      *
      * @return CustomJackson2JsonRedisSerializer<Any>
      */
-    private fun getRedisSerializer(): CustomJackson2JsonRedisSerializer<Any> {
-        return CustomJackson2JsonRedisSerializer(Any::class.java).also {
+    private fun getRedisSerializer(): CustomJackson2JsonRedisSerializer<Any> =
+        CustomJackson2JsonRedisSerializer(Any::class.java).also {
             it.setObjectMapper(KtObjectMapper.instance)
         }
-    }
 }

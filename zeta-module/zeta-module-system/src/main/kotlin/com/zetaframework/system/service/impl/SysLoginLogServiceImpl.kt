@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service
  * @date 2022-03-21 16:33:13
  */
 @Service
-class SysLoginLogServiceImpl : ISysLoginLogService, ServiceImpl<SysLoginLogMapper, SysLoginLog>() {
+class SysLoginLogServiceImpl :
+    ServiceImpl<SysLoginLogMapper, SysLoginLog>(),
+    ISysLoginLogService {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     /**

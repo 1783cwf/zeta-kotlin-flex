@@ -13,4 +13,6 @@ import org.springframework.stereotype.Service
  * @date 2021-12-30 15:24:03
  */
 @Service
-class SysMenuServiceImpl : ISysMenuService, ServiceImpl<SysMenuMapper, SysMenu>()
+class SysMenuServiceImpl :
+    ServiceImpl<SysMenuMapper, SysMenu>(),
+    ISysMenuService

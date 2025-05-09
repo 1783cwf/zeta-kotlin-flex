@@ -48,9 +48,7 @@ class ServerInfoDTO {
         var osArch: String? = null
 
         companion object {
-            fun build(sysInfo: com.aizuda.monitor.SysInfo): SysInfo? {
-                return MapstructUtils.convert(sysInfo, SysInfo::class.java)
-            }
+            fun build(sysInfo: com.aizuda.monitor.SysInfo): SysInfo? = MapstructUtils.convert(sysInfo, SysInfo::class.java)
         }
     }
 
@@ -81,9 +79,7 @@ class ServerInfoDTO {
         var usePercent: Double = 0.0
 
         companion object {
-            fun build(cpuInfo: com.aizuda.monitor.CpuInfo): CpuInfo? {
-                return MapstructUtils.convert(cpuInfo, CpuInfo::class.java)
-            }
+            fun build(cpuInfo: com.aizuda.monitor.CpuInfo): CpuInfo? = MapstructUtils.convert(cpuInfo, CpuInfo::class.java)
         }
     }
 
@@ -108,9 +104,7 @@ class ServerInfoDTO {
         var usePercent: Double = 0.0
 
         companion object {
-            fun build(memoryInfo: com.aizuda.monitor.MemoryInfo): MemoryInfo? {
-                return MapstructUtils.convert(memoryInfo, MemoryInfo::class.java)
-            }
+            fun build(memoryInfo: com.aizuda.monitor.MemoryInfo): MemoryInfo? = MapstructUtils.convert(memoryInfo, MemoryInfo::class.java)
         }
     }
 
@@ -157,9 +151,7 @@ class ServerInfoDTO {
         var uptime: Long = 0
 
         companion object {
-            fun build(jvmInfo: com.aizuda.monitor.JvmInfo): JvmInfo? {
-                return MapstructUtils.convert(jvmInfo, JvmInfo::class.java)
-            }
+            fun build(jvmInfo: com.aizuda.monitor.JvmInfo): JvmInfo? = MapstructUtils.convert(jvmInfo, JvmInfo::class.java)
         }
     }
 
@@ -177,12 +169,11 @@ class ServerInfoDTO {
         var cpu64bit: Boolean = false
 
         companion object {
-            fun build(centralProcessor: oshi.hardware.CentralProcessor.ProcessorIdentifier): CentralProcessor {
-                return CentralProcessor().apply {
+            fun build(centralProcessor: oshi.hardware.CentralProcessor.ProcessorIdentifier): CentralProcessor =
+                CentralProcessor().apply {
                     this.name = centralProcessor.name
                     this.cpu64bit = centralProcessor.isCpu64bit
                 }
-            }
         }
     }
 
@@ -230,13 +221,9 @@ class ServerInfoDTO {
         var usePercent: Double = 0.0
 
         companion object {
-            fun build(diskInfo: com.aizuda.monitor.DiskInfo): DiskInfo {
-                return MapstructUtils.convert(diskInfo, DiskInfo::class.java)!!
-            }
+            fun build(diskInfo: com.aizuda.monitor.DiskInfo): DiskInfo = MapstructUtils.convert(diskInfo, DiskInfo::class.java)!!
 
-            fun build(diskInfos: MutableList<com.aizuda.monitor.DiskInfo>): List<DiskInfo> {
-                return diskInfos.map { build(it) }
-            }
+            fun build(diskInfos: MutableList<com.aizuda.monitor.DiskInfo>): List<DiskInfo> = diskInfos.map { build(it) }
         }
     }
 }

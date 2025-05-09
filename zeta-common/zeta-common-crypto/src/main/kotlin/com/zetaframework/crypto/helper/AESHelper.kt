@@ -18,51 +18,43 @@ import java.util.Locale
  *
  * @author gcc
  */
-class AESHelper(private val aes: AES) {
+class AESHelper(
+    private val aes: AES,
+) {
     /**
      * 加密, 返回bas64字符串
      *
      * @param data 需要加密的数据
      */
-    fun encryptBase64(data: String): String {
-        return Base64.encode(encrypt(data))
-    }
+    fun encryptBase64(data: String): String = Base64.encode(encrypt(data))
 
     /**
      * 加密，返回16进制字符串
      *
      * @param data 需要加密的数据
      */
-    fun encryptHex(data: String): String {
-        return HexUtil.encodeHexStr(encrypt(data))
-    }
+    fun encryptHex(data: String): String = HexUtil.encodeHexStr(encrypt(data))
 
     /**
      * 加密，返回字节数组
      *
      * @param data 需要加密的数据
      */
-    fun encrypt(data: String): ByteArray {
-        return aes.encrypt(data)
-    }
+    fun encrypt(data: String): ByteArray = aes.encrypt(data)
 
     /**
      * 解密, 返回String
      *
      * @param data 需要解密的数据
      */
-    fun decryptStr(data: String): String {
-        return StrUtil.str(decrypt(data), CharsetUtil.CHARSET_UTF_8)
-    }
+    fun decryptStr(data: String): String = StrUtil.str(decrypt(data), CharsetUtil.CHARSET_UTF_8)
 
     /**
      * 解密，返回字节数组
      *
      * @param data 需要解密的数据
      */
-    fun decrypt(data: String): ByteArray {
-        return aes.decrypt(data)
-    }
+    fun decrypt(data: String): ByteArray = aes.decrypt(data)
 
     /**
      * 生成加密key

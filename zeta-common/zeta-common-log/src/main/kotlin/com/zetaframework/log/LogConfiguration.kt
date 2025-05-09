@@ -24,7 +24,9 @@ import org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(LogProperties::class)
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = LogProperties.PREFIX, name = ["enabled"], havingValue = "true", matchIfMissing = true)
-class LogConfiguration(private val context: ApplicationContext) {
+class LogConfiguration(
+    private val context: ApplicationContext,
+) {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     /**

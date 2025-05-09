@@ -29,25 +29,21 @@ import java.time.Duration
  * @author gcc
  */
 @Component
-class CaptchaStringCacheKey(private val redisTemplate: RedisTemplate<String, Any>) : StringCacheKey {
+class CaptchaStringCacheKey(
+    private val redisTemplate: RedisTemplate<String, Any>,
+) : StringCacheKey {
     /**
      * key 前缀
      */
-    override fun getPrefix(): String {
-        return SystemRedisKeyConstants.CAPTCHA_KEY
-    }
+    override fun getPrefix(): String = SystemRedisKeyConstants.CAPTCHA_KEY
 
     /**
      * key 过期时间
      */
-    override fun getExpire(): Duration? {
-        return Duration.ofMinutes(5)
-    }
+    override fun getExpire(): Duration? = Duration.ofMinutes(5)
 
     /**
      * 获取redisTemplate
      */
-    override fun getRedisTemplate(): RedisTemplate<String, Any> {
-        return redisTemplate
-    }
+    override fun getRedisTemplate(): RedisTemplate<String, Any> = redisTemplate
 }

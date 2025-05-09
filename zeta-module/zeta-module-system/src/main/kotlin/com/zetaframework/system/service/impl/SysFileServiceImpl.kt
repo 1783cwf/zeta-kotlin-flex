@@ -27,7 +27,8 @@ import java.io.InputStream
 @Service
 class SysFileServiceImpl(
     private val fileContext: FileContext,
-) : ISysFileService, ServiceImpl<SysFileMapper, SysFile>() {
+) : ServiceImpl<SysFileMapper, SysFile>(),
+    ISysFileService {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     /**

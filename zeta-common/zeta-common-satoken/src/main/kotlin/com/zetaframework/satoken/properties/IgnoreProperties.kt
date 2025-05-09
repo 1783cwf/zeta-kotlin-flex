@@ -29,10 +29,9 @@ class IgnoreProperties {
     /**
      * 获取saToken放行路由
      */
-    fun getNotMatchUrl(): MutableList<String> {
-        return mutableListOf<String>().apply {
+    fun getNotMatchUrl(): MutableList<String> =
+        mutableListOf<String>().apply {
             addAll(baseUrl)
             addAll(ignoreUrl)
         }
-    }
 }

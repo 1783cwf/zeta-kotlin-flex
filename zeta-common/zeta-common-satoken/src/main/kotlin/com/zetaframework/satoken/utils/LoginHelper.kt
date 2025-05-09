@@ -34,7 +34,8 @@ object LoginHelper {
         val username = loginUser.username
         StpUtil.login(
             userId,
-            saLoginModel.setExtra(USER_KEY, userId)
+            saLoginModel
+                .setExtra(USER_KEY, userId)
                 .setExtra(USER_NAME_KEY, username)
                 .setExtra(ACCOUNT, loginUser.account),
         )
@@ -42,7 +43,8 @@ object LoginHelper {
         loginUser.rolePermission = StpUtil.getRoleList().toSet()
         loginUser.menuPermission = StpUtil.getPermissionList().toSet()
 
-        StpUtil.getSession()
+        StpUtil
+            .getSession()
             .set(LOGIN_USER_KEY, loginUser)
             .updateTimeout(model!!.getTimeout())
     }
@@ -50,53 +52,40 @@ object LoginHelper {
     /**
      * 获取用户基于多级缓存
      */
-    fun getLoginUser(): LoginUser {
-        return StpUtil.getSession().get(LOGIN_USER_KEY) as LoginUser
-    }
+    fun getLoginUser(): LoginUser = StpUtil.getSession().get(LOGIN_USER_KEY) as LoginUser
 
     /**
      * 获取用户基于token
      */
-    fun getLoginUser(token: String): LoginUser {
-        return StpUtil.getTokenSessionByToken(token).get(LOGIN_USER_KEY) as LoginUser
-    }
+    fun getLoginUser(token: String): LoginUser = StpUtil.getTokenSessionByToken(token).get(LOGIN_USER_KEY) as LoginUser
 
     /**
      * 获取用户ID
      */
-    fun getUserId(): Long? {
-        return Convert.toLong(getExtra(USER_KEY))
-    }
+    fun getUserId(): Long? = Convert.toLong(getExtra(USER_KEY))
 
     /**
      * 获取用户名
      */
-    fun getUserName(): String {
-        return getExtra(USER_NAME_KEY) as String
-    }
+    fun getUserName(): String = getExtra(USER_NAME_KEY) as String
 
     /**
      * 获取账号
      */
-    fun getAccount(): String {
-        return getExtra(USER_NAME_KEY) as String
-    }
+    fun getAccount(): String = getExtra(USER_NAME_KEY) as String
 
     /**
      * 获取扩展信息
      */
-    fun getExtra(key: String): Any? {
-        return try {
+    fun getExtra(key: String): Any? =
+        try {
             StpUtil.getExtra(key)
         } catch (e: Exception) {
             null
         }
-    }
 
     /**
      * 判断当前用户是否已经登录
      */
-    fun isLogin(): Boolean {
-        return StpUtil.isLogin()
-    }
+    fun isLogin(): Boolean = StpUtil.isLogin()
 }

@@ -18,19 +18,20 @@ import org.springframework.stereotype.Service
  * @date 2021-12-30 15:24:03
  */
 @Service
-class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>() {
+class SysRoleServiceImpl :
+    ServiceImpl<SysRoleMapper, SysRole>(),
+    ISysRoleService {
     /**
      * 通过角色名查询角色
      *
      * @param name 角色名
      * @return [SysRole] 角色名对应的角色
      */
-    override fun getRoleByName(name: String): SysRole? {
-        return queryOne<SysRole> {
+    override fun getRoleByName(name: String): SysRole? =
+        queryOne<SysRole> {
             SysRole::name eq name
             orderBy(-SysRole::id)
         }
-    }
 
     /**
      * 通过角色名查询角色
@@ -52,12 +53,11 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
      * @param code 角色编码
      * @return [SysRole] 角色编码对应的角色
      */
-    override fun getRoleByCode(code: String): SysRole? {
-        return queryOne<SysRole> {
+    override fun getRoleByCode(code: String): SysRole? =
+        queryOne<SysRole> {
             SysRole::code eq code
             orderBy(-SysRole::id)
         }
-    }
 
     /**
      * 通过角色编码查询角色
@@ -65,9 +65,8 @@ class SysRoleServiceImpl : ISysRoleService, ServiceImpl<SysRoleMapper, SysRole>(
      * @param codes 角色编码列表
      * @return List<[SysRole]> 角色编码对应的角色
      */
-    override fun getRolesByCodes(codes: List<String>): List<SysRole> {
-        return query<SysRole> {
+    override fun getRolesByCodes(codes: List<String>): List<SysRole> =
+        query<SysRole> {
             SysRole::code `in` codes
         }
-    }
 }

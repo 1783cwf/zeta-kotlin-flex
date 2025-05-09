@@ -34,7 +34,7 @@ class SysDictItemController(
         SysDictItemQueryParam,
         SysDictItemSaveDTO,
         SysDictItemUpdateDTO,
-        >() {
+    >() {
     /**
      * 根据字典编码查询字典项
      *

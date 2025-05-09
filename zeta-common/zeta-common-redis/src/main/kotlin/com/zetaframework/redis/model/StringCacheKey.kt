@@ -19,9 +19,7 @@ import java.time.Duration
  * @author gcc
  */
 interface StringCacheKey : CacheKey {
-    fun getValueOps(): ValueOperations<String, Any> {
-        return getRedisTemplate().opsForValue()
-    }
+    fun getValueOps(): ValueOperations<String, Any> = getRedisTemplate().opsForValue()
 
     /**
      * 设置指定key的值
@@ -77,9 +75,7 @@ interface StringCacheKey : CacheKey {
      *
      * @param suffix   key后缀 可空
      */
-    fun delete(suffix: Any? = null): Boolean {
-        return getRedisTemplate().delete(buildKey(getPrefix(), suffix))
-    }
+    fun delete(suffix: Any? = null): Boolean = getRedisTemplate().delete(buildKey(getPrefix(), suffix))
 
     // 如果需要用到这里没有的方法，可以在这里加，或者使用getValueOps()自己实现
 }

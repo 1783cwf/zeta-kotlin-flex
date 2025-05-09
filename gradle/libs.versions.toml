@@ -6,7 +6,7 @@ saTokenBom = "1.41.0"
 hutoolBom = "5.8.36"
 
 # orm
-mybatisFlex = "1.10.8"
+mybatisFlex = "1.10.9"
 mybatisFlexKotlin = "1.1.2"
 autoTable = "2.1.4"
 
@@ -21,8 +21,8 @@ mapstructPlus = "1.4.6"
 
 
 # plugins
-kotlin = "2.0.20"
-ktLintPlugins = "12.1.2"
+kotlin = "2.1.20"
+ktLintPlugins = "5.0.2"
 ktlint = "1.5.0"
 bmuschkoDocker = "9.4.0"
 ksp = "2.0.10-1.0.24"
@@ -52,7 +52,7 @@ ktlint = { module = "com.pinterest.ktlint:ktlint", version.ref = "ktlint" }
 springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
 dependencyManagement = { id = "io.spring.dependency-management", version.ref = "dependencyManagement" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLintPlugins" }
+ktlint = { id = "org.jmailen.kotlinter", version.ref = "ktLintPlugins" }
 kotlinSpring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlinkapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 bmuschkoDocker = { id = "com.bmuschko.docker-remote-api", version.ref = "bmuschkoDocker" }

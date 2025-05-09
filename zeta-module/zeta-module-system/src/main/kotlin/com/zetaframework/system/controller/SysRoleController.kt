@@ -95,7 +95,5 @@ class SysRoleController : SuperController<ISysRoleService, SysRole, SysRoleQuery
      *
      * @return Class<BaseEntity>
      */
-    override fun getEntityClass(): Class<SysRole> {
-        return SysRole::class.java
-    }
+    override fun getEntityClass(): Class<SysRole> = SysRole::class.java
 }

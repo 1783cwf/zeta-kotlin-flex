@@ -4,7 +4,9 @@ package com.zetaframework.log.enums
  * 登录状态枚举
  * @author gcc
  */
-enum class LoginStateEnum(var desc: String) {
+enum class LoginStateEnum(
+    var desc: String,
+) {
     /** 登录成功 */
     SUCCESS("登录成功"),
 

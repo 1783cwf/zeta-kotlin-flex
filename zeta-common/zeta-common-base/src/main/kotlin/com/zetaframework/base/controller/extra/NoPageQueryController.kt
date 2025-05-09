@@ -31,9 +31,7 @@ interface NoPageQueryController<Entity, QueryParam> : BaseController<Entity> {
     @PostMapping("/query")
     fun list(
         @RequestBody param: QueryParam,
-    ): ApiResult<MutableList<Entity>> {
-        return success(handlerBatchQuery(param))
-    }
+    ): ApiResult<MutableList<Entity>> = success(handlerBatchQuery(param))
 
     /**
      * 自定义批量查询

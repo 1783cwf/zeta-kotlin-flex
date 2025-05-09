@@ -19,7 +19,9 @@ import org.springframework.stereotype.Component
  * @author gcc
  */
 @Component
-class WsUserInterceptor(private val applicationContext: ApplicationContext) : ChannelInterceptor {
+class WsUserInterceptor(
+    private val applicationContext: ApplicationContext,
+) : ChannelInterceptor {
     /**
      * 在消息实际发送到通道之前调用。
      * 这允许在必要时修改消息。

@@ -29,20 +29,17 @@ abstract class TreeEntity<E, T : Serializable>(
     /** 子节点 */
     @Ignore
     open var children: MutableList<E>? = null,
-) : BaseEntity<T>(), ITree<E, T> {
+) : BaseEntity<T>(),
+    ITree<E, T> {
     /**
      * 获取树节点id
      */
-    override fun getTreeId(): Long? {
-        return this.id
-    }
+    override fun getTreeId(): Long? = this.id
 
     /**
      * 获取树父节点id
      */
-    override fun getTreeParentId(): Long? {
-        return this.parentId
-    }
+    override fun getTreeParentId(): Long? = this.parentId
 
     /**
      * 设置树子级

@@ -26,7 +26,8 @@ class SysRoleMenuServiceImpl(
     private val userRoleService: ISysUserRoleService,
     private val saRoleStringCacheKey: com.zetaframework.system.common.cacheKey.SaRoleStringCacheKey,
     private val saPermissionStringCacheKey: com.zetaframework.system.common.cacheKey.SaPermissionStringCacheKey,
-) : ISysRoleMenuService, ServiceImpl<SysRoleMenuMapper, SysRoleMenu>() {
+) : ServiceImpl<SysRoleMenuMapper, SysRoleMenu>(),
+    ISysRoleMenuService {
     val baseColumnList =
         listOf(
             SysMenu::id,
@@ -63,7 +64,8 @@ class SysRoleMenuServiceImpl(
     ): List<SysMenu> {
         // 根据用户ID查询当前用户所具有的角色
         val roleIds =
-            QueryWrapper.create()
+            QueryWrapper
+                .create()
                 .select(SysUserRole::roleId)
                 .from(SysUserRole::class.java)
                 .leftJoin<QueryWrapper>(SysRole::class.java)
@@ -72,7 +74,8 @@ class SysRoleMenuServiceImpl(
 
         // 根据角色ID查询所有的菜单ID
         val menuIds =
-            QueryWrapper.create()
+            QueryWrapper
+                .create()
                 .select(SysRoleMenu::menuId)
                 .from(SysRoleMenu::class.java)
                 .where(SysRoleMenu::roleId.`in`(roleIds))
@@ -101,7 +104,8 @@ class SysRoleMenuServiceImpl(
     ): List<SysMenu> {
         // 根据角色ID集合获取所有符合的菜单ID集合
         val menuIds =
-            QueryWrapper.create()
+            QueryWrapper
+                .create()
                 .select(SysRoleMenu::menuId)
                 .from(SysRoleMenu::class.java)
                 .where(SysRoleMenu::roleId.`in`(roleIds))
@@ -127,7 +131,8 @@ class SysRoleMenuServiceImpl(
         // 查询角色对应的用户
         val userRoleList =
             userRoleService.list(
-                QueryWrapper.create(SysUserRole())
+                QueryWrapper
+                    .create(SysUserRole())
                     .eq(SysUserRole::roleId, roleId),
             )
         if (userRoleList.isEmpty()) return

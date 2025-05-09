@@ -31,12 +31,10 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/system")
 class MainController(
     private val captchaCacheKey: CaptchaStringCacheKey,
-    private val authStrategy: Map<String, IAuthStrategy>
+    private val authStrategy: Map<String, IAuthStrategy>,
 ) : SuperSimpleController<ISysUserService, SysUser>() {
     @Value("\${spring.profiles.active:prod}")
     private val env: String? = null
-
-
 
     /**
      * 用户登录

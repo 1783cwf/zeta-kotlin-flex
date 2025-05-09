@@ -7,4 +7,4 @@ package com.zetaframework.xss.annotation
  */
 @kotlin.annotation.Target(AnnotationTarget.FUNCTION)
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class NoXss()
+annotation class NoXss

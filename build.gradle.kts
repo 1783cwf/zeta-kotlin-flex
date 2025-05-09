@@ -38,7 +38,7 @@ java {
 
 kotlin {
   compilerOptions {
-    apiVersion.set(KotlinVersion.KOTLIN_2_0)
+    apiVersion.set(KotlinVersion.KOTLIN_2_1)
     jvmTarget.set(JvmTarget.JVM_21)
     freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=all-compatibility")
   }
@@ -58,14 +58,14 @@ allprojects {
     exclude(group = "org.apache.logging.log4j", module = "log4j-to-slf4j")
   }
 
-  if (childProjects.isNotEmpty()) return@allprojects
-
-  apply(plugin = "idea")
-
   repositories {
     maven("https://mirrors.huaweicloud.com/repository/maven/")
     mavenCentral()
   }
+
+  if (childProjects.isNotEmpty()) return@allprojects
+
+  apply(plugin = "idea")
 
   if (project.name.contains("dependencies")) {
     apply(plugin = "java-platform")

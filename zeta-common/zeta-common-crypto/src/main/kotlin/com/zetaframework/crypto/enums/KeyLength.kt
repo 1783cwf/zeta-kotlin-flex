@@ -5,7 +5,9 @@ package com.zetaframework.crypto.enums
  *
  * @author gcc
  */
-enum class KeyLength(val value: Int) {
+enum class KeyLength(
+    val value: Int,
+) {
     /** 16字节，128位 */
     L_16(16),
 

@@ -25,9 +25,7 @@ import java.time.Duration
  * @author gcc
  */
 interface ZSetCacheKey : CacheKey {
-    fun getZSetOps(): ZSetOperations<String, Any> {
-        return getRedisTemplate().opsForZSet()
-    }
+    fun getZSetOps(): ZSetOperations<String, Any> = getRedisTemplate().opsForZSet()
 
     /**
      * 添加元素，有序集合是按照元素的score值由小到大排列

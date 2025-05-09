@@ -85,9 +85,7 @@ class ExistParam<Entity, Id> private constructor() {
     fun isExist(
         service: IService<Entity>,
         idField: KProperty<*>,
-    ): Boolean {
-        return isExist(service, idField.name, false)
-    }
+    ): Boolean = isExist(service, idField.name, false)
 
     fun isExist(
         service: IService<Entity>,

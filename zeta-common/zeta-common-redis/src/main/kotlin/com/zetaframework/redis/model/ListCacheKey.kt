@@ -19,9 +19,7 @@ import java.time.Duration
  * @author gcc
  */
 interface ListCacheKey : CacheKey {
-    fun getListOps(): ListOperations<String, Any> {
-        return getRedisTemplate().opsForList()
-    }
+    fun getListOps(): ListOperations<String, Any> = getRedisTemplate().opsForList()
 
     /**
      * 通过索引【设置】列表元素的值

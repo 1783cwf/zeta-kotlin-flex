@@ -80,9 +80,7 @@ class ApiResult<T> {
             code: Int?,
             message: String?,
             data: E? = null,
-        ): ApiResult<E> {
-            return ApiResult(code, message, data)
-        }
+        ): ApiResult<E> = ApiResult(code, message, data)
 
         /**
          * 请求成功
@@ -96,18 +94,14 @@ class ApiResult<T> {
             code: Int? = ErrorCodeEnum.SUCCESS.code,
             message: String? = ErrorCodeEnum.SUCCESS.msg,
             data: E? = null,
-        ): ApiResult<E> {
-            return ApiResult(code, message, data)
-        }
+        ): ApiResult<E> = ApiResult(code, message, data)
 
         /**
          * 请求成功，需要执行默认操作
          *
          * @return ApiResult<BaseEntity>
          */
-        fun <E> successDef(): ApiResult<E> {
-            return ApiResult(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
-        }
+        fun <E> successDef(): ApiResult<E> = ApiResult(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
 
         /**
          * 请求失败
@@ -121,8 +115,6 @@ class ApiResult<T> {
             code: Int? = ErrorCodeEnum.FAIL.code,
             message: String? = ErrorCodeEnum.FAIL.msg,
             data: E? = null,
-        ): ApiResult<E> {
-            return ApiResult(code, message, data)
-        }
+        ): ApiResult<E> = ApiResult(code, message, data)
     }
 }

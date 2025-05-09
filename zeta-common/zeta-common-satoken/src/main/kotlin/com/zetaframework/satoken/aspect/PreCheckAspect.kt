@@ -27,7 +27,9 @@ import java.lang.reflect.Method
  */
 @Aspect
 @Component
-class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
+class PreCheckAspect(
+    private val ignoreProperties: IgnoreProperties,
+) {
     companion object {
         private val ANT_PATH_MATCHER = AntPathMatcher()
 
@@ -172,9 +174,10 @@ class PreCheckAspect(private val ignoreProperties: IgnoreProperties) {
         var result = value
         if (StrUtil.isNotBlank(replace)) {
             result =
-                result.map {
-                    StrUtil.format(it, replace)
-                }.toTypedArray()
+                result
+                    .map {
+                        StrUtil.format(it, replace)
+                    }.toTypedArray()
         }
         return result
     }

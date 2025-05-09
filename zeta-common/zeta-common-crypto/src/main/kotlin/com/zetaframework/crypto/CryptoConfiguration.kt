@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Configuration
  */
 @Configuration
 @EnableConfigurationProperties(AesCryptoProperties::class)
-class CryptoConfiguration(private val aesCryptoProperties: AesCryptoProperties) {
+class CryptoConfiguration(
+    private val aesCryptoProperties: AesCryptoProperties,
+) {
     /**
      * 配置AES加密解密类
      */

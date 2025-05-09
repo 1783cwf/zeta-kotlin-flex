@@ -32,7 +32,7 @@ class SysFileController :
     SuperSimpleController<
         ISysFileService,
         SysFile,
-        >(),
+    >(),
     QueryController<SysFile, SysFileQueryParam>,
     DeleteController<SysFile> {
     /**
@@ -50,9 +50,7 @@ class SysFileController :
         file: MultipartFile,
         @RequestParam(required = false)
         bizType: String? = null,
-    ): ApiResult<SysFile> {
-        return success(service.upload(file, bizType))
-    }
+    ): ApiResult<SysFile> = success(service.upload(file, bizType))
 
     /**
      * 下载文件
@@ -76,9 +74,7 @@ class SysFileController :
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    override fun handlerDelete(id: Long): ApiResult<Boolean> {
-        return success(service.delete(id))
-    }
+    override fun handlerDelete(id: Long): ApiResult<Boolean> = success(service.delete(id))
 
     /**
      * 自定义批量删除文件
@@ -86,7 +82,5 @@ class SysFileController :
      * @param ids 主键列表
      * @return ApiResult<Boolean>
      */
-    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
-        return success(service.batchDelete(ids))
-    }
+    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> = success(service.batchDelete(ids))
 }

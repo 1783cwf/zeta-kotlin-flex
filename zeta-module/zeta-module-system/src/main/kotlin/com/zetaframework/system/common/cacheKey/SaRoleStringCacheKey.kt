@@ -12,25 +12,21 @@ import java.time.Duration
  * @author gcc
  */
 @Component
-class SaRoleStringCacheKey(private val redisTemplate: RedisTemplate<String, Any>) : StringCacheKey {
+class SaRoleStringCacheKey(
+    private val redisTemplate: RedisTemplate<String, Any>,
+) : StringCacheKey {
     /**
      * key 前缀
      */
-    override fun getPrefix(): String {
-        return com.zetaframework.constants.RedisKeyConstants.USER_ROLE_KEY
-    }
+    override fun getPrefix(): String = com.zetaframework.constants.RedisKeyConstants.USER_ROLE_KEY
 
     /**
      * key 过期时间
      */
-    override fun getExpire(): Duration? {
-        return Duration.ofDays(1)
-    }
+    override fun getExpire(): Duration? = Duration.ofDays(1)
 
     /**
      * 获取redisTemplate
      */
-    override fun getRedisTemplate(): RedisTemplate<String, Any> {
-        return redisTemplate
-    }
+    override fun getRedisTemplate(): RedisTemplate<String, Any> = redisTemplate
 }

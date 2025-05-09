@@ -16,7 +16,9 @@ import org.springframework.scheduling.annotation.Async
  * 2. 用户上线、下线之后要做的事交给具体的业务去实现
  * @author gcc
  */
-open class WsUserEventListener(private val consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit) {
+open class WsUserEventListener(
+    private val consumer: (user: WsUser?, userType: WsUserTypeEnum) -> Unit,
+) {
     /**
      * 处理用户上线、下线事件
      *

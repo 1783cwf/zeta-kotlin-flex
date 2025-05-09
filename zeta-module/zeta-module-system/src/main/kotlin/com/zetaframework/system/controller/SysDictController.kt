@@ -21,12 +21,13 @@ import org.springframework.web.bind.annotation.RestController
 @PreAuth(replace = "sys:dict")
 @RestController
 @RequestMapping("/api/system/dict")
-class SysDictController : SuperController<
-    ISysDictService,
-    SysDict,
-    SysDictQueryParam,
-    SysDictSaveDTO,
-    SysDictUpdateDTO,
+class SysDictController :
+    SuperController<
+        ISysDictService,
+        SysDict,
+        SysDictQueryParam,
+        SysDictSaveDTO,
+        SysDictUpdateDTO,
     >() {
     /**
      * 自定义新增

@@ -144,11 +144,7 @@ object ServletUtil {
         }
     }
 
-    fun getRequest(): HttpServletRequest? {
-        return getRequestAttributes()?.request
-    }
+    fun getRequest(): HttpServletRequest? = getRequestAttributes()?.request
 
-    fun getResponse(): HttpServletResponse? {
-        return getRequestAttributes()?.response
-    }
+    fun getResponse(): HttpServletResponse? = getRequestAttributes()?.response
 }

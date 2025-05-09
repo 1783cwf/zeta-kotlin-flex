@@ -31,7 +31,5 @@ class SaTokenContextByPatternsRequestCondition : SaTokenContextForSpringInJakart
     override fun matchPath(
         pattern: String,
         path: String,
-    ): Boolean {
-        return SaPatternsRequestConditionHolder.match(pattern, path)
-    }
+    ): Boolean = SaPatternsRequestConditionHolder.match(pattern, path)
 }

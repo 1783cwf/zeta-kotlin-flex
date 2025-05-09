@@ -34,7 +34,5 @@ class SysRoleMenu() : BaseEntity<Long>() {
         this.menuId = menuId
     }
 
-    override fun toString(): String {
-        return "SysRoleMenu(id=$id, createTime=$createTime, createdBy=$createdBy, roleId=$roleId, menuId=$menuId)"
-    }
+    override fun toString(): String = "SysRoleMenu(id=$id, createTime=$createTime, createdBy=$createdBy, roleId=$roleId, menuId=$menuId)"
 }

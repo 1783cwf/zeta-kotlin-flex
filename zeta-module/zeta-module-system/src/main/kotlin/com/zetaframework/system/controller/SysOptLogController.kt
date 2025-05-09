@@ -39,9 +39,7 @@ class SysOptLogController(
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<SysOptLogQueryParam>,
-    ): ApiResult<Page<SysOptLogTableDTO>> {
-        return success(service.pageTable(param))
-    }
+    ): ApiResult<Page<SysOptLogTableDTO>> = success(service.pageTable(param))
 
     /**
      * 单体查询

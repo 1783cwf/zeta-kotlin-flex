@@ -20,7 +20,9 @@ import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy
 @Configuration
 @EnableAsync
 @EnableConfigurationProperties(AsyncProperties::class)
-class AsyncConfiguration(private val asyncProperties: AsyncProperties) : AsyncConfigurer {
+class AsyncConfiguration(
+    private val asyncProperties: AsyncProperties,
+) : AsyncConfigurer {
     /**
      * 配置自定义线程池
      *
@@ -55,7 +57,5 @@ class AsyncConfiguration(private val asyncProperties: AsyncProperties) : AsyncCo
     /**
      * 配置异步线程未捕获异常处理器
      */
-    override fun getAsyncUncaughtExceptionHandler(): AsyncUncaughtExceptionHandler {
-        return SimpleAsyncUncaughtExceptionHandler()
-    }
+    override fun getAsyncUncaughtExceptionHandler(): AsyncUncaughtExceptionHandler = SimpleAsyncUncaughtExceptionHandler()
 }

@@ -19,9 +19,7 @@ import java.time.Duration
  * @author gcc
  */
 interface SetCacheKey : CacheKey {
-    fun getSetOps(): SetOperations<String, Any> {
-        return getRedisTemplate().opsForSet()
-    }
+    fun getSetOps(): SetOperations<String, Any> = getRedisTemplate().opsForSet()
 
     /**
      * set集合添加元素
@@ -66,9 +64,7 @@ interface SetCacheKey : CacheKey {
      *
      * @param suffix   key后缀 可空
      */
-    fun get(suffix: Any? = ""): MutableSet<Any>? {
-        return getSetOps().members(buildKey(getPrefix(), suffix))
-    }
+    fun get(suffix: Any? = ""): MutableSet<Any>? = getSetOps().members(buildKey(getPrefix(), suffix))
 
     /**
      * 删除集合中的指定元素

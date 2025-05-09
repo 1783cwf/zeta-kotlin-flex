@@ -29,8 +29,8 @@ class MonitorController(
      */
     @SysLog
     @GetMapping("/server")
-    fun getServerInfo(): ApiResult<ServerInfoDTO> {
-        return success(
+    fun getServerInfo(): ApiResult<ServerInfoDTO> =
+        success(
             ServerInfoDTO().apply {
                 // 系统信息
                 this.sysInfo = ServerInfoDTO.SysInfo.build(oshiMonitor.sysInfo)
@@ -49,7 +49,6 @@ class MonitorController(
                 this.diskInfos = ServerInfoDTO.DiskInfo.build(oshiMonitor.diskInfos)
             },
         )
-    }
 
     /**
      * 获取Redis信息

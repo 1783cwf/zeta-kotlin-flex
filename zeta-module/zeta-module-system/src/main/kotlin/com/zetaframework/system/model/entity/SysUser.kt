@@ -16,10 +16,10 @@ import io.github.linpeilie.annotations.AutoMappers
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
-import java.time.LocalDate
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoTable
 import org.dromara.autotable.annotation.Ignore
+import java.time.LocalDate
 
 /**
  * 用户
@@ -83,9 +83,7 @@ class SysUser : StateEntity<Long>() {
     @Ignore
     var roles: List<SysRoleDTO>? = null
 
-    override fun toString(): String {
-        return "SysUser(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, username=$username, account=$account, password=$password, email=$email, mobile=$mobile, sex=$sex, avatar=$avatar, birthday=$birthday, readonly=$readonly, deleted=$deleted)"
-    }
+    override fun toString(): String = "SysUser(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, username=$username, account=$account, password=$password, email=$email, mobile=$mobile, sex=$sex, avatar=$avatar, birthday=$birthday, readonly=$readonly, deleted=$deleted)"
 }
 
 fun SysUser.toLoginUser(): LoginUser {

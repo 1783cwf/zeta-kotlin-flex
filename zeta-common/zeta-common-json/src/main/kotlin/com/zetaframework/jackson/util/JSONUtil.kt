@@ -175,22 +175,12 @@ object JSONUtil {
  * @param pretty Boolean?   是否格式化输出
  * @return String?
  */
-fun Any?.toJsonString(pretty: Boolean? = false): String? {
-    return JSONUtil.toJsonStr(this, pretty)
-}
+fun Any?.toJsonString(pretty: Boolean? = false): String? = JSONUtil.toJsonStr(this, pretty)
 
-fun <T> String?.toListObject(clazz: Class<T>): T? {
-    return JSONUtil.parseObject(this, TypeFactory.defaultInstance().constructCollectionType(List::class.java, clazz))
-}
+fun <T> String?.toListObject(clazz: Class<T>): T? = JSONUtil.parseObject(this, TypeFactory.defaultInstance().constructCollectionType(List::class.java, clazz))
 
-fun <T> String?.toObject(clazz: Class<T>): T? {
-    return JSONUtil.parseObject(this, clazz)
-}
+fun <T> String?.toObject(clazz: Class<T>): T? = JSONUtil.parseObject(this, clazz)
 
-inline fun <reified T> String.toObject(): T? {
-    return toObject(T::class.java)
-}
+inline fun <reified T> String.toObject(): T? = toObject(T::class.java)
 
-fun <T : Any> T.deepCody(clazz: Class<T> = this.javaClass): T? {
-    return this.toJsonString()?.toObject(clazz)
-}
+fun <T : Any> T.deepCody(clazz: Class<T> = this.javaClass): T? = this.toJsonString()?.toObject(clazz)

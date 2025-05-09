@@ -27,7 +27,9 @@ import java.util.concurrent.TimeUnit
  * @version 1.2 类名变更 util -> helper
  */
 @Suppress("UNCHECKED_CAST", "unused")
-class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
+class RedisHelper(
+    private val redisTemplate: RedisTemplate<String, Any>,
+) {
     val valueOps: ValueOperations<String, Any> = redisTemplate.opsForValue()
     val hashOps: HashOperations<String, Any, Any> = redisTemplate.opsForHash()
     val listOps: ListOperations<String, Any> = redisTemplate.opsForList()
@@ -55,9 +57,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun renameIfAbsent(
         oldKey: String,
         newKey: String,
-    ): Boolean {
-        return redisTemplate.renameIfAbsent(oldKey, newKey)
-    }
+    ): Boolean = redisTemplate.renameIfAbsent(oldKey, newKey)
 
     /**
      * 删除key
@@ -80,18 +80,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param key String
      * @return Boolean
      */
-    fun hasKey(key: String): Boolean {
-        return redisTemplate.hasKey(key)
-    }
+    fun hasKey(key: String): Boolean = redisTemplate.hasKey(key)
 
     /**
      * 获取key的剩余时间
      * @param key String
      * @return Long
      */
-    fun getExpire(key: String): Long {
-        return redisTemplate.getExpire(key)
-    }
+    fun getExpire(key: String): Long = redisTemplate.getExpire(key)
 
     /**
      * 获取key的剩余时间
@@ -101,9 +97,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun getExpire(
         key: String,
         unit: TimeUnit,
-    ): Long {
-        return redisTemplate.getExpire(key, unit)
-    }
+    ): Long = redisTemplate.getExpire(key, unit)
 
     /**
      * 设置key的过期时间
@@ -116,9 +110,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         timeout: Long,
         unit: TimeUnit,
-    ): Boolean {
-        return redisTemplate.expire(key, timeout, unit)
-    }
+    ): Boolean = redisTemplate.expire(key, timeout, unit)
 
     /**
      * 设置key的过期时间
@@ -129,44 +121,34 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun expireAt(
         key: String,
         date: Date,
-    ): Boolean {
-        return redisTemplate.expireAt(key, date)
-    }
+    ): Boolean = redisTemplate.expireAt(key, date)
 
     /**
      * 移除key的过期时间
      * @param key String
      * @return Boolean
      */
-    fun persist(key: String): Boolean {
-        return redisTemplate.persist(key)
-    }
+    fun persist(key: String): Boolean = redisTemplate.persist(key)
 
     /**
      * 查找匹配的key
      * @param pattern String
      * @return Set<String>
      */
-    fun keys(pattern: String): MutableSet<String> {
-        return redisTemplate.keys(pattern)
-    }
+    fun keys(pattern: String): MutableSet<String> = redisTemplate.keys(pattern)
 
     /**
      * 从当前db中随机获取一个key
      * @return String
      */
-    fun randomKey(): String {
-        return redisTemplate.randomKey()
-    }
+    fun randomKey(): String = redisTemplate.randomKey()
 
     /**
      * 获取key值的类型
      * @param key String
      * @return DataType
      */
-    fun type(key: String): DataType {
-        return redisTemplate.type(key)
-    }
+    fun type(key: String): DataType = redisTemplate.type(key)
 
     /**
      * 将当前数据库的key移动到指定的数据库db中
@@ -177,18 +159,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun move(
         key: String,
         dbIndex: Int,
-    ): Boolean {
-        return redisTemplate.move(key, dbIndex)
-    }
+    ): Boolean = redisTemplate.move(key, dbIndex)
 
     /**
      * 序列化key
      * @param key String
      * @return ByteArray?
      */
-    fun dump(key: String): ByteArray {
-        return redisTemplate.dump(key)
-    }
+    fun dump(key: String): ByteArray = redisTemplate.dump(key)
 
     /**
      * 判断缓存值是否为空对象
@@ -218,9 +196,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param key String
      * @return T?
      */
-    fun <T> get(key: String): T? {
-        return returnVal(valueOps[key] as T?)
-    }
+    fun <T> get(key: String): T? = returnVal(valueOps[key] as T?)
 
     /**
      * 设置指定key的值
@@ -259,9 +235,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun setIfAbsent(
         key: String,
         value: Any?,
-    ): Boolean? {
-        return valueOps.setIfAbsent(key, value ?: createNullVal())
-    }
+    ): Boolean? = valueOps.setIfAbsent(key, value ?: createNullVal())
 
     /**
      * 将给定key的值设为value, 并返回key的旧值old value
@@ -272,9 +246,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <T> getAndSet(
         key: String,
         value: Any?,
-    ): T? {
-        return returnVal(valueOps.getAndSet(key, value ?: createNullVal()) as T?)
-    }
+    ): T? = returnVal(valueOps.getAndSet(key, value ?: createNullVal()) as T?)
 
     /**
      * 获取字符串的长度
@@ -288,9 +260,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param keys
      * @return
      */
-    fun multiGet(keys: Collection<String>): MutableList<Any>? {
-        return valueOps.multiGet(keys)
-    }
+    fun multiGet(keys: Collection<String>): MutableList<Any>? = valueOps.multiGet(keys)
 
     /**
      * 批量添加
@@ -305,9 +275,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param maps Map<String, Any?>
      * @return Boolean?
      */
-    fun multiSetIfAbsent(maps: Map<String, Any?>): Boolean? {
-        return valueOps.multiSetIfAbsent(maps)
-    }
+    fun multiSetIfAbsent(maps: Map<String, Any?>): Boolean? = valueOps.multiSetIfAbsent(maps)
 
     /**
      * 增加(自增长), 负数则为自减
@@ -318,9 +286,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun incrBy(
         key: String,
         increment: Long,
-    ): Long? {
-        return valueOps.increment(key, increment)
-    }
+    ): Long? = valueOps.increment(key, increment)
 
     /**
      * 增加(自增长), 负数则为自减
@@ -331,9 +297,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun incrByFloat(
         key: String,
         increment: Double,
-    ): Double? {
-        return valueOps.increment(key, increment)
-    }
+    ): Double? = valueOps.increment(key, increment)
 
     /**
      * 追加到末尾
@@ -344,9 +308,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun append(
         key: String,
         value: String?,
-    ): Int? {
-        return valueOps.append(key, value ?: "")
-    }
+    ): Int? = valueOps.append(key, value ?: "")
 
     /**
      * 获取存储在哈希表中指定字段的值
@@ -357,18 +319,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <T> hGet(
         key: String,
         field: Any,
-    ): T? {
-        return returnVal(hashOps[key, field] as T?)
-    }
+    ): T? = returnVal(hashOps[key, field] as T?)
 
     /**
      * 获取所有给定字段的值
      * @param key
      * @return
      */
-    fun hGetAll(key: String): MutableMap<Any, Any> {
-        return hashOps.entries(key)
-    }
+    fun hGetAll(key: String): MutableMap<Any, Any> = hashOps.entries(key)
 
     /**
      * 获取所有给定字段的值
@@ -379,9 +337,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun hMultiGet(
         key: String,
         fields: Collection<Any>,
-    ): MutableList<Any> {
-        return hashOps.multiGet(key, fields)
-    }
+    ): MutableList<Any> = hashOps.multiGet(key, fields)
 
     /**
      * 将哈希表key中的字段hashKey的值设为value
@@ -420,9 +376,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         hashKey: String,
         value: Any?,
-    ): Boolean {
-        return hashOps.putIfAbsent(key, hashKey, value ?: createNullVal())
-    }
+    ): Boolean = hashOps.putIfAbsent(key, hashKey, value ?: createNullVal())
 
     /**
      * 删除一个或多个哈希表字段
@@ -433,9 +387,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun hDelete(
         key: String,
         vararg fields: Any?,
-    ): Long {
-        return hashOps.delete(key, *fields)
-    }
+    ): Long = hashOps.delete(key, *fields)
 
     /**
      * 查看哈希表 key 中，指定的字段是否存在
@@ -446,9 +398,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun hExists(
         key: String,
         field: String,
-    ): Boolean {
-        return hashOps.hasKey(key, field)
-    }
+    ): Boolean = hashOps.hasKey(key, field)
 
     /**
      * 为哈希表 key 中的指定字段的整数值加上增量 increment
@@ -461,9 +411,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         field: Any,
         increment: Long,
-    ): Long {
-        return hashOps.increment(key, field, increment)
-    }
+    ): Long = hashOps.increment(key, field, increment)
 
     /**
      * 为哈希表 key 中的指定字段的整数值加上增量 increment
@@ -476,18 +424,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         field: Any,
         delta: Double,
-    ): Double {
-        return hashOps.increment(key, field, delta)
-    }
+    ): Double = hashOps.increment(key, field, delta)
 
     /**
      * 获取所有哈希表中的字段
      * @param key
      * @return
      */
-    fun hKeys(key: String): MutableSet<Any> {
-        return hashOps.keys(key)
-    }
+    fun hKeys(key: String): MutableSet<Any> = hashOps.keys(key)
 
     /**
      * 获取哈希表中字段的数量
@@ -501,9 +445,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param key
      * @return
      */
-    fun hValues(key: String): MutableList<Any> {
-        return hashOps.values(key)
-    }
+    fun hValues(key: String): MutableList<Any> = hashOps.values(key)
 
     /**
      * 迭代哈希表中的键值对
@@ -514,9 +456,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun hScan(
         key: String,
         options: ScanOptions,
-    ): Cursor<MutableMap.MutableEntry<Any, Any>> {
-        return hashOps.scan(key, options)
-    }
+    ): Cursor<MutableMap.MutableEntry<Any, Any>> = hashOps.scan(key, options)
 
     /**
      * 通过索引获取列表中的元素
@@ -527,9 +467,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <T> lIndex(
         key: String,
         index: Long,
-    ): T? {
-        return returnVal(listOps.index(key, index) as T?)
-    }
+    ): T? = returnVal(listOps.index(key, index) as T?)
 
     /**
      * 获取列表指定范围内的元素
@@ -542,9 +480,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): MutableList<Any>? {
-        return listOps.range(key, start, end)
-    }
+    ): MutableList<Any>? = listOps.range(key, start, end)
 
     /**
      * 存储在list头部
@@ -555,9 +491,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lLeftPush(
         key: String,
         value: Any,
-    ): Long? {
-        return listOps.leftPush(key, value)
-    }
+    ): Long? = listOps.leftPush(key, value)
 
     /**
      * 存储多个值在list头部
@@ -568,9 +502,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lLeftPushAll(
         key: String,
         vararg value: Any?,
-    ): Long? {
-        return listOps.leftPushAll(key, *value)
-    }
+    ): Long? = listOps.leftPushAll(key, *value)
 
     /**
      * 当list存在的时候才加入
@@ -581,9 +513,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lLeftPushIfPresent(
         key: String,
         value: Any,
-    ): Long? {
-        return listOps.leftPushIfPresent(key, value)
-    }
+    ): Long? = listOps.leftPushIfPresent(key, value)
 
     /**
      * 如果pivot存在,再pivot前面添加
@@ -596,9 +526,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         pivot: Any,
         value: Any,
-    ): Long? {
-        return listOps.leftPush(key, pivot, value)
-    }
+    ): Long? = listOps.leftPush(key, pivot, value)
 
     /**
      * 存储多个值在list尾部
@@ -609,9 +537,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lRightPush(
         key: String,
         value: Any,
-    ): Long? {
-        return listOps.rightPush(key, value)
-    }
+    ): Long? = listOps.rightPush(key, value)
 
     /**
      * 存储多个值在list尾部
@@ -622,9 +548,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lRightPushAll(
         key: String,
         vararg value: Any?,
-    ): Long? {
-        return listOps.rightPushAll(key, *value)
-    }
+    ): Long? = listOps.rightPushAll(key, *value)
 
     /**
      * 为已存在的列表添加值
@@ -635,9 +559,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun lRightPushIfPresent(
         key: String,
         value: Any,
-    ): Long? {
-        return listOps.rightPushIfPresent(key, value)
-    }
+    ): Long? = listOps.rightPushIfPresent(key, value)
 
     /**
      * 在pivot元素的右边添加值
@@ -650,9 +572,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         pivot: Any,
         value: Any,
-    ): Long? {
-        return listOps.rightPush(key, pivot, value)
-    }
+    ): Long? = listOps.rightPush(key, pivot, value)
 
     /**
      * 通过索引设置列表元素的值
@@ -673,9 +593,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param key
      * @return 删除的元素
      */
-    fun <T> lLeftPop(key: String): T? {
-        return listOps.leftPop(key) as T?
-    }
+    fun <T> lLeftPop(key: String): T? = listOps.leftPop(key) as T?
 
     /**
      * 移出并获取列表的第一个元素
@@ -689,18 +607,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         timeout: Long,
         unit: TimeUnit?,
-    ): T? {
-        return listOps.leftPop(key, timeout, unit!!) as T?
-    }
+    ): T? = listOps.leftPop(key, timeout, unit!!) as T?
 
     /**
      * 移除并获取列表最后一个元素
      * @param key
      * @return 删除的元素
      */
-    fun <T> lRightPop(key: String): T? {
-        return listOps.rightPop(key) as T?
-    }
+    fun <T> lRightPop(key: String): T? = listOps.rightPop(key) as T?
 
     /**
      * 移出并获取列表的最后一个元素
@@ -714,9 +628,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         timeout: Long,
         unit: TimeUnit?,
-    ): T? {
-        return listOps.rightPop(key, timeout, unit!!) as T?
-    }
+    ): T? = listOps.rightPop(key, timeout, unit!!) as T?
 
     /**
      * 移除列表的最后一个元素，并将该元素添加到另一个列表并返回
@@ -727,9 +639,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <T> lRightPopAndLeftPush(
         @NonNull sourceKey: String?,
         destinationKey: String?,
-    ): T? {
-        return listOps.rightPopAndLeftPush(sourceKey!!, destinationKey!!) as T?
-    }
+    ): T? = listOps.rightPopAndLeftPush(sourceKey!!, destinationKey!!) as T?
 
     /**
      * 从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它
@@ -745,9 +655,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         destinationKey: String,
         timeout: Long,
         unit: TimeUnit,
-    ): T? {
-        return listOps.rightPopAndLeftPush(sourceKey, destinationKey, timeout, unit) as T?
-    }
+    ): T? = listOps.rightPopAndLeftPush(sourceKey, destinationKey, timeout, unit) as T?
 
     /**
      * 删除集合中值等于value得元素
@@ -764,9 +672,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         index: Long,
         value: Any,
-    ): Long? {
-        return listOps.remove(key, index, value)
-    }
+    ): Long? = listOps.remove(key, index, value)
 
     /**
      * 裁剪list
@@ -787,9 +693,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
      * @param key
      * @return
      */
-    fun lLen(key: String): Long? {
-        return listOps.size(key)
-    }
+    fun lLen(key: String): Long? = listOps.size(key)
 
     /**
      * set添加元素
@@ -800,9 +704,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun sAdd(
         key: String,
         vararg values: Any?,
-    ): Long? {
-        return setOps.add(key, *values)
-    }
+    ): Long? = setOps.add(key, *values)
 
     /**
      * set移除元素
@@ -813,18 +715,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun sRemove(
         key: String,
         vararg values: Any?,
-    ): Long? {
-        return setOps.remove(key, *values)
-    }
+    ): Long? = setOps.remove(key, *values)
 
     /**
      * 移除并返回集合的一个随机元素
      * @param key
      * @return
      */
-    fun <T> sPop(key: String): T? {
-        return setOps.pop(key) as T?
-    }
+    fun <T> sPop(key: String): T? = setOps.pop(key) as T?
 
     /**
      * 将元素value从一个集合移到另一个集合
@@ -837,18 +735,14 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         value: Any?,
         destKey: String?,
-    ): Boolean? {
-        return setOps.move(key, value!!, destKey!!)
-    }
+    ): Boolean? = setOps.move(key, value!!, destKey!!)
 
     /**
      * 获取集合的大小
      * @param key
      * @return
      */
-    fun sSize(key: String): Long? {
-        return setOps.size(key)
-    }
+    fun sSize(key: String): Long? = setOps.size(key)
 
     /**
      * 判断集合是否包含value
@@ -859,9 +753,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun sIsMember(
         key: String,
         value: Any,
-    ): Boolean? {
-        return setOps.isMember(key, value)
-    }
+    ): Boolean? = setOps.isMember(key, value)
 
     /**
      * 获取两个集合的交集
@@ -872,9 +764,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sIntersect(
         key: String,
         otherKey: String,
-    ): MutableSet<Any>? {
-        return setOps.intersect(key, otherKey)
-    }
+    ): MutableSet<Any>? = setOps.intersect(key, otherKey)
 
     /**
      * 获取key集合与多个集合的交集
@@ -885,9 +775,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun sIntersect(
         key: String,
         otherKeys: Collection<String?>,
-    ): MutableSet<Any>? {
-        return setOps.intersect(key, otherKeys)
-    }
+    ): MutableSet<Any>? = setOps.intersect(key, otherKeys)
 
     /**
      * key集合与otherKey集合的交集存储到destKey集合中
@@ -900,9 +788,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKey: String,
         destKey: String,
-    ): Long? {
-        return setOps.intersectAndStore(key, otherKey, destKey)
-    }
+    ): Long? = setOps.intersectAndStore(key, otherKey, destKey)
 
     /**
      * key集合与多个集合的交集存储到destKey集合中
@@ -915,9 +801,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKeys: Collection<String?>,
         destKey: String,
-    ): Long? {
-        return setOps.intersectAndStore(key, otherKeys, destKey)
-    }
+    ): Long? = setOps.intersectAndStore(key, otherKeys, destKey)
 
     /**
      * 获取两个集合的并集
@@ -928,9 +812,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sUnion(
         key: String,
         otherKeys: String,
-    ): MutableSet<Any>? {
-        return setOps.union(key, otherKeys)
-    }
+    ): MutableSet<Any>? = setOps.union(key, otherKeys)
 
     /**
      * 获取key集合与多个集合的并集
@@ -941,9 +823,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sUnion(
         key: String,
         otherKeys: Collection<String?>,
-    ): MutableSet<Any>? {
-        return setOps.union(key, otherKeys)
-    }
+    ): MutableSet<Any>? = setOps.union(key, otherKeys)
 
     /**
      * key集合与otherKey集合的并集存储到destKey中
@@ -956,9 +836,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKey: String,
         destKey: String,
-    ): Long? {
-        return setOps.unionAndStore(key, otherKey, destKey)
-    }
+    ): Long? = setOps.unionAndStore(key, otherKey, destKey)
 
     /**
      * key集合与多个集合的并集存储到destKey中
@@ -971,9 +849,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKeys: Collection<String?>,
         destKey: String,
-    ): Long? {
-        return setOps.unionAndStore(key, otherKeys, destKey)
-    }
+    ): Long? = setOps.unionAndStore(key, otherKeys, destKey)
 
     /**
      * 获取两个集合的差集
@@ -984,9 +860,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sDifference(
         key: String,
         otherKey: String,
-    ): MutableSet<Any>? {
-        return setOps.difference(key, otherKey)
-    }
+    ): MutableSet<Any>? = setOps.difference(key, otherKey)
 
     /**
      * 获取key集合与多个集合的差集
@@ -997,9 +871,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sDifference(
         key: String,
         otherKeys: Collection<String?>,
-    ): MutableSet<Any>? {
-        return setOps.difference(key, otherKeys)
-    }
+    ): MutableSet<Any>? = setOps.difference(key, otherKeys)
 
     /**
      * key集合与otherKey集合的差集存储到destKey中
@@ -1012,9 +884,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKey: String,
         destKey: String,
-    ): Long? {
-        return setOps.differenceAndStore(key, otherKey, destKey)
-    }
+    ): Long? = setOps.differenceAndStore(key, otherKey, destKey)
 
     /**
      * key集合与多个集合的差集存储到destKey中
@@ -1027,27 +897,21 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKeys: Collection<String?>,
         destKey: String,
-    ): Long? {
-        return setOps.differenceAndStore(key, otherKeys, destKey)
-    }
+    ): Long? = setOps.differenceAndStore(key, otherKeys, destKey)
 
     /**
      * 返回集合 key 中的所有成员。
      * @param key
      * @return
      */
-    fun <V> setMembers(key: String): MutableSet<Any>? {
-        return setOps.members(key)
-    }
+    fun <V> setMembers(key: String): MutableSet<Any>? = setOps.members(key)
 
     /**
      * 随机获取集合中的一个元素
      * @param key
      * @return
      */
-    fun <T> sRandomMember(key: String): T {
-        return setOps.randomMember(key) as T
-    }
+    fun <T> sRandomMember(key: String): T = setOps.randomMember(key) as T
 
     /**
      * 随机获取集合中count个元素
@@ -1058,9 +922,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sRandomMembers(
         key: String,
         count: Long,
-    ): MutableList<Any>? {
-        return setOps.randomMembers(key, count)
-    }
+    ): MutableList<Any>? = setOps.randomMembers(key, count)
 
     /**
      * 随机获取集合中count个元素并且去除重复的
@@ -1071,9 +933,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun <V> sDistinctRandomMembers(
         key: String,
         count: Long,
-    ): MutableSet<Any>? {
-        return setOps.distinctRandomMembers(key, count)
-    }
+    ): MutableSet<Any>? = setOps.distinctRandomMembers(key, count)
 
     /**
      * 添加元素,有序集合是按照元素的score值由小到大排列
@@ -1086,9 +946,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         value: Any,
         score: Double,
-    ): Boolean? {
-        return zSetOps.add(key, value, score)
-    }
+    ): Boolean? = zSetOps.add(key, value, score)
 
     /**
      * 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。
@@ -1118,9 +976,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun zRemove(
         key: String,
         vararg values: Any?,
-    ): Long? {
-        return zSetOps.remove(key, *values)
-    }
+    ): Long? = zSetOps.remove(key, *values)
 
     /**
      * 增加元素的score值，并返回增加后的值
@@ -1133,9 +989,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         value: Any,
         delta: Double,
-    ): Double? {
-        return zSetOps.incrementScore(key, value, delta)
-    }
+    ): Double? = zSetOps.incrementScore(key, value, delta)
 
     /**
      * 返回元素在集合的排名,有序集合是按照元素的score值由小到大排列
@@ -1146,9 +1000,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun zRank(
         key: String,
         value: Any,
-    ): Long? {
-        return zSetOps.rank(key, value)
-    }
+    ): Long? = zSetOps.rank(key, value)
 
     /**
      * 返回元素在集合的排名,按元素的score值由大到小排列
@@ -1159,9 +1011,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun zReverseRank(
         key: String,
         value: Any,
-    ): Long? {
-        return zSetOps.reverseRank(key, value)
-    }
+    ): Long? = zSetOps.reverseRank(key, value)
 
     /**
      * 获取集合的元素, 从小到大排序
@@ -1174,9 +1024,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): MutableSet<Any>? {
-        return zSetOps.range(key, start, end)
-    }
+    ): MutableSet<Any>? = zSetOps.range(key, start, end)
 
     /**
      * 获取集合元素, 并且把score值也获取
@@ -1189,9 +1037,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): MutableSet<TypedTuple<Any>>? {
-        return zSetOps.rangeWithScores(key, start, end)
-    }
+    ): MutableSet<TypedTuple<Any>>? = zSetOps.rangeWithScores(key, start, end)
 
     /**
      * 根据Score值查询集合元素
@@ -1204,9 +1050,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): MutableSet<Any>? {
-        return zSetOps.rangeByScore(key, min, max)
-    }
+    ): MutableSet<Any>? = zSetOps.rangeByScore(key, min, max)
 
     /**
      * 根据Score值查询集合元素, 从小到大排序
@@ -1219,9 +1063,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): MutableSet<TypedTuple<Any>>? {
-        return zSetOps.rangeByScoreWithScores(key, min, max)
-    }
+    ): MutableSet<TypedTuple<Any>>? = zSetOps.rangeByScoreWithScores(key, min, max)
 
     /**
      * 根据Score值查询集合元素, 从小到大排序
@@ -1238,9 +1080,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         max: Double,
         start: Long,
         end: Long,
-    ): MutableSet<TypedTuple<Any>>? {
-        return zSetOps.rangeByScoreWithScores(key, min, max, start, end)
-    }
+    ): MutableSet<TypedTuple<Any>>? = zSetOps.rangeByScoreWithScores(key, min, max, start, end)
 
     /**
      * 获取集合的元素, 从大到小排序
@@ -1253,9 +1093,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): MutableSet<Any>? {
-        return zSetOps.reverseRange(key, start, end)
-    }
+    ): MutableSet<Any>? = zSetOps.reverseRange(key, start, end)
 
     /**
      * 获取集合的元素, 从大到小排序, 并返回score值
@@ -1268,9 +1106,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): MutableSet<TypedTuple<Any>>? {
-        return zSetOps.reverseRangeWithScores(key, start, end)
-    }
+    ): MutableSet<TypedTuple<Any>>? = zSetOps.reverseRangeWithScores(key, start, end)
 
     /**
      * 根据Score值查询集合元素, 从大到小排序
@@ -1283,9 +1119,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): MutableSet<Any>? {
-        return zSetOps.reverseRangeByScore(key, min, max)
-    }
+    ): MutableSet<Any>? = zSetOps.reverseRangeByScore(key, min, max)
 
     /**
      * 根据Score值查询集合元素
@@ -1302,9 +1136,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         max: Double,
         start: Long,
         end: Long,
-    ): MutableSet<Any>? {
-        return zSetOps.reverseRangeByScore(key, min, max, start, end)
-    }
+    ): MutableSet<Any>? = zSetOps.reverseRangeByScore(key, min, max, start, end)
 
     /**
      * 根据Score值查询集合元素, 从大到小排序
@@ -1317,9 +1149,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): MutableSet<TypedTuple<Any>>? {
-        return zSetOps.reverseRangeByScoreWithScores(key, min, max)
-    }
+    ): MutableSet<TypedTuple<Any>>? = zSetOps.reverseRangeByScoreWithScores(key, min, max)
 
     /**
      * 根据score值获取集合元素数量
@@ -1332,27 +1162,21 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): Long? {
-        return zSetOps.count(key, min, max)
-    }
+    ): Long? = zSetOps.count(key, min, max)
 
     /**
      * 获取集合大小
      * @param key
      * @return
      */
-    fun zSize(key: String): Long? {
-        return zSetOps.size(key)
-    }
+    fun zSize(key: String): Long? = zSetOps.size(key)
 
     /**
      * 获取集合大小
      * @param key
      * @return
      */
-    fun zZCard(key: String): Long? {
-        return zSetOps.zCard(key)
-    }
+    fun zZCard(key: String): Long? = zSetOps.zCard(key)
 
     /**
      * 获取集合中value元素的score值
@@ -1363,9 +1187,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun zScore(
         key: String,
         value: Any,
-    ): Double? {
-        return zSetOps.score(key, value)
-    }
+    ): Double? = zSetOps.score(key, value)
 
     /**
      * 移除指定索引位置的成员
@@ -1378,9 +1200,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         start: Long,
         end: Long,
-    ): Long? {
-        return zSetOps.removeRange(key, start, end)
-    }
+    ): Long? = zSetOps.removeRange(key, start, end)
 
     /**
      * 根据指定的score值的范围来移除成员
@@ -1393,9 +1213,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         min: Double,
         max: Double,
-    ): Long? {
-        return zSetOps.removeRangeByScore(key, min, max)
-    }
+    ): Long? = zSetOps.removeRangeByScore(key, min, max)
 
     /**
      * 获取key和otherKey的并集并存储在destKey中
@@ -1408,9 +1226,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKey: String,
         destKey: String,
-    ): Long? {
-        return zSetOps.unionAndStore(key, otherKey, destKey)
-    }
+    ): Long? = zSetOps.unionAndStore(key, otherKey, destKey)
 
     /**
      * 获取key和otherKey的并集并存储在destKey中
@@ -1423,9 +1239,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKeys: Collection<String?>,
         destKey: String,
-    ): Long? {
-        return zSetOps.unionAndStore(key, otherKeys, destKey)
-    }
+    ): Long? = zSetOps.unionAndStore(key, otherKeys, destKey)
 
     /**
      * 交集
@@ -1438,9 +1252,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKey: String,
         destKey: String,
-    ): Long? {
-        return zSetOps.intersectAndStore(key, otherKey, destKey)
-    }
+    ): Long? = zSetOps.intersectAndStore(key, otherKey, destKey)
 
     /**
      * 交集
@@ -1453,9 +1265,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
         key: String,
         otherKeys: Collection<String?>,
         destKey: String,
-    ): Long? {
-        return zSetOps.intersectAndStore(key, otherKeys, destKey)
-    }
+    ): Long? = zSetOps.intersectAndStore(key, otherKeys, destKey)
 
     /**
      * 在key处迭代zset中的元素。
@@ -1466,9 +1276,7 @@ class RedisHelper(private val redisTemplate: RedisTemplate<String, Any>) {
     fun zScan(
         key: String,
         options: ScanOptions,
-    ): Cursor<TypedTuple<Any>> {
-        return zSetOps.scan(key, options)
-    }
+    ): Cursor<TypedTuple<Any>> = zSetOps.scan(key, options)
 
     /**
      * 针对某个key使用lua脚本进行限流

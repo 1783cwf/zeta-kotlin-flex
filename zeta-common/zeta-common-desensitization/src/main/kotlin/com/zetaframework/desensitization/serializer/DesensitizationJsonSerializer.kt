@@ -16,7 +16,9 @@ import java.util.Objects
  *
  * @author gcc
  */
-class DesensitizationJsonSerializer() : JsonSerializer<String>(), ContextualSerializer {
+class DesensitizationJsonSerializer() :
+    JsonSerializer<String>(),
+    ContextualSerializer {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     private var rule: DesensitizedUtil.DesensitizedType? = null
     private var symbol: String? = ""

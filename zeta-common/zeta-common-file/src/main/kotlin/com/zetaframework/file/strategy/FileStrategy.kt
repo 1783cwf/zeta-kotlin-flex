@@ -28,16 +28,12 @@ interface FileStrategy {
      *
      * @param param 文件删除参数
      */
-    fun delete(param: FileDeleteParam): Boolean {
-        return false
-    }
+    fun delete(param: FileDeleteParam): Boolean = false
 
     /**
      * 获取文件输入流
      *
      * @param path
      */
-    fun getObject(path: String): InputStream? {
-        return null
-    }
+    fun getObject(path: String): InputStream? = null
 }

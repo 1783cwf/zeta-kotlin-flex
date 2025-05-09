@@ -25,9 +25,10 @@ class XssRequestWrapper(
             if (values.isNotEmpty()) {
                 // 等价于 result.put(key, 清理过的value)
                 result[key] =
-                    values.map {
-                        xssCleaner.clear(it)
-                    }.toTypedArray()
+                    values
+                        .map {
+                            xssCleaner.clear(it)
+                        }.toTypedArray()
             } else {
                 result[key] = values
             }

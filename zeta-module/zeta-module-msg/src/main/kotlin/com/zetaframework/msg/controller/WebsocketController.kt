@@ -36,15 +36,14 @@ class WebsocketController(
     @GetMapping("/group")
     fun group(
         @RequestParam message: String,
-    ): ApiResult<Boolean> {
-        return try {
+    ): ApiResult<Boolean> =
+        try {
             simpMessagingTemplate.convertAndSend("/topic/group", message)
             ApiResult.success()
         } catch (e: MessagingException) {
             logger.error("群发消息发送失败", e)
             ApiResult.fail()
         }
-    }
 
     /**
      * 私聊消息
@@ -70,7 +69,5 @@ class WebsocketController(
      * @return ApiResult<Int>
      */
     @GetMapping("/onlineUser")
-    fun onlineUser(): ApiResult<Int> {
-        return ApiResult.success(data = userRegistry.userCount)
-    }
+    fun onlineUser(): ApiResult<Int> = ApiResult.success(data = userRegistry.userCount)
 }

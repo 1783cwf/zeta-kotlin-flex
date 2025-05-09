@@ -34,7 +34,5 @@ class SysUserRole() : BaseEntity<Long>() {
         this.roleId = roleId
     }
 
-    override fun toString(): String {
-        return "SysUserRole(id=$id, createTime=$createTime, createdBy=$createdBy, userId=$userId, roleId=$roleId)"
-    }
+    override fun toString(): String = "SysUserRole(id=$id, createTime=$createTime, createdBy=$createdBy, userId=$userId, roleId=$roleId)"
 }
