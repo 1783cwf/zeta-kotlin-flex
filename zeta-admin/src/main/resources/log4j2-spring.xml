@@ -3,7 +3,7 @@
 
   <!-- 安全加固配置 -->
   <Properties>
-    <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%X{traceId}] %-5level %logger{36} - %msg%n</Property>
+    <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
     <Property name="LOG_PATH">./logs</Property>
     <Property name="LOG_NAME">${spring:spring.application.name}</Property>
     <Property name="LOG_RETAIN">30</Property>

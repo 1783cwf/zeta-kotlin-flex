@@ -16,6 +16,6 @@ COPY --from=builder application/application/ ./
 
 RUN mkdir -p /appdata/heapdump && mkdir -p /appdata/gclog
 
-ENV JAVA_TOOL_OPTIONS "-Xms2048m -Xmx2048m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/appdata/heapdump/${PROJECT_NAME}-heapdump.hprof -Xlog:gc*:file=/appdata/gclog/${PROJECT_NAME}-gc-%t.log:time,uptime,pid,tid,level,tags:filecount=5,filesize=10M -Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Duser.timezone=Asia/Shanghai"
+ENV JAVA_TOOL_OPTIONS "-Xms2048m -Xmx2048m -XX:+UseZGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/appdata/heapdump/${PROJECT_NAME}-heapdump.hprof -Xlog:gc*:file=/appdata/gclog/${PROJECT_NAME}-gc-%t.log:time,uptime,pid,tid,level,tags:filecount=5,filesize=10M -Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Duser.timezone=Asia/Shanghai"
 
 ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
