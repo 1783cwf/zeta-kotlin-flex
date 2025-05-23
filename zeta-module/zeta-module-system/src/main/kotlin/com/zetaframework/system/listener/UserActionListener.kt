@@ -172,9 +172,9 @@ class UserActionListener : SaTokenListener {
      * @param timeout 续期时间
      */
     override fun doRenewTimeout(
-        tokenValue: String?,
+        loginType: String?,
         loginId: Any?,
+        tokenValue: String?,
         timeout: Long,
-    ) {
-    }
+    ) {}
 }

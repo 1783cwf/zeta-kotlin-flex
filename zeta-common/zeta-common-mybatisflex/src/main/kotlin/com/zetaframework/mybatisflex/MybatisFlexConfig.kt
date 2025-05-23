@@ -10,12 +10,16 @@ import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor
 import com.mybatisflex.core.query.QueryColumnBehavior
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer
 import com.mybatisflex.spring.boot.MybatisFlexProperties
-import com.zetaframework.mybatisflex.adapter.MybatisFlexAutoTableAdapter
+import com.zetaframework.mybatisflex.adapter.CustomAutoTableClassScanner
+import com.zetaframework.mybatisflex.adapter.CustomAutoTableMetadataAdapter
+import com.zetaframework.mybatisflex.adapter.CustomJavaTypeToDatabaseTypeConverter
 import com.zetaframework.mybatisflex.entity.BaseEntity
 import com.zetaframework.mybatisflex.listener.EntityInsertListener
 import com.zetaframework.mybatisflex.listener.EntityUpdateListener
 import com.zetaframework.mybatisflex.properties.DatabaseProperties
-import org.dromara.autotable.core.AutoTableOrmFrameAdapter
+import org.dromara.autotable.core.AutoTableClassScanner
+import org.dromara.autotable.core.AutoTableMetadataAdapter
+import org.dromara.autotable.core.converter.JavaTypeToDatabaseTypeConverter
 import org.dromara.autotable.springboot.EnableAutoTable
 import org.mybatis.spring.annotation.MapperScan
 import org.slf4j.Logger
@@ -87,6 +91,12 @@ class MybatisFlexConfig(
     }
 
     @Bean
-    fun mybatisFlexAdapter(mybatisFlexProperties: MybatisFlexProperties): AutoTableOrmFrameAdapter =
-        MybatisFlexAutoTableAdapter(mybatisFlexProperties)
+    fun customAutoTableMetadataAdapter(mybatisFlexProperties: MybatisFlexProperties): AutoTableMetadataAdapter =
+        CustomAutoTableMetadataAdapter(mybatisFlexProperties)
+
+    @Bean
+    fun customAutoTableClassScanner(): AutoTableClassScanner = CustomAutoTableClassScanner()
+
+    @Bean
+    fun customJavaTypeToDatabaseTypeConverter(): JavaTypeToDatabaseTypeConverter = CustomJavaTypeToDatabaseTypeConverter()
 }

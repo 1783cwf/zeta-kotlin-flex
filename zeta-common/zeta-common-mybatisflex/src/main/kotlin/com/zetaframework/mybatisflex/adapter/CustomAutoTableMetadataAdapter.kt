@@ -14,9 +14,8 @@ import com.mybatisflex.core.FlexGlobalConfig
 import com.mybatisflex.core.util.ClassUtil
 import com.mybatisflex.spring.boot.MybatisFlexProperties
 import com.zetaframework.mybatisflex.entity.BaseEntity
-import org.apache.ibatis.type.UnknownTypeHandler
 import org.dromara.autotable.annotation.AutoTable
-import org.dromara.autotable.core.AutoTableOrmFrameAdapter
+import org.dromara.autotable.core.AutoTableMetadataAdapter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.AnnotatedElementUtils
@@ -28,9 +27,9 @@ import java.util.Objects
  * @date 2024年05月03日 08:24
  */
 
-class MybatisFlexAutoTableAdapter(
+class CustomAutoTableMetadataAdapter(
     private val mybatisFlexProperties: MybatisFlexProperties,
-) : AutoTableOrmFrameAdapter {
+) : AutoTableMetadataAdapter {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     override fun isIgnoreField(
@@ -87,25 +86,7 @@ class MybatisFlexAutoTableAdapter(
         }
     }
 
-    override fun customFieldTypeHandler(
-        clazz: Class<*>?,
-        field: Field,
-    ): Class<*> {
-        // 枚举，按照字符串处理
-        if (field.type.isEnum) {
-            return String::class.java
-        }
-        val column = AnnotatedElementUtils.findMergedAnnotation(field, Column::class.java)
-
-        // json数据，按照字符串处理
-        if (column != null && column.typeHandler != UnknownTypeHandler::class.java) {
-            return String::class.java
-        }
-
-        return field.type
-    }
-
-    override fun getEnumValues(enumType: Class<*>): List<String> {
+    override fun getColumnEnumValues(enumType: Class<*>): List<String> {
         if (!enumType.isEnum) {
             throw IllegalArgumentException("Class: ${enumType.getName()} 非枚举类型")
         }
@@ -133,8 +114,6 @@ class MybatisFlexAutoTableAdapter(
             .toList()
     }
 
-    override fun scannerAnnotations(): List<Class<out Annotation>> = listOf(Table::class.java)
-
     override fun getTableName(clazz: Class<*>): String {
         val table = AnnotatedElementUtils.findMergedAnnotation(clazz, Table::class.java)
         if (table != null && table.value.isNotBlank()) {
@@ -158,7 +137,7 @@ class MybatisFlexAutoTableAdapter(
         return super.getTableSchema(clazz)
     }
 
-    override fun getRealColumnName(
+    override fun getColumnName(
         clazz: Class<*>,
         field: Field,
     ): String {

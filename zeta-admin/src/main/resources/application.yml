@@ -192,6 +192,8 @@ mybatis-flex:
     logic-delete-column: "deleted"
     # 默认乐观锁字段
     version-column: "version"
+    # 不打印mybatis-flex logo及版本号
+    print-banner: false
 
 
 # Sa-Token配置 https://sa-token.dev33.cn/doc/index.html#/use/config
@@ -229,6 +231,8 @@ auto-table:
     version: 1.0.0
     # 记录到数据库（如果是多数据源，则会根据不同数据源，记录到不同的库）
     record-type: db
+  # 是否打印banner
+  show-banner: false
 
 # 日志配置
 logging:

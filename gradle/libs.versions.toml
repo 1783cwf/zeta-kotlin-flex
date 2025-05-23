@@ -2,13 +2,13 @@
 # bom
 springBoot = "3.4.3"
 dependencyManagement = "1.1.4"
-saTokenBom = "1.41.0"
-hutoolBom = "5.8.36"
+saTokenBom = "1.43.0"
+hutoolBom = "5.8.38"
 
 # orm
 mybatisFlex = "1.10.9"
 mybatisFlexKotlin = "1.1.2"
-autoTable = "2.1.4"
+autoTable = "2.4.4.1"
 
 # utils
 aliyunSdkOss = "3.17.1"
