@@ -2,6 +2,7 @@ package com.zetaframework.system.service.impl
 
 import com.mybatisflex.core.query.QueryWrapper
 import com.mybatisflex.kotlin.extensions.condition.allAnd
+import com.mybatisflex.kotlin.extensions.db.query
 import com.mybatisflex.kotlin.extensions.kproperty.eq
 import com.mybatisflex.kotlin.extensions.kproperty.`in`
 import com.mybatisflex.kotlin.extensions.kproperty.unaryPlus
@@ -80,7 +81,7 @@ class SysRoleMenuServiceImpl(
                 .from(SysRoleMenu::class.java)
                 .where(SysRoleMenu::roleId.`in`(roleIds))
 
-        return com.mybatisflex.kotlin.extensions.db.query<SysMenu> {
+        return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SysMenu::class.java)
             where(
@@ -112,7 +113,7 @@ class SysRoleMenuServiceImpl(
                 .from(SysRoleMenu::class.java)
                 .where(SysRoleMenu::roleId.`in`(roleIds))
 
-        return com.mybatisflex.kotlin.extensions.db.query<SysMenu> {
+        return query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SysMenu::class.java)
             where(
