@@ -83,9 +83,11 @@ class SysRoleMenuServiceImpl(
         return com.mybatisflex.kotlin.extensions.db.query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SysMenu::class.java)
-            allAnd(
-                SysMenu::id `in` menuIds,
-                SysMenu::menuType eq menuType,
+            where(
+                allAnd(
+                    SysMenu::id `in` menuIds,
+                    SysMenu::menuType eq menuType,
+                ),
             )
             orderBy(+SysMenu::sortValue, +SysMenu::id)
         }
@@ -113,9 +115,11 @@ class SysRoleMenuServiceImpl(
         return com.mybatisflex.kotlin.extensions.db.query<SysMenu> {
             select(*baseColumnList.toTypedArray())
             from(SysMenu::class.java)
-            allAnd(
-                SysMenu::id `in` menuIds,
-                SysMenu::menuType eq menuType,
+            where(
+                allAnd(
+                    SysMenu::id `in` menuIds,
+                    SysMenu::menuType eq menuType,
+                ),
             )
             orderBy(+SysMenu::sortValue, +SysMenu::id)
         }
