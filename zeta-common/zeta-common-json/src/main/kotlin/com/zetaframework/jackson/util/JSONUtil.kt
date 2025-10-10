@@ -18,12 +18,12 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import org.slf4j.LoggerFactory
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import org.slf4j.LoggerFactory
 
 /**
  * 封装Jackson得到的JSON工具类
@@ -72,7 +72,7 @@ object JSONUtil {
     /**
      * 对象转json字符串
      *
-     * @param value Any         对象
+     * @param value Any 对象
      * @param pretty Boolean?   是否格式化输出
      * @return String           json字符串
      */

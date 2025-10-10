@@ -9,6 +9,9 @@ enum class MenuTypeEnum {
     /** 菜单 */
     MENU,
 
-    /** 资源 */
-    RESOURCE,
+    /** 目录 */
+    DIRECTORY,
+
+    /** 按钮 */
+    BUTTON
 }

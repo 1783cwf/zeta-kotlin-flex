@@ -1,14 +1,14 @@
 [versions]
 # bom
-springBoot = "3.4.3"
+springBoot = "3.5.6"
 dependencyManagement = "1.1.4"
-saTokenBom = "1.43.0"
-hutoolBom = "5.8.38"
+saTokenBom = "1.44.0"
+hutoolBom = "5.8.40"
 
 # orm
-mybatisFlex = "1.10.9"
+mybatisFlex = "1.11.3"
 mybatisFlexKotlin = "1.1.2"
-autoTable = "2.4.4.1"
+autoTable = "2.5.7"
 
 # utils
 aliyunSdkOss = "3.17.1"
@@ -17,8 +17,9 @@ easyCaptcha = "1.6.2"
 transmittableThreadLocal = "2.14.5"
 ip2region = "2.7.0"
 aizudaMonitor = "1.0.0"
-mapstructPlus = "1.4.6"
+mapstructPlus = "1.5.0"
 
+# ai agent
 
 # plugins
 kotlin = "2.1.20"
@@ -46,7 +47,6 @@ minio = { module = "io.minio:minio", version.ref = "minio" }
 aizudaMonitor = { module = "com.aizuda:aizuda-monitor", version.ref = "aizudaMonitor" }
 easyCaptcha = { module = "com.github.whvcse:easy-captcha", version.ref = "easyCaptcha" }
 ktlint = { module = "com.pinterest.ktlint:ktlint", version.ref = "ktlint" }
-
 
 [plugins]
 springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
