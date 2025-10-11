@@ -2,7 +2,7 @@ package com.zetaframework.system.controller
 
 import cn.hutool.core.lang.Assert
 import com.zetaframework.base.controller.SuperController
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.system.model.dto.sysDictItem.SysDictItemDTO
@@ -44,7 +44,7 @@ class SysDictItemController(
     @PostMapping("/codeList")
     fun codeList(
         @RequestBody codes: List<String>,
-    ): ApiResult<Map<String, List<SysDictItemDTO>>> {
+    ): ResultT<Map<String, List<SysDictItemDTO>>> {
         Assert.notEmpty(codes, "字典code不能为空")
         return success(service.listByCodes(codes))
     }

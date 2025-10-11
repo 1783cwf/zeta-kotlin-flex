@@ -2,7 +2,7 @@ package com.zetaframework.base.controller.curd
 
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
 import com.zetaframework.utils.MapstructUtils
@@ -30,7 +30,7 @@ interface UpdateController<Entity, UpdateDTO> : BaseController<Entity> {
     @PutMapping
     fun update(
         @RequestBody @Validated(Update::class) updateDTO: UpdateDTO,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val result = handlerUpdate(updateDTO)
         if (result.defExec) {
             // updateDTO -> BaseEntity
@@ -46,5 +46,5 @@ interface UpdateController<Entity, UpdateDTO> : BaseController<Entity> {
      * @param updateDTO 修改对象
      * @return ApiResult<Boolean>
      */
-    fun handlerUpdate(updateDTO: UpdateDTO): ApiResult<Boolean> = ApiResult.successDef()
+    fun handlerUpdate(updateDTO: UpdateDTO): ResultT<Boolean> = ResultT.successDef()
 }

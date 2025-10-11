@@ -3,7 +3,7 @@ package com.zetaframework.base.controller.extra
 import com.mybatisflex.core.query.QueryWrapper
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.utils.MapstructUtils
 import org.springframework.web.bind.annotation.GetMapping
@@ -31,7 +31,7 @@ interface NoPageQueryController<Entity, QueryParam> : BaseController<Entity> {
     @PostMapping("/query")
     fun list(
         @RequestBody param: QueryParam,
-    ): ApiResult<MutableList<Entity>> = success(handlerBatchQuery(param))
+    ): ResultT<MutableList<Entity>> = success(handlerBatchQuery(param))
 
     /**
      * 自定义批量查询
@@ -64,7 +64,7 @@ interface NoPageQueryController<Entity, QueryParam> : BaseController<Entity> {
     @GetMapping("/{id}")
     fun get(
         @PathVariable("id")id: Long,
-    ): ApiResult<Entity?> {
+    ): ResultT<Entity?> {
         val entity = getBaseService().getById(id)
         // 处理单体查询数据
         handlerGetData(entity)

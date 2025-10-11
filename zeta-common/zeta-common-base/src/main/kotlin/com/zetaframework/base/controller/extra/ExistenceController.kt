@@ -2,7 +2,7 @@ package com.zetaframework.base.controller.extra
 
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.base.param.ExistParam
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import org.springframework.web.bind.annotation.GetMapping
 
@@ -22,7 +22,7 @@ interface ExistenceController<Entity> : BaseController<Entity> {
      */
     @PreCheckPermission(value = ["{}:view"])
     @GetMapping("/existence")
-    fun existence(param: ExistParam<Entity, Long>): ApiResult<Boolean> {
+    fun existence(param: ExistParam<Entity, Long>): ResultT<Boolean> {
         if (param.isExist(getBaseService())) {
             return success("${param.value}已存在", true)
         }

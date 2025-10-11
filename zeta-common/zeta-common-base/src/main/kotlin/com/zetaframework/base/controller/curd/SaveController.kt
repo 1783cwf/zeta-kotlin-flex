@@ -2,7 +2,7 @@ package com.zetaframework.base.controller.curd
 
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
 import com.zetaframework.utils.MapstructUtils
@@ -29,7 +29,7 @@ interface SaveController<Entity, SaveDTO> : BaseController<Entity> {
     @PostMapping
     fun save(
         @RequestBody @Validated saveDTO: SaveDTO,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val result = handlerSave(saveDTO)
         if (result.defExec) {
             // SaveDTO -> BaseEntity
@@ -45,5 +45,5 @@ interface SaveController<Entity, SaveDTO> : BaseController<Entity> {
      * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
-    fun handlerSave(saveDTO: SaveDTO): ApiResult<Boolean> = ApiResult.successDef()
+    fun handlerSave(saveDTO: SaveDTO): ResultT<Boolean> = ResultT.successDef()
 }

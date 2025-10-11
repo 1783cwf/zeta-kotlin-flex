@@ -38,3 +38,7 @@ out/
 ### VS Code ###
 .vscode/
 /log/
+/logs/2025-08-15/zeta-kotlin-flex.info.1.log
+/logs/2025-09-22/zeta-kotlin-flex.info.1.log
+/logs/zeta-kotlin-flex.error.log
+/logs/zeta-kotlin-flex.info.log

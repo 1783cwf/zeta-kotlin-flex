@@ -6,7 +6,7 @@ import cn.dev33.satoken.exception.NotRoleException
 import cn.hutool.core.util.StrUtil
 import com.zetaframework.exception.ArgumentException
 import com.zetaframework.exception.BusinessException
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.redis.exception.LimitException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -35,9 +35,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(BusinessException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun businessExceptionHandler(ex: BusinessException): ApiResult<*> {
+    fun businessExceptionHandler(ex: BusinessException): ResultT<*> {
         logger.warn("抛出业务异常：$ex")
-        return ApiResult.result(ex.code, ex.message, null)
+        return ResultT.result(ex.code, ex.message, null)
     }
 
     /**
@@ -48,9 +48,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(ArgumentException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun argumentExceptionHandler(ex: ArgumentException): ApiResult<*> {
+    fun argumentExceptionHandler(ex: ArgumentException): ResultT<*> {
         logger.warn("抛出参数异常：", ex)
-        return ApiResult.result(ex.code, ex.message, null)
+        return ResultT.result(ex.code, ex.message, null)
     }
 
     /**
@@ -64,9 +64,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(IllegalArgumentException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun illegalArgumentExceptionHandler(ex: IllegalArgumentException): ApiResult<*> {
+    fun illegalArgumentExceptionHandler(ex: IllegalArgumentException): ResultT<*> {
         logger.warn("抛出非法参数异常：", ex)
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.ERR_ARGUMENT.code, ex.message, null)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.ERR_ARGUMENT.code, ex.message, null)
     }
 
     /**
@@ -79,9 +79,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(LimitException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun limitExceptionHandler(ex: LimitException): ApiResult<*> {
+    fun limitExceptionHandler(ex: LimitException): ResultT<*> {
         logger.warn("抛出接口限流异常：", ex)
-        return ApiResult.result(ex.code, ex.message, null)
+        return ResultT.result(ex.code, ex.message, null)
     }
 
     /**
@@ -92,12 +92,12 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(BindException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun bindExceptionHandler(ex: BindException): ApiResult<*> {
+    fun bindExceptionHandler(ex: BindException): ResultT<*> {
         logger.warn("抛出绑定异常：", ex)
         try {
             val msg = Objects.requireNonNull(ex.bindingResult.fieldError)!!.defaultMessage
             if (StrUtil.isNotEmpty(msg)) {
-                return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.ERR_BIND_EXCEPTION.code, msg, ex.message)
+                return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.ERR_BIND_EXCEPTION.code, msg, ex.message)
             }
         } catch (e: Exception) {
             logger.warn("获取异常描述失败", e)
@@ -107,7 +107,7 @@ class GlobalExceptionHandler {
         ex.fieldErrors.forEach {
             msg.append("参数:[${it.objectName}.${it.field}]的传入值:[${it.rejectedValue}]与预期的字段类型不匹配.")
         }
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.ERR_BIND_EXCEPTION.code, msg.toString(), ex.message)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.ERR_BIND_EXCEPTION.code, msg.toString(), ex.message)
     }
 
     /**
@@ -118,10 +118,10 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun methodArgumentTypeMismatchException(ex: MethodArgumentTypeMismatchException): ApiResult<*>? {
+    fun methodArgumentTypeMismatchException(ex: MethodArgumentTypeMismatchException): ResultT<*>? {
         logger.warn("抛出方法参数类型不匹配异常：", ex)
         val msg = "参数：[${ex.name}]的传入值：[${ex.value}]与预期的字段类型：[${Objects.requireNonNull(ex.requiredType)!!.name}]不匹配"
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.ERR_ARGUMENT_TYPE_MISMATCH_EXCEPTION.code, msg, ex.message)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.ERR_ARGUMENT_TYPE_MISMATCH_EXCEPTION.code, msg, ex.message)
     }
 
     /**
@@ -132,7 +132,7 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun httpMessageNotReadableException(ex: HttpMessageNotReadableException): ApiResult<*>? {
+    fun httpMessageNotReadableException(ex: HttpMessageNotReadableException): ResultT<*>? {
         logger.warn("抛出从请求中读取数据失败异常：", ex)
         var msg = ex.message
         if (StrUtil.containsAny(msg, "Could not read document:")) {
@@ -148,7 +148,7 @@ class GlobalExceptionHandler {
         if (StrUtil.containsAny(msg, "not one of the values accepted for Enum class")) {
             msg = "枚举参数值不正确"
         }
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.ERR_REQUEST_PARAM_EXCEPTION.code, msg, ex.message)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.ERR_REQUEST_PARAM_EXCEPTION.code, msg, ex.message)
     }
 
     /**
@@ -159,7 +159,7 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(NotLoginException::class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    fun notLoginExceptionHandler(ex: NotLoginException): ApiResult<*> {
+    fun notLoginExceptionHandler(ex: NotLoginException): ResultT<*> {
         logger.warn("抛出登录认证异常：", ex)
         val message =
             when (ex.type) {
@@ -170,7 +170,7 @@ class GlobalExceptionHandler {
                 NotLoginException.KICK_OUT -> NotLoginException.KICK_OUT_MESSAGE
                 else -> NotLoginException.DEFAULT_MESSAGE
             }
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.UNAUTHORIZED.code, message, null).setError(ex.message)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.UNAUTHORIZED.code, message, null).setError(ex.message)
     }
 
     /**
@@ -181,9 +181,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(NotRoleException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    fun notRoleExceptionHandler(ex: NotRoleException): ApiResult<*> {
+    fun notRoleExceptionHandler(ex: NotRoleException): ResultT<*> {
         logger.warn("抛出角色认证异常：", ex)
-        return ApiResult.result(
+        return ResultT.result(
             com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code,
             com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg,
             null,
@@ -198,9 +198,9 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(NotPermissionException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    fun notPermissionExceptionHandler(ex: NotPermissionException): ApiResult<*> {
+    fun notPermissionExceptionHandler(ex: NotPermissionException): ResultT<*> {
         logger.warn("抛出权限认证异常：", ex)
-        return ApiResult.result(
+        return ResultT.result(
             com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.code,
             com.zetaframework.enums.ErrorCodeEnum.FORBIDDEN.msg,
             null,
@@ -215,8 +215,8 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun otherExceptionHandler(ex: Exception): ApiResult<*> {
+    fun otherExceptionHandler(ex: Exception): ResultT<*> {
         logger.warn("抛出其它异常：", ex)
-        return ApiResult.result(com.zetaframework.enums.ErrorCodeEnum.SYSTEM_BUSY.code, ex.message, null)
+        return ResultT.result(com.zetaframework.enums.ErrorCodeEnum.SYSTEM_BUSY.code, ex.message, null)
     }
 }

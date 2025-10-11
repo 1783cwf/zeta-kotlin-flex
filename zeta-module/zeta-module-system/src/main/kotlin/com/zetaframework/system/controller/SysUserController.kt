@@ -12,7 +12,7 @@ import com.zetaframework.base.param.PageParam
 import com.zetaframework.base.param.UpdateStateParam
 import com.zetaframework.log.annotation.SysLog
 import com.zetaframework.model.dto.SysRoleDTO
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.utils.LoginHelper
@@ -68,7 +68,7 @@ class SysUserController(
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<SysUserQueryParam>,
-    ): ApiResult<Page<SysUserDTO>> = success(service.customPage(param))
+    ): ResultT<Page<SysUserDTO>> = success(service.customPage(param))
 
     /**
      * 处理单体查询数据
@@ -100,7 +100,7 @@ class SysUserController(
      * @param saveDTO 保存对象
      * @return ApiResult<BaseEntity>
      */
-    override fun handlerSave(saveDTO: SysUserSaveDTO): ApiResult<Boolean> {
+    override fun handlerSave(saveDTO: SysUserSaveDTO): ResultT<Boolean> {
         // 判断是否存在
         if (ExistParam<SysUser, Long>("account", saveDTO.account).isExist(service)) {
             return fail("账号已存在")
@@ -114,7 +114,7 @@ class SysUserController(
      * @param updateDTO 修改对象
      * @return ApiResult<BaseEntity>
      */
-    override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ApiResult<Boolean> = success(service.updateUser(updateDTO))
+    override fun handlerUpdate(updateDTO: SysUserUpdateDTO): ResultT<Boolean> = success(service.updateUser(updateDTO))
 
     /**
      * 自定义修改状态
@@ -122,7 +122,7 @@ class SysUserController(
      * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
-    override fun handlerUpdateState(param: UpdateStateParam<Long, Int>): ApiResult<Boolean> {
+    override fun handlerUpdateState(param: UpdateStateParam<Long, Int>): ResultT<Boolean> {
         // 判断状态值是否正常
         Assert.notNull(param.id, "用户id不能为空")
         Assert.notNull(param.state, "状态不能为空")
@@ -148,7 +148,7 @@ class SysUserController(
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    override fun handlerDelete(id: Long): ApiResult<Boolean> {
+    override fun handlerDelete(id: Long): ResultT<Boolean> {
         val user = service.getById(id) ?: return success(true)
         // 判断用户是否允许删除
         if (user.readonly != null && user.readonly == true) {
@@ -163,7 +163,7 @@ class SysUserController(
      * @param ids 主键列表
      * @return ApiResult<Boolean>
      */
-    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
+    override fun handlerBatchDelete(ids: MutableList<Long>): ResultT<Boolean> {
         val userList = service.listByIds(ids) ?: return success(true)
         // 判断是否存在不允许删除的用户
         userList.forEach { user ->
@@ -185,7 +185,7 @@ class SysUserController(
     fun changePwd(
         @RequestBody @Validated param: ChangePasswordParam,
         request: HttpServletRequest,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val user = service.getById(LoginHelper.getUserId()) ?: throw com.zetaframework.exception.BusinessException("用户不存在")
 
         // 旧密码是否正确
@@ -218,7 +218,7 @@ class SysUserController(
     fun updatePwd(
         @RequestBody @Validated param: ResetPasswordParam,
         request: HttpServletRequest,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val user = service.getById(param.id) ?: return success(true)
         // 判断用户是否允许重置密码
         if (user.readonly != null && user.readonly == true) {
@@ -245,7 +245,7 @@ class SysUserController(
      * @return ApiResult<[UserInfoDTO]>
      */
     @GetMapping("/info")
-    fun userInfo(): ApiResult<UserInfoDTO> {
+    fun userInfo(): ResultT<UserInfoDTO> {
         // 获取用户基本信息
         val user = service.getById(LoginHelper.getUserId()) ?: return fail("用户不存在")
         val userInfoDto = MapstructUtils.convert(user, UserInfoDTO::class.java)
@@ -263,7 +263,7 @@ class SysUserController(
      * @return ApiResult<List<[FrontRoute]>>
      */
     @GetMapping("/menu")
-    fun userMenu(): ApiResult<List<FrontRoute>> {
+    fun userMenu(): ResultT<List<FrontRoute>> {
         // 查询用户对应的菜单
         val menuList = roleMenuService.listMenuByUserId(LoginHelper.getUserId()!!, MenuTypeEnum.MENU.name)
 
@@ -278,5 +278,5 @@ class SysUserController(
      * @return ApiResult<[List<String>]>
      */
     @GetMapping("/permissions")
-    fun permissions(): ApiResult<List<String>> = success(StpUtil.getPermissionList())
+    fun permissions(): ResultT<List<String>> = success(StpUtil.getPermissionList())
 }

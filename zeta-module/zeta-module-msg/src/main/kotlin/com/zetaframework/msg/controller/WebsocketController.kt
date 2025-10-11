@@ -1,6 +1,6 @@
 package com.zetaframework.msg.controller
 
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.msg.model.PrivateMessageParam
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -36,13 +36,13 @@ class WebsocketController(
     @GetMapping("/group")
     fun group(
         @RequestParam message: String,
-    ): ApiResult<Boolean> =
+    ): ResultT<Boolean> =
         try {
             simpMessagingTemplate.convertAndSend("/topic/group", message)
-            ApiResult.success()
+            ResultT.success()
         } catch (e: MessagingException) {
             logger.error("群发消息发送失败", e)
-            ApiResult.fail()
+            ResultT.fail()
         }
 
     /**
@@ -53,13 +53,13 @@ class WebsocketController(
     @PostMapping("/group")
     fun privateChat(
         @RequestBody @Validated message: PrivateMessageParam,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         return try {
             simpMessagingTemplate.convertAndSendToUser(message.toUserId!!, "/queue/private", message.message!!)
-            ApiResult.success()
+            ResultT.success()
         } catch (e: MessagingException) {
             logger.error("私聊消息发送失败", e)
-            return ApiResult.fail()
+            return ResultT.fail()
         }
     }
 
@@ -69,5 +69,5 @@ class WebsocketController(
      * @return ApiResult<Int>
      */
     @GetMapping("/onlineUser")
-    fun onlineUser(): ApiResult<Int> = ApiResult.success(data = userRegistry.userCount)
+    fun onlineUser(): ResultT<Int> = ResultT.success(data = userRegistry.userCount)
 }

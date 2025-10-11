@@ -3,7 +3,7 @@ package com.zetaframework.system.controller
 import cn.hutool.core.collection.CollUtil
 import com.mybatisflex.core.query.QueryWrapper
 import com.zetaframework.base.controller.SuperSimpleController
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
@@ -45,7 +45,7 @@ class SysRoleMenuController(
     @GetMapping("/{roleId}")
     fun list(
         @PathVariable("roleId") roleId: Long,
-    ): ApiResult<List<SysMenu?>> {
+    ): ResultT<List<SysMenu?>> {
         val menuList = menuService.list() ?: return success(mutableListOf())
         val roleMenuList = service.list(QueryWrapper().eq(SysRoleMenu::roleId, roleId))
         for (menu in menuList) {
@@ -67,7 +67,7 @@ class SysRoleMenuController(
     @PutMapping
     fun update(
         @RequestBody @Validated roleMenuHandleDto: SysRoleMenuHandleDTO,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         // 修改前先删除角色所有权限
 
         service.remove(QueryWrapper().eq(SysRoleMenu::roleId, roleMenuHandleDto.roleId))

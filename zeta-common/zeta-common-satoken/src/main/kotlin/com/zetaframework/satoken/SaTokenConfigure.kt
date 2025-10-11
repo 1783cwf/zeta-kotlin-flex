@@ -17,7 +17,7 @@ import cn.dev33.satoken.stp.StpLogic
 import cn.dev33.satoken.stp.StpUtil
 import com.zetaframework.enums.ErrorCodeEnum
 import com.zetaframework.jackson.util.JSONUtil
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.enums.TokenTypeEnum
 import com.zetaframework.satoken.interceptor.ClearThreadLocalInterceptor
 import com.zetaframework.satoken.properties.IgnoreProperties
@@ -203,6 +203,6 @@ class SaTokenConfigure(
             this.setHeader("Content-Type", "application/json;charset=utf-8")
             this.status = statusCode
         }
-        return JSONUtil.toJsonStr(ApiResult<Boolean>(code, message))
+        return JSONUtil.toJsonStr(ResultT<Boolean>(code, message))
     }
 }

@@ -4,7 +4,7 @@ import com.zetaframework.base.controller.SuperSimpleController
 import com.zetaframework.base.controller.curd.DeleteController
 import com.zetaframework.base.controller.curd.QueryController
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
@@ -50,7 +50,7 @@ class SysFileController :
         file: MultipartFile,
         @RequestParam(required = false)
         bizType: String? = null,
-    ): ApiResult<SysFile> = success(service.upload(file, bizType))
+    ): ResultT<SysFile> = success(service.upload(file, bizType))
 
     /**
      * 下载文件
@@ -74,7 +74,7 @@ class SysFileController :
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    override fun handlerDelete(id: Long): ApiResult<Boolean> = success(service.delete(id))
+    override fun handlerDelete(id: Long): ResultT<Boolean> = success(service.delete(id))
 
     /**
      * 自定义批量删除文件
@@ -82,5 +82,5 @@ class SysFileController :
      * @param ids 主键列表
      * @return ApiResult<Boolean>
      */
-    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> = success(service.batchDelete(ids))
+    override fun handlerBatchDelete(ids: MutableList<Long>): ResultT<Boolean> = success(service.batchDelete(ids))
 }

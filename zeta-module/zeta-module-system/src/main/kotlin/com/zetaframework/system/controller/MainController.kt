@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil
 import cn.hutool.core.date.SystemClock
 import com.wf.captcha.SpecCaptcha
 import com.zetaframework.base.controller.SuperSimpleController
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.redis.annotation.Limit
 import com.zetaframework.system.common.cacheKey.CaptchaStringCacheKey
 import com.zetaframework.system.model.entity.SysUser
@@ -47,7 +47,7 @@ class MainController(
     fun login(
         @RequestBody @Validated param: LoginParam,
         request: HttpServletRequest,
-    ): ApiResult<LoginResult> {
+    ): ResultT<LoginResult> {
         // 验证验证码
         val verifyCode = captchaCacheKey.get<String>(param.key)
         if (verifyCode.isNullOrBlank()) {
@@ -68,7 +68,7 @@ class MainController(
      * @return ApiResult<Boolean>
      */
     @GetMapping("/logout")
-    fun logout(request: HttpServletRequest): ApiResult<Boolean> {
+    fun logout(request: HttpServletRequest): ResultT<Boolean> {
         // 注销登录
         StpUtil.logout()
         return success(true)
@@ -82,7 +82,7 @@ class MainController(
      */
     @Limit(name = "验证码接口限流", count = 10, describe = "您的操作过于频繁，请稍后再试")
     @GetMapping("/captcha")
-    fun captcha(): ApiResult<CaptchaResult> {
+    fun captcha(): ResultT<CaptchaResult> {
         val key = SystemClock.now()
 
         // 验证码值缓存到redis, 5分钟有效

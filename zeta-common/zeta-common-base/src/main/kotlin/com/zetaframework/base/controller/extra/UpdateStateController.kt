@@ -2,7 +2,7 @@ package com.zetaframework.base.controller.extra
 
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.base.param.UpdateStateParam
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
 import com.zetaframework.utils.MapstructUtils
@@ -29,7 +29,7 @@ interface UpdateStateController<Entity, State : Serializable> : BaseController<E
     @PutMapping("/state")
     fun updateState(
         @RequestBody param: UpdateStateParam<Long, State>,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val result = handlerUpdateState(param)
         if (result.defExec) {
             // updateDTO -> BaseEntity
@@ -45,5 +45,5 @@ interface UpdateStateController<Entity, State : Serializable> : BaseController<E
      * @param param 修改状态参数
      * @return ApiResult<Boolean>
      */
-    fun handlerUpdateState(param: UpdateStateParam<Long, State>): ApiResult<Boolean> = ApiResult.successDef()
+    fun handlerUpdateState(param: UpdateStateParam<Long, State>): ResultT<Boolean> = ResultT.successDef()
 }

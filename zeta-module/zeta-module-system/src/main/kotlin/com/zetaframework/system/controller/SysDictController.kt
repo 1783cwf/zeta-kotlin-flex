@@ -2,7 +2,7 @@ package com.zetaframework.system.controller
 
 import com.zetaframework.base.controller.SuperController
 import com.zetaframework.base.param.ExistParam
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.system.model.dto.sysDict.SysDictSaveDTO
 import com.zetaframework.system.model.dto.sysDict.SysDictUpdateDTO
@@ -35,7 +35,7 @@ class SysDictController :
      * @param saveDTO 保存对象
      * @return ApiResult<Boolean>
      */
-    override fun handlerSave(saveDTO: SysDictSaveDTO): ApiResult<Boolean> {
+    override fun handlerSave(saveDTO: SysDictSaveDTO): ResultT<Boolean> {
         // 判断是否存在
         if (ExistParam<SysDict, Long>(SysDict::code, saveDTO.code).isExist(service)) {
             return fail("编码已存在")
@@ -49,7 +49,7 @@ class SysDictController :
      * @param updateDTO UpdateDTO 修改对象
      * @return ApiResult<Boolean>
      */
-    override fun handlerUpdate(updateDTO: SysDictUpdateDTO): ApiResult<Boolean> {
+    override fun handlerUpdate(updateDTO: SysDictUpdateDTO): ResultT<Boolean> {
         // 判断是否存在
         if (ExistParam<SysDict, Long>(SysDict::code, updateDTO.code, updateDTO.id).isExist(service)) {
             return fail("编码已存在")

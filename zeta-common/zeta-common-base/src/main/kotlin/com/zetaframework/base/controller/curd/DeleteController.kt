@@ -2,7 +2,7 @@ package com.zetaframework.base.controller.curd
 
 import com.zetaframework.base.controller.BaseController
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.satoken.annotation.PreMode
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -28,7 +28,7 @@ interface DeleteController<Entity> : BaseController<Entity> {
     @DeleteMapping("/{id}")
     fun delete(
         @PathVariable id: Long,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val result = handlerDelete(id)
         if (result.defExec) {
             result.setData(getBaseService().removeById(id))
@@ -42,7 +42,7 @@ interface DeleteController<Entity> : BaseController<Entity> {
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    fun handlerDelete(id: Long): ApiResult<Boolean> = ApiResult.successDef()
+    fun handlerDelete(id: Long): ResultT<Boolean> = ResultT.successDef()
 
     /**
      * 批量删除
@@ -55,7 +55,7 @@ interface DeleteController<Entity> : BaseController<Entity> {
     @DeleteMapping("/batch")
     fun batchDelete(
         @RequestBody ids: MutableList<Long>,
-    ): ApiResult<Boolean> {
+    ): ResultT<Boolean> {
         val result = handlerBatchDelete(ids)
         if (result.defExec) {
             result.setData(getBaseService().removeByIds(ids))
@@ -69,5 +69,5 @@ interface DeleteController<Entity> : BaseController<Entity> {
      * @param ids List<Id>
      * @return ApiResult<Boolean>
      */
-    fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> = ApiResult.successDef()
+    fun handlerBatchDelete(ids: MutableList<Long>): ResultT<Boolean> = ResultT.successDef()
 }

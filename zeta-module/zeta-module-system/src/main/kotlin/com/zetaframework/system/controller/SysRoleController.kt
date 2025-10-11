@@ -2,7 +2,7 @@ package com.zetaframework.system.controller
 
 import com.zetaframework.base.controller.SuperController
 import com.zetaframework.base.param.ExistParam
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.system.model.dto.sysRole.SysRoleSaveDTO
 import com.zetaframework.system.model.dto.sysRole.SysRoleUpdateDTO
@@ -28,7 +28,7 @@ class SysRoleController : SuperController<ISysRoleService, SysRole, SysRoleQuery
      * @param saveDTO 保存对象
      * @return ApiResult<BaseEntity>
      */
-    override fun handlerSave(saveDTO: SysRoleSaveDTO): ApiResult<Boolean> {
+    override fun handlerSave(saveDTO: SysRoleSaveDTO): ResultT<Boolean> {
         // 判断是否存在
         if (ExistParam<SysRole, Long>("name", saveDTO.name).isExist(service)) {
             return fail("角色名已存在")
@@ -46,7 +46,7 @@ class SysRoleController : SuperController<ISysRoleService, SysRole, SysRoleQuery
      * @param updateDTO 修改对象
      * @return ApiResult<BaseEntity>
      */
-    override fun handlerUpdate(updateDTO: SysRoleUpdateDTO): ApiResult<Boolean> {
+    override fun handlerUpdate(updateDTO: SysRoleUpdateDTO): ResultT<Boolean> {
         // 判断是否存在
         if (ExistParam<SysRole, Long>("name", updateDTO.name, updateDTO.id).isExist(service)) {
             return fail("角色名已存在")
@@ -64,7 +64,7 @@ class SysRoleController : SuperController<ISysRoleService, SysRole, SysRoleQuery
      * @param id 主键
      * @return ApiResult<Boolean>
      */
-    override fun handlerDelete(id: Long): ApiResult<Boolean> {
+    override fun handlerDelete(id: Long): ResultT<Boolean> {
         val role = service.getById(id) ?: return success(true)
         // 判断角色是否允许删除
         if (role.readonly != null && role.readonly == true) {
@@ -79,7 +79,7 @@ class SysRoleController : SuperController<ISysRoleService, SysRole, SysRoleQuery
      * @param ids 主键列表
      * @return ApiResult<Boolean>
      */
-    override fun handlerBatchDelete(ids: MutableList<Long>): ApiResult<Boolean> {
+    override fun handlerBatchDelete(ids: MutableList<Long>): ResultT<Boolean> {
         val roleList = service.listByIds(ids) ?: return success(true)
         // 判断是否存在不允许删除的角色
         roleList.forEach { role ->

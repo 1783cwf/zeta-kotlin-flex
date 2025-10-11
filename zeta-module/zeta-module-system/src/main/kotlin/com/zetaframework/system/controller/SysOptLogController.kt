@@ -3,7 +3,7 @@ package com.zetaframework.system.controller
 import com.mybatisflex.core.paginate.Page
 import com.zetaframework.base.controller.SuperSimpleController
 import com.zetaframework.base.param.PageParam
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreAuth
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.system.model.dto.sysOptLog.SysOptLogTableDTO
@@ -39,7 +39,7 @@ class SysOptLogController(
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<SysOptLogQueryParam>,
-    ): ApiResult<Page<SysOptLogTableDTO>> = success(service.pageTable(param))
+    ): ResultT<Page<SysOptLogTableDTO>> = success(service.pageTable(param))
 
     /**
      * 单体查询
@@ -50,7 +50,7 @@ class SysOptLogController(
     @GetMapping("/{id}")
     fun get(
         @PathVariable("id") id: Long,
-    ): ApiResult<SysOptLog?> {
+    ): ResultT<SysOptLog?> {
         val entity = service.getById(id) ?: return success(null)
 
         // 查询操作人

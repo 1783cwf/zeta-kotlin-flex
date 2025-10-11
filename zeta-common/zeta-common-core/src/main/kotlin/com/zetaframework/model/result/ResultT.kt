@@ -9,7 +9,7 @@ import com.zetaframework.enums.ErrorCodeEnum
  * @author gcc
  */
 
-class ApiResult<T> {
+class ResultT<T> {
     /** 状态码 */
 
     var code: Int? = null
@@ -53,17 +53,17 @@ class ApiResult<T> {
         this.defExec = false
     }
 
-    fun setMessage(message: String?): ApiResult<T> {
+    fun setMessage(message: String?): ResultT<T> {
         this.message = message
         return this
     }
 
-    fun setError(error: String?): ApiResult<T> {
+    fun setError(error: String?): ResultT<T> {
         this.error = error
         return this
     }
 
-    fun setData(data: T?): ApiResult<T> {
+    fun setData(data: T?): ResultT<T> {
         this.data = data
         return this
     }
@@ -80,7 +80,7 @@ class ApiResult<T> {
             code: Int?,
             message: String?,
             data: E? = null,
-        ): ApiResult<E> = ApiResult(code, message, data)
+        ): ResultT<E> = ResultT(code, message, data)
 
         /**
          * 请求成功
@@ -94,14 +94,14 @@ class ApiResult<T> {
             code: Int? = ErrorCodeEnum.SUCCESS.code,
             message: String? = ErrorCodeEnum.SUCCESS.msg,
             data: E? = null,
-        ): ApiResult<E> = ApiResult(code, message, data)
+        ): ResultT<E> = ResultT(code, message, data)
 
         /**
          * 请求成功，需要执行默认操作
          *
          * @return ApiResult<BaseEntity>
          */
-        fun <E> successDef(): ApiResult<E> = ApiResult(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
+        fun <E> successDef(): ResultT<E> = ResultT(ErrorCodeEnum.SUCCESS.code, ErrorCodeEnum.SUCCESS.msg, null, true)
 
         /**
          * 请求失败
@@ -115,6 +115,6 @@ class ApiResult<T> {
             code: Int? = ErrorCodeEnum.FAIL.code,
             message: String? = ErrorCodeEnum.FAIL.msg,
             data: E? = null,
-        ): ApiResult<E> = ApiResult(code, message, data)
+        ): ResultT<E> = ResultT(code, message, data)
     }
 }

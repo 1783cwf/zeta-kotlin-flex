@@ -1,6 +1,6 @@
 package com.zetaframework.base.controller
 
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 
 /**
  * 基础接口
@@ -13,7 +13,7 @@ interface SuperBaseController {
      *
      * @return ApiResult<T>
      */
-    fun <T> success(): ApiResult<T> = ApiResult.success()
+    fun <T> success(): ResultT<T> = ResultT.success()
 
     /**
      * 返回成功
@@ -21,7 +21,7 @@ interface SuperBaseController {
      * @param message 状态信息
      * @return ApiResult<T>
      */
-    fun <T> success(message: String): ApiResult<T> = ApiResult.success(message = message)
+    fun <T> success(message: String): ResultT<T> = ResultT.success(message = message)
 
     /**
      * 返回成功
@@ -29,7 +29,7 @@ interface SuperBaseController {
      * @param data 返回数据
      * @return ApiResult<T>
      */
-    fun <T> success(data: T): ApiResult<T> = ApiResult.success(data = data)
+    fun <T> success(data: T): ResultT<T> = ResultT.success(data = data)
 
     /**
      * 返回成功
@@ -41,14 +41,14 @@ interface SuperBaseController {
     fun <T> success(
         message: String,
         data: T,
-    ): ApiResult<T> = ApiResult.success(message = message, data = data)
+    ): ResultT<T> = ResultT.success(message = message, data = data)
 
     /**
      * 返回失败
      *
      * @return ApiResult<T>
      */
-    fun <T> fail(): ApiResult<T> = ApiResult.fail()
+    fun <T> fail(): ResultT<T> = ResultT.fail()
 
     /**
      * 返回失败
@@ -56,7 +56,7 @@ interface SuperBaseController {
      * @param message 状态信息
      * @return ApiResult<T>
      */
-    fun <T> fail(message: String): ApiResult<T> = ApiResult.fail(message = message)
+    fun <T> fail(message: String): ResultT<T> = ResultT.fail(message = message)
 
     /**
      * 返回失败
@@ -64,7 +64,7 @@ interface SuperBaseController {
      * @param data 返回数据
      * @return ApiResult<T>
      */
-    fun <T> fail(data: T): ApiResult<T> = ApiResult.fail(data = data)
+    fun <T> fail(data: T): ResultT<T> = ResultT.fail(data = data)
 
     /**
      * 返回失败
@@ -76,5 +76,5 @@ interface SuperBaseController {
     fun <T> fail(
         message: String,
         data: T,
-    ): ApiResult<T> = ApiResult.fail(message = message, data = data)
+    ): ResultT<T> = ResultT.fail(message = message, data = data)
 }

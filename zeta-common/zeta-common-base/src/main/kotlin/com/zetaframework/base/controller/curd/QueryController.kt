@@ -4,7 +4,7 @@ import com.mybatisflex.core.paginate.Page
 import com.mybatisflex.core.query.QueryWrapper
 import com.zetaframework.base.param.PageParam
 import com.zetaframework.log.annotation.SysLog
-import com.zetaframework.model.result.ApiResult
+import com.zetaframework.model.result.ResultT
 import com.zetaframework.satoken.annotation.PreCheckPermission
 import com.zetaframework.utils.MapstructUtils
 import org.springframework.web.bind.annotation.GetMapping
@@ -32,7 +32,7 @@ interface QueryController<Entity, QueryParam> : PageController<Entity, QueryPara
     @PostMapping("/page")
     fun page(
         @RequestBody param: PageParam<QueryParam>,
-    ): ApiResult<Page<Entity>> = success(super.query(param))
+    ): ResultT<Page<Entity>> = success(super.query(param))
 
     /**
      * 批量查询
@@ -45,7 +45,7 @@ interface QueryController<Entity, QueryParam> : PageController<Entity, QueryPara
     @PostMapping("/query")
     fun list(
         @RequestBody param: QueryParam,
-    ): ApiResult<List<Entity>> = success(handlerBatchQuery(param))
+    ): ResultT<List<Entity>> = success(handlerBatchQuery(param))
 
     /**
      * 自定义批量查询
@@ -78,7 +78,7 @@ interface QueryController<Entity, QueryParam> : PageController<Entity, QueryPara
     @GetMapping("/{id}")
     fun get(
         @PathVariable("id") id: Long,
-    ): ApiResult<Entity?> {
+    ): ResultT<Entity?> {
         val entity = getBaseService().getById(id)
         // 处理单体查询数据
         handlerGetData(entity)
