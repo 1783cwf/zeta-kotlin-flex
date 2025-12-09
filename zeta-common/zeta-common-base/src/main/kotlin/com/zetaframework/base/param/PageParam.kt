@@ -13,14 +13,16 @@ class PageParam<T> private constructor() {
     /**
      * 每页数据数量。
      */
-    private var pageSize: Long = 10
+    var pageSize: Long = 10
 
     /**
      * 当前页码。
      */
-    private var pageNumber: Long = 1
+    var pageNumber: Long = 1
 
-    /** 查询条件 */
+    /**
+     * 查询条件
+     */
     @Valid // 见[docs/03功能介绍/参数校验.md]常见问题
     var model: T? = null
 
@@ -28,7 +30,7 @@ class PageParam<T> private constructor() {
      * 排序列
      * 允许的列名： "id","createTime","updateTime"
      */
-    private var orderByColumn: String? = null
+    var orderByColumn: String? = null
 
     /**
      * 排序的方向desc或者asc
@@ -40,7 +42,7 @@ class PageParam<T> private constructor() {
      *     <li>{@code false} 降序
      * </ul>
      */
-    private var isAsc: Boolean? = null
+    var isAsc: Boolean? = null
 
     constructor(pageNumber: Long, pageSize: Long) : this() {
         this.pageNumber = pageNumber
@@ -55,7 +57,7 @@ class PageParam<T> private constructor() {
      * 构造分页查询参数
      * @return
      * @param <T>
-     </T> */
+    </T> */
     fun <T> build(): Page<T> = Page<T>(this.pageNumber, this.pageSize)
 
     companion object {
