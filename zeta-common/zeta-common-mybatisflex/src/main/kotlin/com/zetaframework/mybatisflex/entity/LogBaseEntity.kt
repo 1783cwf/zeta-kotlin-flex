@@ -3,9 +3,18 @@ package com.zetaframework.mybatisflex.entity
 import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Id
 import com.mybatisflex.annotation.KeyType
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATE
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATETIME
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.TIMESTAMP
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
+import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.PrimaryKey
+import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
+import org.dromara.autotable.annotation.pgsql.PgsqlTypeConstant.INT8
+import org.dromara.autotable.core.constants.DatabaseDialect
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -18,16 +27,31 @@ import java.time.LocalDateTime
  * @since 1.0.0
  */
 abstract class LogBaseEntity<T>(
-    /** id */
+    /** ID */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
-    @Id(keyType = KeyType.Generator, value = "flexId")
+    @Id(keyType = KeyType.Generator, value = "flexId", comment = "ID")
     @PrimaryKey(autoIncrement = false)
+    @field:AutoColumns(
+        AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = INT8),
+    )
     open var id: Long? = null,
     /** 创建时间 */
-    @Column(value = "create_time")
+    @field:Column(value = "create_time", comment = "创建时间")
+    @field:AutoColumns(
+        AutoColumn(type = DATE, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = DATETIME, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = TIMESTAMP),
+    )
     open var createTime: LocalDateTime? = null,
     /** 创建人ID */
-    @Column(value = "created_by")
+    @field:Column(value = "created_by", comment = "创建人ID")
+    @field:AutoColumns(
+        AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = INT8),
+    )
     open var createdBy: Long? = null,
 ) : Serializable {
     companion object {

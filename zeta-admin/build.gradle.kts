@@ -18,8 +18,10 @@ dependencies {
   implementation(project(":zeta-module:zeta-module-system"))
 
   // 数据库相关
+
   implementation("org.apache.commons:commons-pool2")
-  implementation("com.mysql:mysql-connector-j")
+//  implementation("com.mysql:mysql-connector-j")
+  implementation("org.postgresql:postgresql")
   implementation("com.zaxxer:HikariCP")
   implementation("org.springframework.boot:spring-boot-starter-actuator")
 }

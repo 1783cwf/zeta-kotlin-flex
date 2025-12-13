@@ -13,5 +13,5 @@ enum class MenuTypeEnum {
     DIRECTORY,
 
     /** 按钮 */
-    BUTTON
+    BUTTON,
 }

@@ -11,6 +11,7 @@ object DBTypeConstant {
      */
     const val INT: String = "int"
     const val BIGINT: String = "bigint"
+    const val TINYINT: String = "tinyint"
 
     /**
      * 小数
@@ -48,9 +49,4 @@ object DBTypeConstant {
      * json
      */
     const val JSON: String = "json"
-
-    /**
-     * mysql 数据库类型
-     */
-    const val TINYINT: String = "tinyint"
 }

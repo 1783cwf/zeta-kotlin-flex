@@ -19,6 +19,7 @@ import org.dromara.autotable.core.AutoTableMetadataAdapter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.annotation.AnnotatedElementUtils
+import org.springframework.util.StringUtils
 import java.lang.reflect.Field
 import java.util.Objects
 
@@ -88,7 +89,7 @@ class CustomAutoTableMetadataAdapter(
 
     override fun getColumnEnumValues(enumType: Class<*>): List<String> {
         if (!enumType.isEnum) {
-            throw IllegalArgumentException("Class: ${enumType.getName()} 非枚举类型")
+            throw IllegalArgumentException("Class: ${enumType.name} 非枚举类型")
         }
 
         val enumDbValueFields: List<Field> = ClassUtil.getAllFields(enumType) { f -> f.getAnnotation(EnumValue::class.java) != null }
@@ -123,6 +124,14 @@ class CustomAutoTableMetadataAdapter(
         return smartConvert(table != null && table.camelToUnderline, clazz.simpleName)
     }
 
+    override fun getTableComment(clazz: Class<*>): String? {
+        val table = AnnotatedElementUtils.findMergedAnnotation(clazz, Table::class.java)
+        if (table != null && StringUtils.hasText(table.comment)) {
+            return table.comment
+        }
+        return super.getTableComment(clazz)
+    }
+
     override fun getTableSchema(clazz: Class<*>): String? {
         val table = AnnotatedElementUtils.findMergedAnnotation(clazz, Table::class.java)
         if (table != null && table.schema.isNotBlank()) {
@@ -154,6 +163,17 @@ class CustomAutoTableMetadataAdapter(
         val camelToUnderline = table != null && table.camelToUnderline
 
         return smartConvert(camelToUnderline, field.name)
+    }
+
+    override fun getColumnComment(
+        field: Field,
+        clazz: Class<*>,
+    ): String? {
+        val column = AnnotatedElementUtils.findMergedAnnotation(field, Column::class.java)
+        if (column != null && StringUtils.hasText(column.comment)) {
+            return column.comment
+        }
+        return super.getColumnComment(field, clazz)
     }
 
     private fun smartConvert(

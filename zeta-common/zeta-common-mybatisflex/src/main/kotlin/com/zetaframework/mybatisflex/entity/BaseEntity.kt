@@ -4,13 +4,17 @@ import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Id
 import com.mybatisflex.annotation.KeyType
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATE
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATETIME
-import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
-import com.zetaframework.mybatisflex.constant.DBTypeConstant.TINYINT
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.TIMESTAMP
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
 import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.PrimaryKey
+import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
+import org.dromara.autotable.annotation.pgsql.PgsqlTypeConstant.INT8
+import org.dromara.autotable.core.constants.DatabaseDialect
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -27,31 +31,45 @@ abstract class BaseEntity<T>(
     @get:NotNull(message = "id不能为空", groups = [Update::class])
     @Id(keyType = KeyType.Generator, value = "flexId")
     @PrimaryKey(autoIncrement = false)
+    @field:Column(value = "id", comment = "主键ID")
+    @field:AutoColumns(
+        AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = INT8),
+    )
     open var id: Long? = null,
     /** 创建时间 */
-    @Column(value = "create_time")
-    @AutoColumn(type = DATETIME, comment = "创建时间")
+    @field:Column(value = "create_time", comment = "创建时间")
+    @field:AutoColumns(
+        AutoColumn(type = DATE, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = DATETIME, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = TIMESTAMP),
+    )
     open var createTime: LocalDateTime? = null,
     /** 创建人ID */
-    @Column(value = "created_by")
-    @AutoColumn(type = BIGINT, comment = "创建人ID")
+    @field:Column(value = "created_by", comment = "创建人ID")
+    @field:AutoColumns(
+        AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = INT8),
+    )
     open var createdBy: Long? = null,
     /** 最后修改时间 */
-    @Column(value = "update_time")
-    @AutoColumn(type = DATETIME, comment = "最后修改时间")
+    @field:Column(value = "update_time", comment = "最后修改时间")
+    @field:AutoColumns(
+        AutoColumn(type = DATE, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = DATETIME, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = TIMESTAMP),
+    )
     open var updateTime: LocalDateTime? = null,
     /** 最后修改人ID */
-    @Column(value = "updated_by")
-    @AutoColumn(type = BIGINT, comment = "最后修改人ID")
+    @field:Column(value = "updated_by", comment = "最后修改人ID")
+    @field:AutoColumns(
+        AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = INT8),
+    )
     open var updatedBy: Long? = null,
-    /** 乐观锁 */
-    @Column(value = "version", version = true)
-    @AutoColumn(type = INT, comment = "乐观锁", defaultValue = "0")
-    open var version: Int? = null,
-    /** 逻辑删除字段 false 未删除 true已删除*/
-    @Column(value = "deleted", isLogicDelete = true)
-    @AutoColumn(type = TINYINT, comment = "逻辑删除字段", defaultValue = "0")
-    open var deleted: Boolean? = null,
 ) : Serializable {
     companion object {
         const val FIELD_ID = "id"

@@ -1,7 +1,11 @@
 package com.zetaframework.mybatisflex.entity
 
+import com.mybatisflex.annotation.Column
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import org.dromara.autotable.annotation.AutoColumn
+import org.dromara.autotable.annotation.AutoColumns
+import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
+import org.dromara.autotable.core.constants.DatabaseDialect
 import java.io.Serializable
 
 /**
@@ -16,6 +20,16 @@ import java.io.Serializable
  */
 abstract class StateEntity<T : Serializable>(
     /** 状态 */
-    @AutoColumn(type = INT, length = 10, notNull = true, defaultValue = "0", comment = "状态")
+    @field:Column(value = "state", comment = "状态")
+    @field:AutoColumns(
+        AutoColumn(
+            type = NUMBER,
+            length = 10,
+            notNull = true,
+            defaultValue = "0",
+            dialect = DatabaseDialect.Oracle,
+        ),
+        AutoColumn(type = INT, notNull = true, defaultValue = "0"),
+    )
     open var state: Int? = null,
-) : BaseEntity<T>()
+) : BaseLogicEntity()

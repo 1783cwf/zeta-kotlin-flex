@@ -57,7 +57,7 @@ class PageParam<T> private constructor() {
      * 构造分页查询参数
      * @return
      * @param <T>
-    </T> */
+     </T> */
     fun <T> build(): Page<T> = Page<T>(this.pageNumber, this.pageSize)
 
     companion object {
