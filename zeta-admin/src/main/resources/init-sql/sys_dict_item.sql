@@ -1,0 +1,2 @@
+INSERT INTO sys_dict_item (dict_id, name, value, describe, sort_value, id, create_time, created_by, update_time, updated_by, deleted) VALUES (1645607079798374400, '运行', 'RUNNING', '设备正在运行', 1, 1645607080020672512, '2023-04-11 09:57:56', 0, '2023-04-11 09:57:56', 0, false);
+INSERT INTO sys_dict_item (dict_id, name, value, describe, sort_value, id, create_time, created_by, update_time, updated_by, deleted) VALUES (1645607079798374400, '停止', 'WAITING', '设备已停止', 2, 1645607080020672513, '2023-04-11 09:57:56', 0, '2023-04-11 09:57:56', 0,  false);

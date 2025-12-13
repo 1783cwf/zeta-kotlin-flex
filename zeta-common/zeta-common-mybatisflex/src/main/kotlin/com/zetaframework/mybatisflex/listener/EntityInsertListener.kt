@@ -20,7 +20,7 @@ class EntityInsertListener : InsertListener {
      */
     override fun onInsert(entity: Any?) {
         try {
-            if (entity is BaseEntity<*> && ObjectUtil.isNotNull(entity)) {
+            if (entity is BaseEntity && ObjectUtil.isNotNull(entity)) {
                 val loginUserId = LoginHelper.getUserId()
                 val nowDate = LocalDateTimeUtil.now()
 

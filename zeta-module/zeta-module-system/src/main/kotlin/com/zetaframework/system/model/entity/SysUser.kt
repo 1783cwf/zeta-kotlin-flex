@@ -17,6 +17,7 @@ import io.github.linpeilie.annotations.AutoMappers
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import java.time.LocalDate
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.Ignore
@@ -26,7 +27,6 @@ import org.dromara.autotable.annotation.oracle.OracleTypeConstant.DATE
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.VARCHAR2
 import org.dromara.autotable.core.constants.DatabaseDialect
-import java.time.LocalDate
 
 /**
  * 用户
@@ -115,7 +115,7 @@ class SysUser : StateEntity<Long>() {
     var birthday: LocalDate? = null
 
     /** 是否内置 0否 1是 */
-    @field:Column(value = "readonly_", comment = "是否内置 0否 1是")
+    @field:Column(value = "readonly", comment = "是否内置 0否 1是")
     @field:AutoColumns(
         AutoColumn(
             type = CHAR,

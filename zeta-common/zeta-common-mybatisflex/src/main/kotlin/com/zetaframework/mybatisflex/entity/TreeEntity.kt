@@ -6,6 +6,7 @@ import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.VARCHAR
 import jakarta.validation.constraints.NotEmpty
+import java.io.Serializable
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.Ignore
@@ -13,7 +14,6 @@ import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.VARCHAR2
 import org.dromara.autotable.annotation.pgsql.PgsqlTypeConstant.INT8
 import org.dromara.autotable.core.constants.DatabaseDialect
-import java.io.Serializable
 
 /**
  * 树形表结构 实体类
@@ -48,7 +48,7 @@ abstract class TreeEntity<E, T : Serializable>(
     /** 子节点 */
     @Ignore
     open var children: MutableList<E>? = null,
-) : BaseEntity<T>(),
+) : BaseEntity(),
     ITree<E, T> {
     /**
      * 获取树节点id

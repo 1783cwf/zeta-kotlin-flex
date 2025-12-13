@@ -4,7 +4,7 @@ import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Table
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.VARCHAR
-import com.zetaframework.mybatisflex.entity.BaseLogicEntity
+import com.zetaframework.mybatisflex.entity.BaseEntity
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 import org.dromara.autotable.annotation.AutoColumn
@@ -20,7 +20,7 @@ import org.dromara.autotable.core.constants.DatabaseDialect
  * @date 2022-04-15 10:38:20
  */
 @Table(value = "sys_dict", comment = "字典表")
-class SysDict : BaseLogicEntity() {
+class SysDict : BaseEntity() {
     /** 名称 */
     @get:NotBlank(message = "名称不能为空")
     @get:Size(max = 32, message = "名称长度不能超过32")
@@ -42,7 +42,7 @@ class SysDict : BaseLogicEntity() {
     var code: String? = null
 
     /** 描述 */
-    @field:Column(value = "describe_", comment = "描述")
+    @field:Column(value = "describe", comment = "描述")
     @field:AutoColumns(
         AutoColumn(type = VARCHAR2, length = 255, dialect = DatabaseDialect.Oracle),
         AutoColumn(type = VARCHAR, length = 255),

@@ -4,19 +4,22 @@ import com.mybatisflex.annotation.Column
 import com.mybatisflex.annotation.Id
 import com.mybatisflex.annotation.KeyType
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.BIGINT
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.BOOL
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATE
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.DATETIME
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.TIMESTAMP
+import com.zetaframework.mybatisflex.constant.DBTypeConstant.TINYINT
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
+import java.io.Serializable
+import java.time.LocalDateTime
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.PrimaryKey
+import org.dromara.autotable.annotation.oracle.OracleTypeConstant.CHAR
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
 import org.dromara.autotable.annotation.pgsql.PgsqlTypeConstant.INT8
 import org.dromara.autotable.core.constants.DatabaseDialect
-import java.io.Serializable
-import java.time.LocalDateTime
 
 /**
  * 包括id、create_time、create_by、update_by、update_time、version、deleted字段的表继承的基础实体
@@ -26,7 +29,7 @@ import java.time.LocalDateTime
  * @since 1.0.0
  */
 
-abstract class BaseEntity<T>(
+abstract class BaseEntity(
     /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
     @Id(keyType = KeyType.Generator, value = "flexId")
@@ -70,6 +73,14 @@ abstract class BaseEntity<T>(
         AutoColumn(type = INT8),
     )
     open var updatedBy: Long? = null,
+    /** 逻辑删除字段 false 未删除 true已删除*/
+    @field:Column(value = "deleted", isLogicDelete = true, comment = "逻辑删除字段")
+    @field:AutoColumns(
+        AutoColumn(type = CHAR, length = 1, defaultValue = "N", dialect = DatabaseDialect.Oracle),
+        AutoColumn(type = TINYINT, length = 1, defaultValue = "0", dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BOOL, defaultValue = "false"),
+    )
+    open var deleted: Boolean? = null
 ) : Serializable {
     companion object {
         const val FIELD_ID = "id"

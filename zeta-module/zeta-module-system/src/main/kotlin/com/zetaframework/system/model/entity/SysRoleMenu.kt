@@ -19,7 +19,7 @@ import org.dromara.autotable.core.constants.DatabaseDialect
  * @date 2021-12-30 15:24:03
  */
 @Table(value = "sys_role_menu", comment = "角色菜单")
-class SysRoleMenu() : BaseEntity<Long>() {
+class SysRoleMenu() : BaseEntity() {
     /** 角色id */
     @get:NotNull(message = "角色id不能为空")
     @field:Column(value = "role_id", comment = "角色id")

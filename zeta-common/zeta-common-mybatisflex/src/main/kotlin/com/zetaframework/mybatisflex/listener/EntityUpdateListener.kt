@@ -20,7 +20,7 @@ class EntityUpdateListener : UpdateListener {
      */
     override fun onUpdate(entity: Any?) {
         try {
-            if (entity is BaseEntity<*> && ObjectUtil.isNotNull(entity)) {
+            if (entity is BaseEntity && ObjectUtil.isNotNull(entity)) {
                 entity.updatedBy = LoginHelper.getUserId()
                 entity.updateTime = LocalDateTimeUtil.now()
             }

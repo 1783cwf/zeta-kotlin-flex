@@ -2,11 +2,11 @@ package com.zetaframework.mybatisflex.entity
 
 import com.mybatisflex.annotation.Column
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.INT
+import java.io.Serializable
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
 import org.dromara.autotable.core.constants.DatabaseDialect
-import java.io.Serializable
 
 /**
  * 带状态字段的 实体类
@@ -32,4 +32,4 @@ abstract class StateEntity<T : Serializable>(
         AutoColumn(type = INT, notNull = true, defaultValue = "0"),
     )
     open var state: Int? = null,
-) : BaseLogicEntity()
+) : BaseEntity()

@@ -234,9 +234,10 @@ auto-table:
   # 是否打印banner
   show-banner: false
   init-data:
-    # 表创建后初始化SQL，只会相关表创建完成是执行一次
-    base-path: classpath:sql
+    # 表创建后初始化SQL，只会相关表创建完成时执行一次,只验证了pg
+    base-path: classpath:init-sql
   strict-extends: false
+  super-insert-position: before
 
 # 日志配置
 logging:

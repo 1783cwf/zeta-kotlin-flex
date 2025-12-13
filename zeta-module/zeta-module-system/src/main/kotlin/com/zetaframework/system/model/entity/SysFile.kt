@@ -24,7 +24,7 @@ import org.dromara.autotable.core.constants.DatabaseDialect
  */
 @Table(value = "sys_file", comment = "系统文件")
 @AutoMapper(target = FileInfo::class)
-class SysFile : BaseEntity<Long>() {
+class SysFile : BaseEntity() {
     /** 业务类型 */
     @field:Column(value = "biz_type", comment = "业务类型")
     @field:AutoColumns(
