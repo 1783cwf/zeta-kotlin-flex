@@ -121,7 +121,8 @@ spring:
       matching-strategy: ant_path_matcher
   # 数据源配置
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     # hikari配置
     hikari:
@@ -235,7 +236,7 @@ auto-table:
   show-banner: false
   init-data:
     # 表创建后初始化SQL，只会相关表创建完成时执行一次,只验证了pg
-    base-path: classpath:init-sql
+    base-path: classpath:init-sql/{dialect}
   strict-extends: false
   super-insert-position: before
 

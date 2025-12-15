@@ -11,8 +11,6 @@ import com.zetaframework.mybatisflex.constant.DBTypeConstant.TIMESTAMP
 import com.zetaframework.mybatisflex.constant.DBTypeConstant.TINYINT
 import com.zetaframework.validation.group.Update
 import jakarta.validation.constraints.NotNull
-import java.io.Serializable
-import java.time.LocalDateTime
 import org.dromara.autotable.annotation.AutoColumn
 import org.dromara.autotable.annotation.AutoColumns
 import org.dromara.autotable.annotation.PrimaryKey
@@ -20,6 +18,8 @@ import org.dromara.autotable.annotation.oracle.OracleTypeConstant.CHAR
 import org.dromara.autotable.annotation.oracle.OracleTypeConstant.NUMBER
 import org.dromara.autotable.annotation.pgsql.PgsqlTypeConstant.INT8
 import org.dromara.autotable.core.constants.DatabaseDialect
+import java.io.Serializable
+import java.time.LocalDateTime
 
 /**
  * 包括id、create_time、create_by、update_by、update_time、version、deleted字段的表继承的基础实体
@@ -37,7 +37,7 @@ abstract class BaseEntity(
     @field:Column(value = "id", comment = "主键ID")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     open var id: Long? = null,
@@ -53,7 +53,7 @@ abstract class BaseEntity(
     @field:Column(value = "created_by", comment = "创建人ID")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     open var createdBy: Long? = null,
@@ -69,7 +69,7 @@ abstract class BaseEntity(
     @field:Column(value = "updated_by", comment = "最后修改人ID")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     open var updatedBy: Long? = null,
@@ -80,7 +80,7 @@ abstract class BaseEntity(
         AutoColumn(type = TINYINT, length = 1, defaultValue = "0", dialect = DatabaseDialect.MySQL),
         AutoColumn(type = BOOL, defaultValue = "false"),
     )
-    open var deleted: Boolean? = null
+    open var deleted: Boolean? = null,
 ) : Serializable {
     companion object {
         const val FIELD_ID = "id"

@@ -117,7 +117,7 @@ class SysFile : BaseEntity() {
     @field:Column(value = "size", comment = "文件大小")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     var size: Long? = null

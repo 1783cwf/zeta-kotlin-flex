@@ -25,7 +25,7 @@ class SysRoleMenu() : BaseEntity() {
     @field:Column(value = "role_id", comment = "角色id")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     @Index
@@ -36,7 +36,7 @@ class SysRoleMenu() : BaseEntity() {
     @field:Column(value = "menu_id", comment = "菜单id")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     @Index

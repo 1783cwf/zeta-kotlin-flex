@@ -1,1 +1,0 @@
-INSERT INTO sys_user (username, account, password, email, mobile, sex, avatar, birthday,  readonly, state, id, create_time, created_by, update_time, updated_by, deleted) VALUES ('zeta管理员', 'zetaAdmin', '$2a$10$M8Q6189WcePNJ7d50FvOKOdCtcyy0hxyFKL6z8jxmhyvkLHIP8ZBC', NULL, NULL, 2, NULL, NULL, , 1, 1645607078095486976, '2023-04-11 09:57:56', 0, '2023-04-11 09:57:56', 0,  false);

@@ -1,0 +1,1 @@
+INSERT INTO sys_user_role (user_id, role_id, id, create_time, created_by, update_time, updated_by, deleted) VALUES (1645607078095486976, 1645607076937859072, 1645607079659962368, '2023-04-11 09:57:56', 0, NULL, NULL, 0);

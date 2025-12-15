@@ -27,10 +27,11 @@ import java.time.LocalDateTime
  * @since 1.0.0
  */
 abstract class LogBaseEntity<T>(
-    /** ID */
+    /** id */
     @get:NotNull(message = "id不能为空", groups = [Update::class])
-    @Id(keyType = KeyType.Generator, value = "flexId", comment = "ID")
+    @Id(keyType = KeyType.Generator, value = "flexId")
     @PrimaryKey(autoIncrement = false)
+    @field:Column(value = "id", comment = "主键ID")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
         AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),

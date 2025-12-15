@@ -29,7 +29,7 @@ class SysDictItem : BaseEntity() {
     @field:Column(value = "dict_id", comment = "字典id")
     @field:AutoColumns(
         AutoColumn(type = NUMBER, dialect = DatabaseDialect.Oracle),
-        AutoColumn(type = BIGINT, dialect = DatabaseDialect.MySQL),
+        AutoColumn(type = BIGINT, length = 20, dialect = DatabaseDialect.MySQL),
         AutoColumn(type = INT8),
     )
     var dictId: Long? = null
