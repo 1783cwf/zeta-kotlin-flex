@@ -52,7 +52,7 @@ class SysUserRoleServiceImpl :
                 SysRole::createTime,
                 SysRole::updatedBy,
                 SysRole::updateTime,
-                SysRole::describe,
+                SysRole::remark,
                 SysRole::deleted,
             )
             SysRole::id `in` roleIds
@@ -75,7 +75,7 @@ class SysUserRoleServiceImpl :
                 SysRole::createTime,
                 SysRole::updatedBy,
                 SysRole::updateTime,
-                SysRole::describe,
+                SysRole::remark,
                 SysRole::deleted,
                 SysUserRole::userId,
             )

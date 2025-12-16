@@ -42,12 +42,12 @@ class SysDict : BaseEntity() {
     var code: String? = null
 
     /** 描述 */
-    @field:Column(value = "describe", comment = "描述")
+    @field:Column(value = "remark", comment = "备注")
     @field:AutoColumns(
         AutoColumn(type = VARCHAR2, length = 255, dialect = DatabaseDialect.Oracle),
         AutoColumn(type = VARCHAR, length = 255),
     )
-    var describe: String? = null
+    var remark: String? = null
 
     /** 排序 */
     @field:Column(value = "sort_value", comment = "排序")
@@ -58,5 +58,5 @@ class SysDict : BaseEntity() {
     var sortValue: Int? = null
 
     override fun toString(): String =
-        "SysDict(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, sortValue=$sortValue, deleted=$deleted)"
+        "SysDict(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, remark=$remark, sortValue=$sortValue, deleted=$deleted)"
 }

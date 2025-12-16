@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
                           `name` varchar(32) DEFAULT NULL COMMENT '名称',
                           `code` varchar(32) DEFAULT NULL COMMENT '编码',
-                          `describe` varchar(255) DEFAULT NULL COMMENT '描述',
+                          `remark` varchar(255) DEFAULT NULL COMMENT '描述',
                           `sort_value` int DEFAULT NULL COMMENT '排序',
                           `id` bigint NOT NULL AUTO_INCREMENT,
                           `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -33,7 +33,7 @@ CREATE TABLE `sys_dict` (
                           `update_time` datetime DEFAULT NULL COMMENT '最后修改时间',
                           `updated_by` bigint DEFAULT NULL COMMENT '最后修改人ID',
                           `version` int DEFAULT '0' COMMENT '乐观锁',
-                          `describe_` varchar(255) DEFAULT NULL COMMENT '描述',
+                          `remark_` varchar(255) DEFAULT NULL COMMENT '描述',
                           `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除字段',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1645607079798374401 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='字典表';
@@ -43,7 +43,7 @@ CREATE TABLE `sys_dict` (
 -- Dumping data for table `sys_dict`
 --
 
-INSERT INTO `sys_dict` (`name`, `code`, `describe`, `sort_value`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `describe_`, `deleted`) VALUES ('设备状态','device_status',NULL,0,1645607079798374400,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备运行状态',0);
+INSERT INTO `sys_dict` (`name`, `code`, `remark`, `sort_value`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `remark_`, `deleted`) VALUES ('设备状态','device_status',NULL,0,1645607079798374400,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备运行状态',0);
 
 --
 -- Table structure for table `sys_dict_item`
@@ -56,7 +56,7 @@ CREATE TABLE `sys_dict_item` (
                                `dict_id` bigint DEFAULT NULL COMMENT '字典id',
                                `name` varchar(32) DEFAULT NULL COMMENT '字典项',
                                `value` varchar(32) DEFAULT NULL COMMENT '值',
-                               `describe` varchar(255) DEFAULT NULL COMMENT '描述',
+                               `remark` varchar(255) DEFAULT NULL COMMENT '描述',
                                `sort_value` int DEFAULT NULL COMMENT '排序',
                                `id` bigint NOT NULL AUTO_INCREMENT,
                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -64,7 +64,7 @@ CREATE TABLE `sys_dict_item` (
                                `update_time` datetime DEFAULT NULL COMMENT '最后修改时间',
                                `updated_by` bigint DEFAULT NULL COMMENT '最后修改人ID',
                                `version` int DEFAULT '0' COMMENT '乐观锁',
-                               `describe_` varchar(255) DEFAULT NULL COMMENT '描述',
+                               `remark_` varchar(255) DEFAULT NULL COMMENT '描述',
                                `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除字段',
                                PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1645607080020672514 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='字典项';
@@ -74,7 +74,7 @@ CREATE TABLE `sys_dict_item` (
 -- Dumping data for table `sys_dict_item`
 --
 
-INSERT INTO `sys_dict_item` (`dict_id`, `name`, `value`, `describe`, `sort_value`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `describe_`, `deleted`) VALUES (1645607079798374400,'运行','RUNNING',NULL,1,1645607080020672512,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备正在运行',0),(1645607079798374400,'停止','WAITING',NULL,2,1645607080020672513,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备已停止',0);
+INSERT INTO `sys_dict_item` (`dict_id`, `name`, `value`, `remark`, `sort_value`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `remark_`, `deleted`) VALUES (1645607079798374400,'运行','RUNNING',NULL,1,1645607080020672512,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备正在运行',0),(1645607079798374400,'停止','WAITING',NULL,2,1645607080020672513,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'设备已停止',0);
 
 --
 -- Table structure for table `sys_file`
@@ -223,7 +223,7 @@ DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
                           `name` varchar(32) DEFAULT NULL COMMENT '角色名',
                           `code` varchar(32) DEFAULT NULL COMMENT '角色编码',
-                          `describe` varchar(255) DEFAULT NULL COMMENT '描述',
+                          `remark` varchar(255) DEFAULT NULL COMMENT '描述',
                           `readonly` tinyint(1) DEFAULT NULL COMMENT '是否内置 0否 1是',
                           `id` bigint NOT NULL AUTO_INCREMENT,
                           `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -231,7 +231,7 @@ CREATE TABLE `sys_role` (
                           `update_time` datetime DEFAULT NULL COMMENT '最后修改时间',
                           `updated_by` bigint DEFAULT NULL COMMENT '最后修改人ID',
                           `version` int DEFAULT '0' COMMENT '乐观锁',
-                          `describe_` varchar(255) DEFAULT NULL COMMENT '描述',
+                          `remark_` varchar(255) DEFAULT NULL COMMENT '描述',
                           `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除字段',
                           `readonly_` bit(1) NOT NULL DEFAULT b'0' COMMENT '内置',
                           PRIMARY KEY (`id`) USING BTREE
@@ -242,7 +242,7 @@ CREATE TABLE `sys_role` (
 -- Dumping data for table `sys_role`
 --
 
-INSERT INTO `sys_role` (`name`, `code`, `describe`, `readonly`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `describe_`, `deleted`, `readonly_`) VALUES ('超级管理员','SUPER_ADMIN',NULL,NULL,1645607076937859072,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'超级管理员，拥有至高无上的权利',0,_binary ''),('管理员','ADMIN',NULL,NULL,1645607076937859073,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'管理员，拥有99%的权利',0,_binary '\0'),('普通用户','USER',NULL,NULL,1645607076937859074,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'普通用户，拥有管理员赋予的权利',0,_binary '\0');
+INSERT INTO `sys_role` (`name`, `code`, `remark`, `readonly`, `id`, `create_time`, `created_by`, `update_time`, `updated_by`, `version`, `remark_`, `deleted`, `readonly_`) VALUES ('超级管理员','SUPER_ADMIN',NULL,NULL,1645607076937859072,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'超级管理员，拥有至高无上的权利',0,_binary ''),('管理员','ADMIN',NULL,NULL,1645607076937859073,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'管理员，拥有99%的权利',0,_binary '\0'),('普通用户','USER',NULL,NULL,1645607076937859074,'2023-04-11 09:57:56',0,'2023-04-11 09:57:56',0,0,'普通用户，拥有管理员赋予的权利',0,_binary '\0');
 
 --
 -- Table structure for table `sys_role_menu`

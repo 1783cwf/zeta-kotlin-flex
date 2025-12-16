@@ -20,5 +20,5 @@ data class SysRoleSaveDTO(
     var code: String? = null,
     /** 描述 */
 
-    var describe: String? = null,
+    var remark: String? = null,
 )

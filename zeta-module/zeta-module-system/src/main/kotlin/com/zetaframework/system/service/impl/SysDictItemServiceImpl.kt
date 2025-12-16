@@ -48,7 +48,7 @@ class SysDictItemServiceImpl :
                 SysDictItem::dictId,
                 SysDictItem::name,
                 SysDictItem::value,
-                SysDictItem::describe,
+                SysDictItem::remark,
                 SysDictItem::sortValue,
                 SysDictItem::deleted,
             )

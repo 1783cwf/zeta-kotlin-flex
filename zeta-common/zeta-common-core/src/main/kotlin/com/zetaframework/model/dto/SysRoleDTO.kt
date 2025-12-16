@@ -18,7 +18,7 @@ data class SysRoleDTO(
     var code: String? = null,
     /** 描述 */
 
-    var describe: String? = null,
+    var remark: String? = null,
     /** 创建时间 */
 
     var createTime: LocalDateTime? = null,

@@ -1,1 +1,1 @@
-INSERT INTO sys_dict (name, code, `describe`, sort_value, id, create_time, created_by, update_time, updated_by, deleted)VALUES ('设备状态', 'device_status', '设备运行状态', 0, 1645607079798374400, '2023-04-11 09:57:56', 0, '2023-04-11 09:57:56', 0, 0);
+INSERT INTO sys_dict (name, code, `remark`, sort_value, id, create_time, created_by, update_time, updated_by, deleted)VALUES ('设备状态', 'device_status', '设备运行状态', 0, 1645607079798374400, '2023-04-11 09:57:56', 0, '2023-04-11 09:57:56', 0, 0);

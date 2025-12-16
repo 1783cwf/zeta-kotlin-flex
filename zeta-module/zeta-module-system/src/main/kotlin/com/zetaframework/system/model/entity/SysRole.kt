@@ -43,12 +43,12 @@ class SysRole : BaseEntity() {
     var code: String? = null
 
     /** 描述 */
-    @field:Column(value = "describe", comment = "描述")
+    @field:Column(value = "remark", comment = "备注")
     @field:AutoColumns(
         AutoColumn(type = VARCHAR2, length = 255, dialect = DatabaseDialect.Oracle),
         AutoColumn(type = VARCHAR, length = 255),
     )
-    var describe: String? = null
+    var remark: String? = null
 
     /** 是否内置 0否 1是 */
     @field:Column(value = "readonly", comment = "是否内置 0否 1是")
@@ -60,5 +60,5 @@ class SysRole : BaseEntity() {
     var readonly: Boolean? = null
 
     override fun toString(): String =
-        "SysRole(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, describe=$describe, readonly=$readonly, deleted=$deleted)"
+        "SysRole(id=$id, createTime=$createTime, createdBy=$createdBy, updateTime=$updateTime, updatedBy=$updatedBy, name=$name, code=$code, remark=$remark, readonly=$readonly, deleted=$deleted)"
 }
