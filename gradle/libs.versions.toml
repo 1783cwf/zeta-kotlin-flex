@@ -1,6 +1,6 @@
 [versions]
 # bom
-springBoot = "3.5.6"
+springBoot = "3.5.8"
 dependencyManagement = "1.1.4"
 saTokenBom = "1.44.0"
 hutoolBom = "5.8.42"

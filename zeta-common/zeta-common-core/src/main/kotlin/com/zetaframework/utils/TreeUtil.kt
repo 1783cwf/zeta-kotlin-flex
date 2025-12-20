@@ -23,7 +23,7 @@ object TreeUtil {
         list: MutableList<E>,
         isShowNullChildren: Boolean = true,
     ): List<E> {
-        if (list.isEmpty() || list.size == 0) {
+        if (list.isEmpty()) {
             return list
         }
 
