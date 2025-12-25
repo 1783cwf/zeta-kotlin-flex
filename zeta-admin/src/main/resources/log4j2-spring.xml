@@ -59,8 +59,13 @@
   </Appenders>
 
   <Loggers>
+    <!-- Spring BeanPostProcessor警告：只输出ERROR级别 -->
+    <Logger name="org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker" level="ERROR"/>
+    <!-- AutoTable建表日志：只输出WARN及以上级别 -->
+    <Logger name="org.dromara.autotable" level="WARN"/>
 
     <SpringProfile name="dev">
+
       <Root level="INFO">
         <AppenderRef ref="CONSOLE_INFO"/>
         <AppenderRef ref="CONSOLE_ERROR"/>
