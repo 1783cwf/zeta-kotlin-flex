@@ -18,7 +18,10 @@
     <!-- 控制台输出：仅输出 INFO 级别 -->
     <Console name="CONSOLE_INFO" target="SYSTEM_OUT">
       <PatternLayout pattern="${LOG_PATTERN}"/>
-      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <Filters>
+        <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
     </Console>
 
     <!-- 控制台输出：仅输出 ERROR 级别 -->
@@ -31,8 +34,8 @@
     <RollingFile name="INFO_FILE" fileName="${LOG_PATH}/${LOG_NAME}.info.log"
                  filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/${LOG_NAME}.info.%i.log">
       <Filters>
+        <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
         <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-        <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
       </Filters>
       <PatternLayout pattern="${LOG_PATTERN}"/>
       <Policies>
